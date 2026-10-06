@@ -1,6 +1,22 @@
 # Changelog — DSA and Software Engineering V.0.1
 
+## [0.1.2] — 2026-10-06
+
+### Redesigned: Streamlined Header with LinkedIn & Connect Dropdown
+
+**Date:** 2026-10-06  
+**Timestamp:** 23:05 IST  
+
+**Files Modified:**
+- `index.html` — Streamlined navigation header to showcase only LinkedIn directly, consolidating mail (`codebyart@gmail.com`) and websites (`codebyart.com`, `connectkreations.com`) into an interactive Connect dropdown menu.
+- `styles.css` — Created `.header-dropdown` styles with glassmorphic dropdown cards, smooth slide-down animation, carets, and backdrop blur.
+- `app.js` — Added dropdown click toggle, outside-click detection, and Escape key listener.
+- `dsa_roadmap.html`, `dsa_pattern_guide.html`, and `DSA Pattern Guide.html` — Synchronized unified navigation header with matching LinkedIn badge and Connect dropdown menu.
+
+---
+
 ## [0.1.1] — 2026-10-06
+
 
 ### Added: Collaboration & Inquiries Contact Channel
 

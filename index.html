@@ -131,25 +131,52 @@
 
             <div class="nav-right-group">
                 <div class="nav-network">
-                    <a href="https://codebyart.com" target="_blank" rel="noopener noreferrer" class="network-badge cba-badge" title="Visit codebyart.com">
-                        <span class="badge-dot"></span>
-                        <span>codebyart.com</span>
-                    </a>
-                    <a href="https://connectkreations.com" target="_blank" rel="noopener noreferrer" class="network-badge ck-badge" title="Visit connectkreations.com">
-                        <span class="badge-icon">🌐</span>
-                        <span>connectkreations.com</span>
-                    </a>
                     <a href="https://www.linkedin.com/in/kamal-patel-61a8201a0/" target="_blank" rel="noopener noreferrer" class="network-badge linkedin-badge" title="Kamal Patel on LinkedIn">
                         <svg class="linkedin-svg" viewBox="0 0 24 24" width="13" height="13" fill="currentColor">
                             <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 10.9v8.37H9.2V10.9H6.46M7.83 6.45a1.6 1.6 0 1 0 0 3.2 1.6 1.6 0 0 0 0-3.2Z"/>
                         </svg>
                         <span>Kamal Patel</span>
                     </a>
-                    <a href="mailto:codebyart@gmail.com" class="network-badge mail-badge" title="Collaboration & Contact">
-                        <span class="badge-icon">✉️</span>
-                        <span>codebyart@gmail.com</span>
-                    </a>
+
+                    <!-- Websites & Contact Dropdown -->
+                    <div class="header-dropdown" id="nav-dropdown">
+                        <button type="button" class="dropdown-trigger" id="dropdown-trigger-btn" aria-haspopup="true" aria-expanded="false" title="Websites & Contact" onclick="toggleHeaderDropdown(event)">
+                            <span>Connect</span>
+                            <svg class="dropdown-caret" width="10" height="10" viewBox="0 0 12 12" fill="none">
+                                <path d="M2.5 4.5L6 8L9.5 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </button>
+                        <div class="dropdown-menu" id="header-dropdown-menu">
+                            <div class="dropdown-header">Collaboration &amp; Contact</div>
+                            <a href="mailto:codebyart@gmail.com" class="dropdown-item">
+                                <span class="dropdown-item-icon">✉️</span>
+                                <div class="dropdown-item-text">
+                                    <span class="dropdown-item-title">codebyart@gmail.com</span>
+                                    <span class="dropdown-item-desc">Collaboration &amp; Inquiries</span>
+                                </div>
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <div class="dropdown-header">Official Websites</div>
+                            <a href="https://codebyart.com" target="_blank" rel="noopener noreferrer" class="dropdown-item">
+                                <span class="dropdown-item-icon"><span class="badge-dot"></span></span>
+                                <div class="dropdown-item-text">
+                                    <span class="dropdown-item-title">codebyart.com</span>
+                                    <span class="dropdown-item-desc">Where Code Meets Artistry</span>
+                                </div>
+                                <span class="dropdown-external">↗</span>
+                            </a>
+                            <a href="https://connectkreations.com" target="_blank" rel="noopener noreferrer" class="dropdown-item">
+                                <span class="dropdown-item-icon">🌐</span>
+                                <div class="dropdown-item-text">
+                                    <span class="dropdown-item-title">connectkreations.com</span>
+                                    <span class="dropdown-item-desc">Partner Network</span>
+                                </div>
+                                <span class="dropdown-external">↗</span>
+                            </a>
+                        </div>
+                    </div>
                 </div>
+
 
                 <div class="nav-divider"></div>
                 <div class="nav-actions">
