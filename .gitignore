@@ -37,12 +37,9 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-# Proprietary Spreadsheets & Raw Data
 *.xlsx
 *.xls
 *.csv
-LeetCode_150_Roadmap.xlsx
-
-# Testing Suite, Test Scripts & Verification Logs
 testing/
+
 
