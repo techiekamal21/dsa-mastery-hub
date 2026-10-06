@@ -775,3 +775,40 @@ function confirmReset() {
         alert('Please type RESET in capital letters to confirm.');
     }
 }
+
+// ==========================================================================
+// Header Dropdown Menu (Connect & Websites)
+// ==========================================================================
+function toggleHeaderDropdown(event) {
+    if (event) {
+        event.stopPropagation();
+        event.preventDefault();
+    }
+    const dropdown = document.getElementById('nav-dropdown');
+    if (dropdown) {
+        const isOpen = dropdown.classList.toggle('open');
+        const trigger = dropdown.querySelector('.dropdown-trigger');
+        if (trigger) trigger.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    }
+}
+
+document.addEventListener('click', (e) => {
+    const dropdown = document.getElementById('nav-dropdown');
+    if (dropdown && !dropdown.contains(e.target)) {
+        dropdown.classList.remove('open');
+        const trigger = dropdown.querySelector('.dropdown-trigger');
+        if (trigger) trigger.setAttribute('aria-expanded', 'false');
+    }
+});
+
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+        const dropdown = document.getElementById('nav-dropdown');
+        if (dropdown && dropdown.classList.contains('open')) {
+            dropdown.classList.remove('open');
+            const trigger = dropdown.querySelector('.dropdown-trigger');
+            if (trigger) trigger.setAttribute('aria-expanded', 'false');
+        }
+    }
+});
+
