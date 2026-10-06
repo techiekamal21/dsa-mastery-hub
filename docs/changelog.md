@@ -1,6 +1,27 @@
 # Changelog — LeetCode 150 DSA Roadmap Webpage
 
+## [2026-10-06] — 22:15 IST
+
+### Security & Privacy: Excluded Raw Spreadsheet & Testing Suite via .gitignore
+
+**Date:** 2026-10-06  
+**Timestamp:** 22:15 IST  
+
+**Files Modified:**
+- `.gitignore` — Added ignore rules for raw proprietary spreadsheets (`*.xlsx`, `*.xls`, `*.csv`, `LeetCode_150_Roadmap.xlsx`) and local automated test suites/logs (`testing/`).
+- `LeetCode_150_Roadmap.xlsx` — Untracked from Git index cache (`git rm --cached`) to prevent committing binary spreadsheets to GitHub while preserving files safely on the local disk.
+- `testing/` (`test_runner.py`, `verify_dom.py`, `test-results.md`) — Untracked from Git index cache (`git rm -r --cached`) to maintain clean public repository boundaries.
+- `README.md` — Updated repository file map to document exclusion of local spreadsheets and test scripts.
+- `SECURITY.md` — Added Data Hygiene & Confidentiality Safeguards section detailing rules for secret, spreadsheet, and test environment isolation.
+
+**Details:**
+- Enforced zero-leak confidentiality standards prior to remote GitHub publishing.
+- Verified local disk files remain intact and functional for local testing and historical reference.
+
+---
+
 ## [2026-10-06] — 21:52 IST
+
 
 ### Redesigned: CodeByArt Software Engineering Brand Identity & Professional Header
 

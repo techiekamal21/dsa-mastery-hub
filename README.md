@@ -92,23 +92,23 @@ dsa-mastery-hub/
 ├── styles.css                 # Modern design system & responsive styling
 ├── app.js                     # Application logic, streaks, reminders & state engine
 ├── data.js                    # Parsed dataset of 163 roadmap entries
-├── roadmap_data.json          # Raw JSON dataset
-├── LeetCode_150_Roadmap.xlsx   # Original source roadmap spreadsheet
+├── roadmap_data.json          # Formatted JSON dataset
 ├── README.md                  # Project documentation & guide
 ├── LICENSE                    # MIT License
 ├── CONTRIBUTING.md            # Community contribution guidelines
-├── SECURITY.md                # Security policy
-├── .gitignore                 # Standard git exclusions
+├── SECURITY.md                # Security policy & data hygiene
+├── .gitignore                 # Standard git exclusions (spreadsheets, tests & cache)
 ├── assets/
 │   └── screenshots/           # Screenshot assets and checklist
 ├── docs/
 │   ├── changelog.md           # Granular version and change tracking
 │   ├── bugs.md                # Bug tracking and resolution history
 │   └── open-items.md          # Feature backlog and enhancement roadmap
-└── testing/
+└── testing/                   # Local verification suite (excluded via .gitignore)
     ├── test_runner.py         # Automated verification suite (26 tests)
     ├── verify_dom.py          # DOM ID alignment checker
     └── test-results.md        # Formal test execution report
+
 ```
 
 ---
