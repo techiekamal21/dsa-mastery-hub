@@ -1,4 +1,4 @@
-# Bug Tracking — LeetCode 150 DSA Roadmap Webpage
+# Bug Tracking — DSA and Software Engineering V.0.1
 
 This file tracks all identified bugs, edge cases, and their corresponding resolutions.
 

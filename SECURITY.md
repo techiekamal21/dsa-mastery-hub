@@ -14,12 +14,3 @@ If you discover a security vulnerability within this repository, please send an 
 
 All security vulnerabilities will be promptly addressed. Please do not report security vulnerabilities through public GitHub issues.
 
----
-
-## Data Hygiene & Confidentiality Safeguards
-
-To prevent proprietary or confidential data leaks, this repository enforces strict `.gitignore` rules:
-- **Raw Spreadsheets & Proprietary Data**: Binary sheets (`*.xlsx`, `*.xls`, `*.csv`) such as local roadmap trackers are untracked and excluded from public version control.
-- **Local Testing Environments**: All local test runners, DOM verification scripts, and logs (`testing/`) are excluded from Git commits.
-- **Environment & Secret Files**: All `.env*` files and local caches (`.cache/`, `node_modules/`) are strictly ignored.
-

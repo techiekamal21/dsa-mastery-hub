@@ -5,11 +5,12 @@
   <img src="https://img.shields.io/badge/Multiplatform-Ready-10B981?style=for-the-badge" alt="Multiplatform Ready"/>
 </p>
 
-<h1 align="center">🧠 CodeByArt · Software Engineering DSA Mastery Hub</h1>
+<h1 align="center">DSA and Software Engineering V.0.1</h1>
 
 <p align="center">
   <b>A unified, cross-platform engineering portal featuring an Interactive 90-Day LeetCode 150 Tracker, 775-Day Comprehensive Curriculum (2,325 problems), and Algorithmic Pattern Guide.</b>
 </p>
+
 
 <p align="center">
   <a href="https://www.linkedin.com/in/kamal-patel-61a8201a0/">💼 Kamal Patel</a> •
@@ -96,34 +97,18 @@ dsa-mastery-hub/
 ├── README.md                  # Project documentation & guide
 ├── LICENSE                    # MIT License
 ├── CONTRIBUTING.md            # Community contribution guidelines
-├── SECURITY.md                # Security policy & data hygiene
-├── .gitignore                 # Standard git exclusions (spreadsheets, tests & cache)
+├── SECURITY.md                # Security policy
+├── .gitignore                 # Standard git exclusions
 ├── assets/
 │   └── screenshots/           # Screenshot assets and checklist
-├── docs/
-│   ├── changelog.md           # Granular version and change tracking
-│   ├── bugs.md                # Bug tracking and resolution history
-│   └── open-items.md          # Feature backlog and enhancement roadmap
-└── testing/                   # Local verification suite (excluded via .gitignore)
-    ├── test_runner.py         # Automated verification suite (26 tests)
-    ├── verify_dom.py          # DOM ID alignment checker
-    └── test-results.md        # Formal test execution report
-
+└── docs/
+    ├── changelog.md           # Granular version and change tracking
+    ├── bugs.md                # Bug tracking and resolution history
+    └── open-items.md          # Feature backlog and enhancement roadmap
 ```
 
 ---
 
-## 🧪 Automated Testing
-
-The project includes an automated test runner validating data consistency, DOM structure, inter-page routing, and input validation:
-
-```bash
-python testing/test_runner.py
-```
-
-**Test Status:** `26 / 26 PASSED` (19 Positive tests, 7 Negative safety tests).
-
----
 
 ## 📱 Cross-Platform Compatibility
 
