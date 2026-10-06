@@ -10,7 +10,7 @@
 
 ## Reporting a Vulnerability
 
-If you discover a security vulnerability within this repository, please send an email to **security@codebyart.com** or reach out via [codebyart.com/contact](https://codebyart.com). 
+If you discover a security vulnerability within this repository, please send an email to **codebyart@gmail.com** or reach out via [codebyart.com/contact](https://codebyart.com). 
 
 All security vulnerabilities will be promptly addressed. Please do not report security vulnerabilities through public GitHub issues.
 

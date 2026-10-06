@@ -1,6 +1,6 @@
-# Contributing to CodeByArt DSA Mastery Hub
+# Contributing to DSA and Software Engineering
 
-Thank you for your interest in contributing to the **CodeByArt DSA Mastery Hub**! We welcome contributions from developers worldwide to improve problem explanations, add pattern categories, and enhance the overall developer experience.
+Thank you for your interest in contributing to **DSA and Software Engineering**! We welcome contributions from developers worldwide to improve problem explanations, add pattern categories, and enhance the overall developer experience.
 
 ---
 
@@ -27,9 +27,7 @@ We expect all contributors to adhere to standard open-source community standards
    - Fork the repository.
    - Create a feature branch: `git checkout -b feature/your-feature-name`.
    - Make your changes cleanly.
-   - Run the automated test suite: `python testing/test_runner.py`.
-   - Ensure all tests pass.
-   - Commit your changes using conventional commits (e.g., `feat:`, `fix:`, `docs:`).
+   - Commit your changes using clear commit messages (e.g., `feat:`, `fix:`, `docs:`).
    - Push to your branch and open a Pull Request.
 
 ---
@@ -38,12 +36,14 @@ We expect all contributors to adhere to standard open-source community standards
 
 - **HTML/CSS/JS**: Keep dependencies zero (`Vanilla JS`, clean semantic HTML5, CSS custom properties).
 - **Responsive Design**: Ensure mobile, tablet, and desktop layouts remain touch-friendly and functional.
-- **Data Integrity**: Any updates to problem sets or URLs must be validated against `testing/test_runner.py`.
+- **Cross-Platform**: Test across Chrome, Safari, and Firefox.
 
 ---
 
-## Attribution & Project Owners
+## Attribution & Collaboration
 
-- **CodeByArt**: [codebyart.com](https://codebyart.com)
-- **ConnectKreations**: [connectkreations.com](https://connectkreations.com)
-- **Author**: Kamal Patel ([LinkedIn](https://www.linkedin.com/in/kamal-patel-61a8201a0/))
+- **Organization**: [codebyart.com](https://codebyart.com)
+- **Partner**: [connectkreations.com](https://connectkreations.com)
+- **Author**: Kamal Patel ([LinkedIn Profile](https://www.linkedin.com/in/kamal-patel-61a8201a0/))
+- **Collaboration & Contact**: [codebyart@gmail.com](mailto:codebyart@gmail.com)
+

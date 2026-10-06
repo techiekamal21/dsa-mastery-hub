@@ -1,6 +1,24 @@
 # Changelog — DSA and Software Engineering V.0.1
 
+## [0.1.1] — 2026-10-06
+
+### Added: Collaboration & Inquiries Contact Channel
+
+**Date:** 2026-10-06  
+**Timestamp:** 22:50 IST  
+
+**Files Modified:**
+- `README.md` — Added primary header link, Author & Organization attribution, and dedicated Collaboration & Contact section with `codebyart@gmail.com`.
+- `SECURITY.md` — Set direct vulnerability reporting contact to `codebyart@gmail.com`.
+- `CONTRIBUTING.md` — Added open-source collaboration and inquiries contact channel (`codebyart@gmail.com`).
+- `index.html` — Integrated interactive `codebyart@gmail.com` contact badge into top navigation network bar and footer links.
+- `styles.css` — Added hover interaction states for mail contact badges and footer pills.
+- `dsa_roadmap.html` & `dsa_pattern_guide.html` — Synchronized `.hub-network` with collaboration email pill.
+
+---
+
 ## [0.1.0] — 2026-10-06
+
 
 ### Initial Release: DSA and Software Engineering V.0.1
 

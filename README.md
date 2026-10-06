@@ -16,9 +16,11 @@
   <a href="https://www.linkedin.com/in/kamal-patel-61a8201a0/">💼 Kamal Patel</a> •
   <a href="https://codebyart.com">🚀 codebyart.com</a> •
   <a href="https://connectkreations.com">🌐 connectkreations.com</a> •
+  <a href="mailto:codebyart@gmail.com">✉️ codebyart@gmail.com</a> •
   <a href="#quick-start">⚡ Quick Start</a> •
   <a href="#core-portals">📦 Portals</a>
 </p>
+
 
 ---
 
@@ -127,8 +129,20 @@ dsa-mastery-hub/
 - **Created by**: **Kamal Patel** — [LinkedIn Profile](https://www.linkedin.com/in/kamal-patel-61a8201a0/)
 - **Organization**: [CodeByArt](https://codebyart.com) — Where Code Meets Artistry
 - **Collaborator**: [ConnectKreations](https://connectkreations.com)
+- **Contact / Collaboration**: [codebyart@gmail.com](mailto:codebyart@gmail.com)
 
 ---
+
+## 🤝 Collaboration & Contact
+
+We welcome open-source contributions, engineering partnerships, curriculum feedback, and sponsorship inquiries:
+- 📧 **Collaboration Email**: [codebyart@gmail.com](mailto:codebyart@gmail.com)
+- 🚀 **Organization Website**: [codebyart.com](https://codebyart.com)
+- 🌐 **Partner Network**: [connectkreations.com](https://connectkreations.com)
+- 💼 **Professional Network**: [Kamal Patel on LinkedIn](https://www.linkedin.com/in/kamal-patel-61a8201a0/)
+
+---
+
 
 ## 📄 License
 
