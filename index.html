@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CodeByArt — Software Engineering &amp; DSA Roadmap Hub | LeetCode 150</title>
+    <meta name="description" content="CodeByArt Software Engineering Development — Interactive 90-day LeetCode 150 roadmap tracker with daily progress, reminders, and streak tracking.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Reminder Toast -->
+    <div id="reminder-toast" class="reminder-toast hidden">
+        <div class="toast-icon">🔔</div>
+        <div class="toast-content">
+            <span class="toast-title">Daily Reminder</span>
+            <span class="toast-msg" id="toast-msg"></span>
+        </div>
+        <button class="toast-close" onclick="closeToast()" aria-label="Close">&times;</button>
+    </div>
+
+    <!-- Reminder Settings Modal -->
+    <div id="reminder-modal" class="modal-overlay hidden">
+        <div class="modal">
+            <div class="modal-header">
+                <h2>⏰ Reminder Settings</h2>
+                <button class="modal-close" onclick="closeReminderModal()" aria-label="Close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="reminder-time">Daily Reminder Time</label>
+                    <input type="time" id="reminder-time" value="09:00">
+                </div>
+                <div class="form-group">
+                    <label class="toggle-label">
+                        <span>Enable Browser Notifications</span>
+                        <input type="checkbox" id="reminder-enabled" checked>
+                        <span class="toggle-slider"></span>
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label for="reminder-message">Custom Message</label>
+                    <input type="text" id="reminder-message" placeholder="Time to solve LeetCode problems! 🚀" value="Time to solve LeetCode problems! 🚀">
+                </div>
+                <div class="reminder-status" id="reminder-status"></div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="closeReminderModal()">Cancel</button>
+                <button class="btn btn-primary" onclick="saveReminderSettings()">Save & Enable</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notes Modal -->
+    <div id="notes-modal" class="modal-overlay hidden">
+        <div class="modal">
+            <div class="modal-header">
+                <h2 id="notes-modal-title">📝 Problem Notes</h2>
+                <button class="modal-close" onclick="closeNotesModal()" aria-label="Close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <textarea id="notes-textarea" rows="8" placeholder="Write your notes, approach, time complexity, etc..."></textarea>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="closeNotesModal()">Cancel</button>
+                <button class="btn btn-primary" onclick="saveNotes()">Save Notes</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Reset Confirmation Modal -->
+    <div id="reset-modal" class="modal-overlay hidden">
+        <div class="modal modal-sm">
+            <div class="modal-header">
+                <h2>⚠️ Reset All Progress</h2>
+                <button class="modal-close" onclick="closeResetModal()" aria-label="Close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p>This will permanently delete all your progress, notes, and streak data. This action cannot be undone.</p>
+                <p style="margin-top:12px;"><strong>Type "RESET" to confirm:</strong></p>
+                <input type="text" id="reset-confirm-input" placeholder="Type RESET" style="margin-top:8px;">
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="closeResetModal()">Cancel</button>
+                <button class="btn btn-danger" onclick="confirmReset()">Reset Everything</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="app-container">
+        <!-- Top Nav Bar -->
+        <nav class="top-nav">
+            <a href="index.html" class="logo-link" title="CodeByArt Software Engineering Platform">
+                <div class="logo-emblem">
+                    <svg width="30" height="30" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <linearGradient id="cba-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="#00e5ff" />
+                                <stop offset="50%" stop-color="#6366f1" />
+                                <stop offset="100%" stop-color="#b14aff" />
+                            </linearGradient>
+                        </defs>
+                        <rect width="32" height="32" rx="8" fill="#131926" stroke="rgba(255,255,255,0.14)" />
+                        <path d="M10 11L5 16L10 21" stroke="url(#cba-grad)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M22 11L27 16L22 21" stroke="url(#cba-grad)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M18 9L14 23" stroke="url(#cba-grad)" stroke-width="2.5" stroke-linecap="round"/>
+                    </svg>
+                </div>
+                <div class="logo-info">
+                    <span class="logo-brand"><span class="logo-code">CODE</span><span class="logo-art">BYART</span></span>
+                    <span class="logo-sub">SWE Platform</span>
+                </div>
+            </a>
+
+            <div class="nav-tabs">
+                <a href="index.html" class="nav-tab active">
+                    <span class="tab-icon">🎯</span>
+                    <span class="tab-text">LeetCode 150</span>
+                </a>
+                <a href="dsa_roadmap.html" class="nav-tab">
+                    <span class="tab-icon">🗺️</span>
+                    <span class="tab-text">775-Day Roadmap</span>
+                </a>
+                <a href="dsa_pattern_guide.html" class="nav-tab">
+                    <span class="tab-icon">💡</span>
+                    <span class="tab-text">Pattern Guide</span>
+                </a>
+            </div>
+
+            <div class="nav-right-group">
+                <div class="nav-network">
+                    <a href="https://codebyart.com" target="_blank" rel="noopener noreferrer" class="network-badge cba-badge" title="Visit codebyart.com">
+                        <span class="badge-dot"></span>
+                        <span>codebyart.com</span>
+                    </a>
+                    <a href="https://connectkreations.com" target="_blank" rel="noopener noreferrer" class="network-badge ck-badge" title="Visit connectkreations.com">
+                        <span class="badge-icon">🌐</span>
+                        <span>connectkreations.com</span>
+                    </a>
+                    <a href="https://www.linkedin.com/in/kamal-patel-61a8201a0/" target="_blank" rel="noopener noreferrer" class="network-badge linkedin-badge" title="Kamal Patel on LinkedIn">
+                        <svg class="linkedin-svg" viewBox="0 0 24 24" width="13" height="13" fill="currentColor">
+                            <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 10.9v8.37H9.2V10.9H6.46M7.83 6.45a1.6 1.6 0 1 0 0 3.2 1.6 1.6 0 0 0 0-3.2Z"/>
+                        </svg>
+                        <span>Kamal Patel</span>
+                    </a>
+                </div>
+                <div class="nav-divider"></div>
+                <div class="nav-actions">
+                    <button class="nav-btn" id="theme-toggle" onclick="toggleTheme()" title="Toggle Theme">
+                        <span id="theme-icon">🌙</span>
+                    </button>
+                    <button class="nav-btn" onclick="openReminderModal()" title="Reminder Settings">⏰</button>
+                    <button class="nav-btn" onclick="exportProgress()" title="Export Progress">📤</button>
+                    <label class="nav-btn import-btn" title="Import Progress">
+                        📥
+                        <input type="file" id="import-file" accept=".json" onchange="importProgress(event)" hidden>
+                    </label>
+                    <button class="nav-btn danger" onclick="openResetModal()" title="Reset Progress">🗑️</button>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Hero Stats Section -->
+        <header class="hero">
+            <div class="hero-grid">
+                <!-- Progress Ring -->
+                <div class="stat-card hero-card">
+                    <div class="progress-ring-container">
+                        <svg class="progress-ring" viewBox="0 0 120 120">
+                            <circle class="progress-ring-bg" cx="60" cy="60" r="52" />
+                            <circle class="progress-ring-fill" id="progress-ring" cx="60" cy="60" r="52" />
+                        </svg>
+                        <div class="progress-ring-text">
+                            <span class="ring-value" id="ring-percent">0%</span>
+                            <span class="ring-label">Complete</span>
+                        </div>
+                    </div>
+                    <div class="stat-detail">
+                        <span id="solved-count">0</span> / <span id="total-count">150</span> solved
+                    </div>
+                </div>
+
+                <!-- Streak -->
+                <div class="stat-card">
+                    <div class="stat-icon">🔥</div>
+                    <div class="stat-value" id="streak-count">0</div>
+                    <div class="stat-label">Day Streak</div>
+                    <div class="stat-sub" id="best-streak">Best: 0</div>
+                </div>
+
+                <!-- Today's Target -->
+                <div class="stat-card">
+                    <div class="stat-icon">🎯</div>
+                    <div class="stat-value" id="today-day">—</div>
+                    <div class="stat-label">Current Day</div>
+                    <div class="stat-sub" id="today-problems">—</div>
+                </div>
+
+                <!-- Difficulty Breakdown -->
+                <div class="stat-card">
+                    <div class="stat-icon">📊</div>
+                    <div class="difficulty-bars">
+                        <div class="diff-bar-row">
+                            <span class="diff-label easy">Easy</span>
+                            <div class="diff-bar-track"><div class="diff-bar-fill easy" id="easy-bar"></div></div>
+                            <span class="diff-count" id="easy-count">0/0</span>
+                        </div>
+                        <div class="diff-bar-row">
+                            <span class="diff-label medium">Med</span>
+                            <div class="diff-bar-track"><div class="diff-bar-fill medium" id="medium-bar"></div></div>
+                            <span class="diff-count" id="medium-count">0/0</span>
+                        </div>
+                        <div class="diff-bar-row">
+                            <span class="diff-label hard">Hard</span>
+                            <div class="diff-bar-track"><div class="diff-bar-fill hard" id="hard-bar"></div></div>
+                            <span class="diff-count" id="hard-count">0/0</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Daily Heatmap (mini) -->
+                <div class="stat-card stat-card-wide">
+                    <div class="stat-icon">📅</div>
+                    <div class="stat-label" style="margin-bottom:8px;">90-Day Activity</div>
+                    <div class="heatmap" id="heatmap"></div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Filters & Search -->
+        <section class="controls-bar">
+            <div class="search-box">
+                <span class="search-icon">🔍</span>
+                <input type="text" id="search-input" placeholder="Search problems..." oninput="renderProblems()">
+            </div>
+            <div class="filter-group">
+                <select id="filter-pattern" onchange="renderProblems()">
+                    <option value="all">All Patterns</option>
+                </select>
+                <select id="filter-difficulty" onchange="renderProblems()">
+                    <option value="all">All Difficulties</option>
+                    <option value="Easy">Easy</option>
+                    <option value="Medium">Medium</option>
+                    <option value="Hard">Hard</option>
+                </select>
+                <select id="filter-status" onchange="renderProblems()">
+                    <option value="all">All Status</option>
+                    <option value="done">✅ Completed</option>
+                    <option value="pending">⬜ Pending</option>
+                </select>
+                <select id="filter-day" onchange="renderProblems()">
+                    <option value="all">All Days</option>
+                </select>
+            </div>
+        </section>
+
+        <!-- Problems Table -->
+        <main class="problems-section">
+            <div class="table-container">
+                <table class="problems-table" id="problems-table">
+                    <thead>
+                        <tr>
+                            <th class="col-check">✓</th>
+                            <th class="col-day">Day</th>
+                            <th class="col-num">#</th>
+                            <th class="col-pattern">Pattern</th>
+                            <th class="col-problem">Problem</th>
+                            <th class="col-diff">Difficulty</th>
+                            <th class="col-actions">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="problems-tbody"></tbody>
+                </table>
+            </div>
+        </main>
+
+        <!-- Pattern Progress Cards -->
+        <section class="pattern-section">
+            <h2 class="section-title">📈 Pattern Progress</h2>
+            <div class="pattern-grid" id="pattern-grid"></div>
+        </section>
+
+        <!-- Companion Learning Portals -->
+        <section class="companions-section">
+            <h2 class="section-title">🚀 Explore Connected DSA Hubs</h2>
+            <div class="companions-grid">
+                <a href="dsa_roadmap.html" class="companion-card">
+                    <div>
+                        <div class="companion-card-header">
+                            <span class="companion-icon">🗺️</span>
+                            <span class="companion-title">775-Day DSA Comprehensive Roadmap</span>
+                        </div>
+                        <p class="companion-desc">
+                            A complete 26-month journey covering 2,325 curated problems across 6 developmental phases. Filter by month, category, and difficulty with deep algorithmic thought processes.
+                        </p>
+                    </div>
+                    <div class="companion-footer">
+                        <span>2,325 Problems &middot; 26 Months</span>
+                        <span>Open Roadmap &rarr;</span>
+                    </div>
+                </a>
+
+                <a href="dsa_pattern_guide.html" class="companion-card">
+                    <div>
+                        <div class="companion-card-header">
+                            <span class="companion-icon">💡</span>
+                            <span class="companion-title">DSA Algorithmic Pattern Guide</span>
+                        </div>
+                        <p class="companion-desc">
+                            Master how to recognize problem archetypes. Features practical scenario descriptions, problem identification clues, and classic practice questions for each pattern.
+                        </p>
+                    </div>
+                    <div class="companion-footer">
+                        <span>15+ Topic Categories</span>
+                        <span>Open Pattern Guide &rarr;</span>
+                    </div>
+                </a>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-container">
+                <div class="footer-brand">
+                    <div class="logo-info">
+                        <span class="logo-brand"><span class="logo-code">CODE</span><span class="logo-art">BYART</span></span>
+                        <p class="footer-tagline">Software Engineering &amp; DSA Mastery Platform</p>
+                    </div>
+                    <p class="footer-credit">Engineered &amp; Curated by <a href="https://www.linkedin.com/in/kamal-patel-61a8201a0/" target="_blank" rel="noopener noreferrer" class="footer-link">Kamal Patel</a></p>
+                </div>
+                <div class="footer-links">
+                    <a href="https://codebyart.com" target="_blank" rel="noopener noreferrer" class="footer-pill">🚀 codebyart.com</a>
+                    <a href="https://connectkreations.com" target="_blank" rel="noopener noreferrer" class="footer-pill">🌐 connectkreations.com</a>
+                    <a href="https://www.linkedin.com/in/kamal-patel-61a8201a0/" target="_blank" rel="noopener noreferrer" class="footer-pill linkedin-pill">
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 10.9v8.37H9.2V10.9H6.46M7.83 6.45a1.6 1.6 0 1 0 0 3.2 1.6 1.6 0 0 0 0-3.2Z"/></svg>
+                        Kamal Patel on LinkedIn
+                    </a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 CodeByArt &middot; Powered by CodeByArt &amp; ConnectKreations &middot; Progress saved locally in your browser</p>
+            </div>
+        </footer>
+    </div>
+
+    <script src="data.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
