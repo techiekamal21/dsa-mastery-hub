@@ -1,6 +1,24 @@
 # Changelog — LeetCode 150 DSA Roadmap Webpage
 
+## [2026-10-06] — 22:21 IST
+
+### Published: Remote Origin Connected & Pushed to GitHub Repository
+
+**Date:** 2026-10-06  
+**Timestamp:** 22:21 IST  
+
+**Repository:** `https://github.com/techiekamal21/dsa-mastery-hub`  
+**Branch:** `main` (tracking `origin/main`)
+
+**Details:**
+- Configured git remote origin to `https://github.com/techiekamal21/dsa-mastery-hub.git`.
+- Set default production branch to `main`.
+- Pushed clean, zero-confidentiality codebase with all tracking exclusions strictly verified.
+
+---
+
 ## [2026-10-06] — 22:15 IST
+
 
 ### Security & Privacy: Excluded Raw Spreadsheet & Testing Suite via .gitignore
 
