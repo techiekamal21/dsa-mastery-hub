@@ -129,6 +129,36 @@ mark{background:#fde68a;color:#000;border-radius:2px}
   color: #fff;
   font-weight: 700;
 }
+/* Hub More Dropdown */
+.hub-more-dropdown { position: relative; display: inline-flex; }
+.hub-more-trigger {
+  padding: 5px 12px; border-radius: 6px; color: var(--mut); font-size: 0.8rem; font-weight: 500;
+  cursor: pointer; background: none; border: none; font-family: inherit; transition: all 0.2s ease; white-space: nowrap;
+}
+.hub-more-trigger:hover, .hub-more-dropdown.open .hub-more-trigger, .hub-more-dropdown:hover .hub-more-trigger {
+  color: var(--tx); background: rgba(255, 255, 255, 0.05);
+}
+.hub-more-trigger .caret { display: inline-block; transition: transform 0.2s ease; margin-left: 2px; font-size: 0.65rem; }
+.hub-more-dropdown.open .hub-more-trigger .caret, .hub-more-dropdown:hover .hub-more-trigger .caret { transform: rotate(180deg); }
+.hub-more-menu {
+  position: absolute; top: calc(100% + 8px); left: 0; min-width: 230px; background: var(--card);
+  border: 1px solid var(--bd); border-radius: 10px; box-shadow: 0 12px 32px rgba(0, 0, 0, 0.5);
+  padding: 6px; z-index: 1000; opacity: 0; visibility: hidden; transform: translateY(-6px);
+  transition: opacity 0.2s var(--ease), transform 0.2s var(--ease), visibility 0.2s; pointer-events: none;
+}
+.hub-more-dropdown:hover .hub-more-menu, .hub-more-dropdown.open .hub-more-menu {
+  opacity: 1; visibility: visible; transform: translateY(0); pointer-events: auto;
+}
+.hub-more-header {
+  font-size: 0.62rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--mut); padding: 6px 10px 4px;
+}
+.hub-more-item {
+  display: flex; align-items: center; gap: 8px; padding: 8px 10px; border-radius: 6px; color: var(--tx);
+  text-decoration: none; font-size: 0.8rem; font-weight: 500; transition: all 0.15s ease;
+}
+.hub-more-item:hover { background: rgba(99, 102, 241, 0.12); color: #fff; text-decoration: none; }
+.hub-more-item.active { background: rgba(99, 102, 241, 0.18); color: var(--ac); }
+.hub-more-item-icon { font-size: 1rem; width: 20px; text-align: center; }
 .hub-network {
   display: flex;
   align-items: center;
@@ -260,6 +290,21 @@ mark{background:#fde68a;color:#000;border-radius:2px}
       <a href="index.html" class="hub-tab">🎯 LeetCode 150</a>
       <a href="dsa_roadmap.html" class="hub-tab">🗺️ 775-Day Roadmap</a>
       <a href="dsa_pattern_guide.html" class="hub-tab active">💡 Pattern Guide</a>
+      <div class="hub-more-dropdown" id="hubMoreDropdown">
+        <button type="button" class="hub-more-trigger" onclick="this.parentElement.classList.toggle('open')">
+          📦 More <span class="caret">▾</span>
+        </button>
+        <div class="hub-more-menu">
+          <div class="hub-more-header">DevOps &amp; Engineering</div>
+          <a href="cicd_guide.html" class="hub-more-item">
+            <span class="hub-more-item-icon">🔄</span>
+            <div>
+              <div style="font-weight:600;">CI/CD Complete Guide</div>
+              <div style="font-size:0.68rem;color:var(--mut);">Zero to Production Pipelines</div>
+            </div>
+          </a>
+        </div>
+      </div>
     </nav>
 
     <div class="hub-network">
@@ -336,4 +381,10 @@ function render(){
 }
 $('q').oninput=render;
 render();
+document.addEventListener('click', (e) => {
+  const more = document.getElementById('hubMoreDropdown');
+  if (more && !more.contains(e.target)) more.classList.remove('open');
+  const conn = document.getElementById('hubDropdown');
+  if (conn && !conn.contains(e.target)) conn.classList.remove('open');
+});
 </script></body></html>

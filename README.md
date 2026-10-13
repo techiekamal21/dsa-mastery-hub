@@ -41,6 +41,7 @@ The suite integrates three comprehensive preparation tools connected via a unifi
 | 🎯 **LeetCode 150 Tracker** | `index.html` | Daily 90-day progress tracker with interactive checkboxes, SVG circular completion ring, consecutive streak engine, in-app daily reminder system, problem notes modal, and 90-day activity heatmap. | 150 Curated Problems |
 | 🗺️ **775-Day Comprehensive Roadmap** | `dsa_roadmap.html` | Exhaustive 26-month journey broken into 6 developmental phases with month navigation, deep algorithmic thought processes, and category filtering. | 2,325 Problems · 26 Months |
 | 💡 **DSA Algorithmic Pattern Guide** | `dsa_pattern_guide.html` | Interactive pattern archetype manual detailing scenario triggers, identification clues, time/space complexities, and classic problem links across 15+ algorithmic topics. | 15+ Algorithmic Topics |
+| 🔄 **CI/CD From Zero to Production** | `cicd_guide.html` | Interactive DevOps lab with live Pipeline Simulator, Deployment Strategy Visualizer (Rolling, Blue/Green, Canary, Recreate), Test Pyramid, and 10-chapter deep-dive blog. | Complete DevOps Curriculum |
 
 ---
 

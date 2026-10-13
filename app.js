@@ -792,12 +792,30 @@ function toggleHeaderDropdown(event) {
     }
 }
 
+// Nav More Dropdown (DevOps / CI/CD)
+// ==========================================================================
+function toggleMoreDropdown(event) {
+    if (event) {
+        event.stopPropagation();
+        event.preventDefault();
+    }
+    const moreDropdown = document.getElementById('navMoreDropdown');
+    if (moreDropdown) {
+        moreDropdown.classList.toggle('open');
+    }
+}
+
 document.addEventListener('click', (e) => {
     const dropdown = document.getElementById('nav-dropdown');
     if (dropdown && !dropdown.contains(e.target)) {
         dropdown.classList.remove('open');
         const trigger = dropdown.querySelector('.dropdown-trigger');
         if (trigger) trigger.setAttribute('aria-expanded', 'false');
+    }
+
+    const moreDropdown = document.getElementById('navMoreDropdown');
+    if (moreDropdown && !moreDropdown.contains(e.target)) {
+        moreDropdown.classList.remove('open');
     }
 });
 
@@ -808,6 +826,11 @@ document.addEventListener('keydown', (e) => {
             dropdown.classList.remove('open');
             const trigger = dropdown.querySelector('.dropdown-trigger');
             if (trigger) trigger.setAttribute('aria-expanded', 'false');
+        }
+
+        const moreDropdown = document.getElementById('navMoreDropdown');
+        if (moreDropdown && moreDropdown.classList.contains('open')) {
+            moreDropdown.classList.remove('open');
         }
     }
 });

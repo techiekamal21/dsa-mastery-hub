@@ -1,5 +1,28 @@
 # Changelog — DSA and Software Engineering V.0.1
 
+## [0.2.0] — 2026-10-13
+
+### Added: CI/CD From Zero to Production Interactive Guide & "More" Dropdown Menu
+
+**Date:** 2026-10-13  
+**Timestamp:** 19:10 IST  
+
+**Files Modified / Added:**
+- `cicd_guide.html` *(New)* — Complete interactive CI/CD learning portal featuring:
+  - DORA Metrics 4-keys dashboard (Deployment Frequency, Lead Time, Change Failure Rate, Time to Restore).
+  - Interactive Simulation Lab: Pipeline Simulator (with live logs and failure injection), Deployment Strategy Visualizer (Rolling, Blue/Green, Canary, Recreate), and Interactive 3-tier Test Pyramid.
+  - Comprehensive 10-chapter deep-dive blog covering everything from integration hell and trunk-based development to Kubernetes, GitOps, secret management, observability, and self-healing pipelines.
+- `index.html` — Integrated "More" dropdown into primary `.nav-tabs` menu linking to `cicd_guide.html` under "DevOps & Engineering".
+- `styles.css` — Added complete design system rules for `.nav-more-dropdown`, `.nav-more-trigger`, `.nav-more-menu`, and `.nav-more-item` supporting glassmorphism, responsive layouts, and light/dark theme modes.
+- `app.js` — Implemented `toggleMoreDropdown(event)` function, document click outside detection, and keyboard Escape key dismissal.
+- `dsa_roadmap.html` — Synchronized unified navigation header with "More" dropdown menu, custom styling, and click-outside handler.
+- `dsa_pattern_guide.html` — Synchronized unified navigation header with "More" dropdown menu, custom styling, and click-outside handler.
+- `DSA Pattern Guide.html` — Updated backward-compatible alias with "More" dropdown menu and styling.
+- `testing/test_runner.py` — Expanded automated test suite from 26 to 38 test cases (POS-01..29, NEG-01..09) verifying CI/CD file existence, simulators, 10-part blog, dropdown menu links on all pages, CSS tokens, and fault-tolerant fallbacks.
+- `testing/test-results.md` — Updated automated test execution report showing 38 passed, 0 failed.
+
+---
+
 ## [0.1.2] — 2026-10-06
 
 ### Redesigned: Streamlined Header with LinkedIn & Connect Dropdown
