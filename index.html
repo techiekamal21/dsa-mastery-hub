@@ -12,7 +12,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="styles.css?v=0.1.2">
+    <link rel="stylesheet" href="styles.css?v=0.2.0">
     <style>
         /* Self-Contained Header Dropdown Styling */
         .header-dropdown {
@@ -171,6 +171,162 @@
         }
 
         [data-theme="light"] .dropdown-item-title {
+            color: #1e293b;
+        }
+
+        /* Self-Contained Nav More Dropdown Styling */
+        .nav-more-dropdown {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+        }
+
+        .nav-more-trigger {
+            cursor: pointer;
+            font-family: inherit;
+            border: none;
+            background: transparent;
+            color: var(--text-secondary, #94a3b8);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.45rem;
+            padding: 0.45rem 0.85rem;
+            border-radius: var(--radius-sm, 6px);
+            font-size: 0.825rem;
+            font-weight: 600;
+            transition: all 0.2s ease;
+            outline: none;
+            -webkit-appearance: none;
+            appearance: none;
+            white-space: nowrap;
+            line-height: inherit;
+        }
+
+        .nav-more-trigger:hover,
+        .nav-more-dropdown:hover .nav-more-trigger,
+        .nav-more-dropdown.open .nav-more-trigger {
+            color: var(--text-primary, #ffffff);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .nav-more-trigger .more-caret {
+            display: inline-block;
+            transition: transform 0.2s ease;
+            font-size: 0.65rem;
+            margin-left: 0.15rem;
+        }
+
+        .nav-more-dropdown:hover .more-caret,
+        .nav-more-dropdown.open .more-caret {
+            transform: rotate(180deg);
+        }
+
+        .nav-more-menu {
+            position: absolute;
+            top: calc(100% + 8px);
+            left: 0;
+            width: 250px;
+            background: var(--bg-surface-elevated, #161f31);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--border-subtle, rgba(255, 255, 255, 0.12));
+            border-radius: var(--radius-md, 10px);
+            box-shadow: 0 16px 36px rgba(0, 0, 0, 0.5), 0 4px 12px rgba(0, 0, 0, 0.3);
+            padding: 0.5rem;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-6px);
+            transition: opacity 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+                        transform 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+                        visibility 0.2s;
+            pointer-events: none;
+        }
+
+        .nav-more-dropdown:hover .nav-more-menu,
+        .nav-more-dropdown.open .nav-more-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+            pointer-events: auto;
+        }
+
+        .nav-more-header {
+            font-size: 0.66rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--text-muted, #64748b);
+            padding: 0.4rem 0.6rem 0.25rem;
+        }
+
+        .nav-more-item {
+            display: flex;
+            align-items: center;
+            gap: 0.65rem;
+            padding: 0.55rem 0.65rem;
+            border-radius: var(--radius-sm, 6px);
+            color: var(--text-secondary, #cbd5e1);
+            text-decoration: none !important;
+            transition: all 0.15s ease;
+        }
+
+        .nav-more-item:hover {
+            background: rgba(99, 102, 241, 0.12);
+            color: #ffffff;
+            text-decoration: none !important;
+        }
+
+        .nav-more-item.active {
+            background: rgba(99, 102, 241, 0.18);
+            color: var(--accent-primary, #6366f1);
+        }
+
+        .nav-more-item-icon {
+            width: 22px;
+            height: 22px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            flex-shrink: 0;
+        }
+
+        .nav-more-item-text {
+            display: flex;
+            flex-direction: column;
+            min-width: 0;
+            flex: 1;
+        }
+
+        .nav-more-item-title {
+            font-weight: 600;
+            font-size: 0.8rem;
+            color: var(--text-primary, #f1f5f9);
+            line-height: 1.25;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .nav-more-item-desc {
+            font-size: 0.68rem;
+            color: var(--text-muted, #94a3b8);
+            line-height: 1.2;
+            margin-top: 2px;
+        }
+
+        [data-theme="light"] .nav-more-menu {
+            background: #ffffff;
+            border-color: rgba(0, 0, 0, 0.1);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+        }
+
+        [data-theme="light"] .nav-more-item:hover {
+            background: rgba(99, 102, 241, 0.08);
+        }
+
+        [data-theme="light"] .nav-more-item-title {
             color: #1e293b;
         }
     </style>
@@ -592,8 +748,22 @@
         </footer>
     </div>
 
-    <script src="data.js"></script>
-    <script src="app.js"></script>
+    <script src="data.js?v=0.2.0"></script>
+    <script src="app.js?v=0.2.0"></script>
+    <script>
+        // Inline self-contained fallback for dropdown interactions
+        function toggleMoreDropdown(event) {
+            if (event) { event.stopPropagation(); event.preventDefault(); }
+            const dd = document.getElementById('navMoreDropdown');
+            if (dd) dd.classList.toggle('open');
+        }
+        document.addEventListener('click', function(e) {
+            const more = document.getElementById('navMoreDropdown');
+            if (more && !more.contains(e.target)) more.classList.remove('open');
+            const conn = document.getElementById('nav-dropdown');
+            if (conn && !conn.contains(e.target)) conn.classList.remove('open');
+        });
+    </script>
 </body>
 
 </html>
