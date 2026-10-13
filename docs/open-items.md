@@ -19,3 +19,7 @@ This file tracks upcoming enhancements, planned features, and deferred items.
 4. **Multi-device Cloud Sync**:
    - *Status*: Open / Future Enhancement
    - *Description*: Add optional Firebase or Supabase authentication to sync progress seamlessly across multiple machines without manual JSON export/import.
+
+5. **CI/CD Visual YAML Workflow Builder**:
+   - *Status*: Open / Future Enhancement
+   - *Description*: Add an interactive GitHub Actions / GitLab CI YAML visual drag-and-drop generator in `cicd_guide.html` allowing users to export production-ready `.github/workflows/ci.yml` files.

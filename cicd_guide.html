@@ -1,0 +1,2246 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>CI/CD From Zero to Production — Interactive Guide | CodeByArt</title>
+  <meta name="description"
+    content="Master CI/CD with interactive pipeline simulations, deployment strategy visualizations, and a comprehensive 10-part deep-dive blog. From first commit to self-healing pipelines.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
+  <style>
+    /* ===== ROOT & RESET ===== */
+    :root {
+      --bg: #0a0e18;
+      --bg-surface: #111827;
+      --bg-surface2: #1a2332;
+      --bg-card: #141c2b;
+      --bg-glass: rgba(17, 24, 39, 0.85);
+      --border: rgba(255, 255, 255, 0.08);
+      --border-hover: rgba(255, 255, 255, 0.16);
+      --border-accent: rgba(56, 189, 248, 0.35);
+      --text: #f0f4f8;
+      --text-secondary: #94a3b8;
+      --text-muted: #64748b;
+      --accent: #38bdf8;
+      --accent2: #818cf8;
+      --accent3: #a78bfa;
+      --accent-green: #34d399;
+      --accent-orange: #fb923c;
+      --accent-red: #f87171;
+      --accent-pink: #f472b6;
+      --gradient-accent: linear-gradient(135deg, #38bdf8 0%, #818cf8 50%, #a78bfa 100%);
+      --gradient-warm: linear-gradient(135deg, #f472b6 0%, #fb923c 100%);
+      --sans: 'Inter', system-ui, sans-serif;
+      --display: 'Space Grotesk', sans-serif;
+      --mono: 'JetBrains Mono', monospace;
+      --ease: cubic-bezier(0.16, 1, 0.3, 1);
+      --radius: 12px;
+      --radius-sm: 8px;
+      --radius-lg: 20px;
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 70px;
+    }
+
+    body {
+      font-family: var(--sans);
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    ::selection {
+      background: rgba(56, 189, 248, 0.3);
+      color: #fff;
+    }
+
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: var(--bg);
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: var(--accent2);
+      border-radius: 3px;
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    /* ===== HUB HEADER (consistent with dsa-mastery-hub) ===== */
+    .hub-header {
+      background: rgba(17, 24, 39, 0.88);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 200;
+      padding: 8px 20px;
+    }
+
+    .hub-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      max-width: 1400px;
+      margin: 0 auto;
+      gap: 12px;
+    }
+
+    .hub-left {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .hub-brand {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 800;
+      font-size: 1.05rem;
+      letter-spacing: -0.02em;
+    }
+
+    .hub-brand:hover {
+      text-decoration: none;
+    }
+
+    .hub-brand-art {
+      background: linear-gradient(135deg, #00e5ff 0%, #a855f7 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hub-brand-sub {
+      font-size: 0.62rem;
+      font-family: var(--mono);
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-weight: 600;
+      display: block;
+      line-height: 1;
+      margin-top: 2px;
+    }
+
+    .hub-return-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 4px 10px;
+      border-radius: 6px;
+      background: var(--bg-surface2);
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      font-size: 0.76rem;
+      font-weight: 500;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+
+    .hub-return-btn:hover {
+      color: var(--accent);
+      border-color: var(--accent);
+      text-decoration: none;
+    }
+
+    .hub-tabs {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      background: var(--bg-surface2);
+      padding: 3px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+    }
+
+    .hub-tab {
+      padding: 5px 12px;
+      border-radius: 6px;
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.8rem;
+      font-weight: 500;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+    }
+
+    .hub-tab:hover {
+      color: var(--text);
+      background: rgba(255, 255, 255, 0.05);
+      text-decoration: none;
+    }
+
+    .hub-tab.active {
+      background: var(--accent);
+      color: #0a0e18;
+      font-weight: 700;
+    }
+
+    /* More Dropdown in Hub Tabs */
+    .hub-more-dropdown {
+      position: relative;
+      display: inline-flex;
+    }
+
+    .hub-more-trigger {
+      padding: 5px 12px;
+      border-radius: 6px;
+      color: var(--text-muted);
+      font-size: 0.8rem;
+      font-weight: 500;
+      cursor: pointer;
+      background: none;
+      border: none;
+      font-family: inherit;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+    }
+
+    .hub-more-trigger:hover,
+    .hub-more-dropdown.open .hub-more-trigger {
+      color: var(--text);
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .hub-more-trigger.active {
+      background: var(--accent);
+      color: #0a0e18;
+      font-weight: 700;
+    }
+
+    .hub-more-trigger .caret {
+      display: inline-block;
+      transition: transform 0.2s ease;
+      margin-left: 2px;
+      font-size: 0.65rem;
+    }
+
+    .hub-more-dropdown.open .hub-more-trigger .caret {
+      transform: rotate(180deg);
+    }
+
+    .hub-more-menu {
+      position: absolute;
+      top: calc(100% + 8px);
+      left: 0;
+      min-width: 220px;
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.5);
+      padding: 6px;
+      z-index: 1000;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-6px);
+      transition: opacity 0.2s var(--ease), transform 0.2s var(--ease), visibility 0.2s;
+      pointer-events: none;
+    }
+
+    .hub-more-dropdown:hover .hub-more-menu,
+    .hub-more-dropdown.open .hub-more-menu {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+
+    .hub-more-header {
+      font-size: 0.62rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-muted);
+      padding: 6px 10px 4px;
+    }
+
+    .hub-more-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 10px;
+      border-radius: 6px;
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 0.8rem;
+      font-weight: 500;
+      transition: all 0.15s ease;
+    }
+
+    .hub-more-item:hover {
+      background: rgba(56, 189, 248, 0.1);
+      color: var(--text);
+      text-decoration: none;
+    }
+
+    .hub-more-item.active {
+      background: rgba(56, 189, 248, 0.15);
+      color: var(--accent);
+    }
+
+    .hub-more-item-icon {
+      font-size: 1rem;
+      width: 20px;
+      text-align: center;
+    }
+
+    .hub-more-divider {
+      height: 1px;
+      background: var(--border);
+      margin: 4px 0;
+    }
+
+    /* Hub Network */
+    .hub-network {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .hub-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 4px 10px;
+      border-radius: 99px;
+      background: var(--bg-surface2);
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.72rem;
+      font-weight: 600;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+    }
+
+    .hub-pill:hover {
+      color: var(--text);
+      border-color: var(--accent);
+      text-decoration: none;
+    }
+
+    .hub-pill-dot {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: #00e5ff;
+    }
+
+    .hub-pill-linkedin:hover {
+      color: #38bdf8;
+      border-color: #0a66c2;
+    }
+
+    .hub-dropdown {
+      position: relative;
+      display: inline-flex;
+    }
+
+    .hub-dropdown-menu {
+      position: absolute;
+      top: calc(100% + 8px);
+      right: 0;
+      width: 240px;
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+      padding: 6px;
+      z-index: 1000;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-4px);
+      transition: all 0.2s ease;
+      pointer-events: none;
+    }
+
+    .hub-dropdown:hover .hub-dropdown-menu,
+    .hub-dropdown.open .hub-dropdown-menu {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+
+    .hub-dropdown-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 10px;
+      border-radius: 6px;
+      color: var(--text);
+      text-decoration: none;
+      font-size: 0.8rem;
+      transition: background 0.15s ease;
+    }
+
+    .hub-dropdown-item:hover {
+      background: var(--bg-surface2);
+      text-decoration: none;
+    }
+
+    .hub-dropdown-header {
+      font-size: 0.65rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-muted);
+      padding: 4px 10px;
+    }
+
+    .hub-dropdown-divider {
+      height: 1px;
+      background: var(--border);
+      margin: 4px 0;
+    }
+
+    @media (max-width: 900px) {
+      .hub-container {
+        flex-wrap: wrap;
+      }
+
+      .hub-network {
+        display: none;
+      }
+
+      .hub-tabs {
+        width: 100%;
+        justify-content: flex-start;
+        overflow-x: auto;
+      }
+    }
+
+    /* ===== PAGE LAYOUT ===== */
+    .page-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* ===== HERO SECTION ===== */
+    .cicd-hero {
+      position: relative;
+      padding: 80px 0 60px;
+      overflow: hidden;
+    }
+
+    .cicd-hero::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -20%;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(56, 189, 248, 0.06) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .cicd-hero::after {
+      content: '';
+      position: absolute;
+      bottom: -30%;
+      left: -15%;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(129, 140, 248, 0.06) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-label {
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+
+    .hero-label::before {
+      content: '';
+      width: 30px;
+      height: 1px;
+      background: var(--accent);
+    }
+
+    .hero-title {
+      font-family: var(--display);
+      font-size: clamp(2.2rem, 5vw, 3.5rem);
+      font-weight: 700;
+      line-height: 1.15;
+      margin-bottom: 18px;
+    }
+
+    .hero-title .gradient {
+      background: var(--gradient-accent);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-subtitle {
+      font-size: 1.1rem;
+      color: var(--text-secondary);
+      max-width: 700px;
+      margin-bottom: 30px;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 24px;
+      border-radius: 60px;
+      font-family: var(--sans);
+      font-weight: 600;
+      font-size: 0.9rem;
+      text-decoration: none;
+      cursor: pointer;
+      border: none;
+      transition: all 0.3s var(--ease);
+    }
+
+    .btn-primary {
+      background: var(--gradient-accent);
+      color: #fff;
+      box-shadow: 0 0 25px rgba(56, 189, 248, 0.2);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 35px rgba(56, 189, 248, 0.35);
+      text-decoration: none;
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--text-secondary);
+      border: 1.5px solid var(--border);
+    }
+
+    .btn-outline:hover {
+      border-color: var(--accent);
+      color: var(--text);
+      text-decoration: none;
+    }
+
+    /* ===== SECTION TITLES ===== */
+    .section-divider {
+      padding: 60px 0 30px;
+      position: relative;
+    }
+
+    .section-label {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    .section-label::before {
+      content: '';
+      width: 24px;
+      height: 1px;
+      background: var(--accent);
+    }
+
+    .section-heading {
+      font-family: var(--display);
+      font-size: clamp(1.6rem, 3vw, 2.4rem);
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 8px;
+    }
+
+    .section-desc {
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+      max-width: 650px;
+    }
+
+    /* ===== SIMULATION CARDS ===== */
+    .sim-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+      gap: 24px;
+      margin-bottom: 60px;
+    }
+
+    .sim-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 28px;
+      transition: all 0.3s var(--ease);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .sim-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: var(--gradient-accent);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .sim-card:hover {
+      border-color: var(--border-hover);
+      transform: translateY(-3px);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+    }
+
+    .sim-card:hover::before {
+      opacity: 1;
+    }
+
+    .sim-card-icon {
+      font-size: 2rem;
+      margin-bottom: 16px;
+    }
+
+    .sim-card-title {
+      font-family: var(--display);
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .sim-card-desc {
+      color: var(--text-secondary);
+      font-size: 0.88rem;
+      margin-bottom: 20px;
+    }
+
+    /* ===== PIPELINE SIMULATOR ===== */
+    .pipeline-sim {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 32px;
+      margin-bottom: 40px;
+    }
+
+    .pipeline-sim-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .pipeline-sim-title {
+      font-family: var(--display);
+      font-size: 1.3rem;
+      font-weight: 700;
+    }
+
+    .pipeline-controls {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .pipeline-btn {
+      padding: 8px 18px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: var(--bg-surface2);
+      color: var(--text-secondary);
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .pipeline-btn:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .pipeline-btn.active {
+      background: var(--accent);
+      color: var(--bg);
+      border-color: var(--accent);
+    }
+
+    .pipeline-btn.run-btn {
+      background: var(--accent-green);
+      color: #000;
+      border-color: var(--accent-green);
+      font-weight: 700;
+    }
+
+    .pipeline-btn.run-btn:hover {
+      box-shadow: 0 0 20px rgba(52, 211, 153, 0.3);
+    }
+
+    .pipeline-btn.run-btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .pipeline-stages {
+      display: flex;
+      gap: 4px;
+      align-items: center;
+      overflow-x: auto;
+      padding: 10px 0;
+      margin-bottom: 16px;
+    }
+
+    .pipeline-stage {
+      flex: 1;
+      min-width: 110px;
+      background: var(--bg-surface2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 14px;
+      text-align: center;
+      transition: all 0.4s var(--ease);
+      position: relative;
+    }
+
+    .pipeline-stage .stage-icon {
+      font-size: 1.3rem;
+      margin-bottom: 6px;
+    }
+
+    .pipeline-stage .stage-name {
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+      font-family: var(--mono);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .pipeline-stage .stage-time {
+      font-size: 0.68rem;
+      color: var(--text-muted);
+      margin-top: 4px;
+      font-family: var(--mono);
+    }
+
+    .pipeline-stage.running {
+      border-color: var(--accent);
+      background: rgba(56, 189, 248, 0.08);
+      box-shadow: 0 0 20px rgba(56, 189, 248, 0.15);
+    }
+
+    .pipeline-stage.running .stage-name {
+      color: var(--accent);
+    }
+
+    .pipeline-stage.passed {
+      border-color: var(--accent-green);
+      background: rgba(52, 211, 153, 0.06);
+    }
+
+    .pipeline-stage.passed .stage-name {
+      color: var(--accent-green);
+    }
+
+    .pipeline-stage.failed {
+      border-color: var(--accent-red);
+      background: rgba(248, 113, 113, 0.06);
+    }
+
+    .pipeline-stage.failed .stage-name {
+      color: var(--accent-red);
+    }
+
+    .pipeline-arrow {
+      font-size: 1.2rem;
+      color: var(--text-muted);
+      flex-shrink: 0;
+    }
+
+    .pipeline-log {
+      background: #0d1117;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 16px;
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      line-height: 1.8;
+      max-height: 200px;
+      overflow-y: auto;
+      color: var(--text-secondary);
+    }
+
+    .log-line {
+      display: flex;
+      gap: 10px;
+    }
+
+    .log-time {
+      color: var(--text-muted);
+      flex-shrink: 0;
+    }
+
+    .log-msg {
+      flex: 1;
+    }
+
+    .log-msg.success {
+      color: var(--accent-green);
+    }
+
+    .log-msg.error {
+      color: var(--accent-red);
+    }
+
+    .log-msg.warn {
+      color: var(--accent-orange);
+    }
+
+    .log-msg.info {
+      color: var(--accent);
+    }
+
+    /* ===== DEPLOYMENT STRATEGY SIMULATOR ===== */
+    .deploy-sim {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 32px;
+      margin-bottom: 40px;
+    }
+
+    .deploy-strategies {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 24px;
+    }
+
+    .strategy-pill {
+      padding: 7px 16px;
+      border-radius: 20px;
+      border: 1px solid var(--border);
+      background: var(--bg-surface2);
+      color: var(--text-secondary);
+      font-size: 0.78rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-family: inherit;
+    }
+
+    .strategy-pill:hover {
+      border-color: var(--accent);
+      color: var(--text);
+    }
+
+    .strategy-pill.active {
+      background: var(--accent);
+      color: var(--bg);
+      border-color: var(--accent);
+    }
+
+    .deploy-visual {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 20px;
+      min-height: 80px;
+      align-items: stretch;
+    }
+
+    .server-block {
+      flex: 1;
+      border-radius: var(--radius-sm);
+      padding: 16px;
+      text-align: center;
+      font-size: 0.78rem;
+      font-weight: 600;
+      font-family: var(--mono);
+      transition: all 0.5s var(--ease);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      border: 1px solid var(--border);
+    }
+
+    .server-block.old {
+      background: rgba(129, 140, 248, 0.1);
+      border-color: rgba(129, 140, 248, 0.3);
+      color: var(--accent2);
+    }
+
+    .server-block.new {
+      background: rgba(52, 211, 153, 0.1);
+      border-color: rgba(52, 211, 153, 0.3);
+      color: var(--accent-green);
+    }
+
+    .server-block.canary {
+      background: rgba(251, 146, 60, 0.1);
+      border-color: rgba(251, 146, 60, 0.3);
+      color: var(--accent-orange);
+    }
+
+    .server-block.down {
+      background: rgba(248, 113, 113, 0.06);
+      border-color: rgba(248, 113, 113, 0.2);
+      color: var(--accent-red);
+      opacity: 0.4;
+    }
+
+    .deploy-desc {
+      background: var(--bg-surface2);
+      border-radius: var(--radius-sm);
+      padding: 16px;
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      line-height: 1.7;
+    }
+
+    .deploy-desc strong {
+      color: var(--text);
+    }
+
+    /* ===== TEST PYRAMID ===== */
+    .pyramid-sim {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 32px;
+      margin-bottom: 40px;
+    }
+
+    .pyramid-visual {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      margin: 24px 0;
+    }
+
+    .pyramid-layer {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 20px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border);
+      transition: all 0.3s var(--ease);
+      cursor: pointer;
+      width: 100%;
+      max-width: 600px;
+    }
+
+    .pyramid-layer:hover {
+      border-color: var(--border-hover);
+      transform: translateX(6px);
+    }
+
+    .pyramid-layer.active {
+      border-color: var(--accent);
+      background: rgba(56, 189, 248, 0.06);
+    }
+
+    .pyramid-layer-icon {
+      font-size: 1.2rem;
+      width: 32px;
+      text-align: center;
+    }
+
+    .pyramid-layer-info {
+      flex: 1;
+    }
+
+    .pyramid-layer-name {
+      font-weight: 700;
+      font-size: 0.9rem;
+    }
+
+    .pyramid-layer-meta {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      font-family: var(--mono);
+    }
+
+    .pyramid-layer-bar {
+      height: 6px;
+      border-radius: 3px;
+      background: var(--bg-surface2);
+      overflow: hidden;
+      min-width: 80px;
+    }
+
+    .pyramid-layer-fill {
+      height: 100%;
+      border-radius: 3px;
+      transition: width 0.5s var(--ease);
+    }
+
+    .pyramid-detail {
+      background: var(--bg-surface2);
+      border-radius: var(--radius-sm);
+      padding: 20px;
+      margin-top: 16px;
+      display: none;
+    }
+
+    .pyramid-detail.active {
+      display: block;
+    }
+
+    .pyramid-detail h4 {
+      font-family: var(--display);
+      margin-bottom: 8px;
+      color: var(--accent);
+    }
+
+    .pyramid-detail p {
+      color: var(--text-secondary);
+      font-size: 0.88rem;
+    }
+
+    .pyramid-detail .tools-list {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 10px;
+    }
+
+    .pyramid-detail .tool-tag {
+      padding: 3px 10px;
+      border-radius: 4px;
+      background: rgba(56, 189, 248, 0.1);
+      color: var(--accent);
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      font-weight: 500;
+    }
+
+    /* ===== DORA METRICS ===== */
+    .dora-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+      margin: 24px 0;
+    }
+
+    .dora-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px;
+      text-align: center;
+      transition: all 0.3s var(--ease);
+    }
+
+    .dora-card:hover {
+      border-color: var(--border-hover);
+      transform: translateY(-2px);
+    }
+
+    .dora-card-value {
+      font-family: var(--display);
+      font-size: 1.8rem;
+      font-weight: 700;
+      background: var(--gradient-accent);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .dora-card-label {
+      font-size: 0.78rem;
+      color: var(--text-secondary);
+      margin-top: 4px;
+    }
+
+    .dora-card-target {
+      font-size: 0.68rem;
+      color: var(--text-muted);
+      font-family: var(--mono);
+      margin-top: 6px;
+    }
+
+    /* ===== BLOG SECTION ===== */
+    .blog-section {
+      padding: 40px 0 80px;
+      border-top: 1px solid var(--border);
+    }
+
+    .blog-toc {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 28px;
+      margin-bottom: 40px;
+    }
+
+    .blog-toc-title {
+      font-family: var(--display);
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 16px;
+      color: var(--accent);
+    }
+
+    .blog-toc-list {
+      list-style: none;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 8px;
+    }
+
+    .blog-toc-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .blog-toc-item a {
+      color: var(--text-secondary);
+      font-size: 0.88rem;
+      transition: color 0.2s;
+    }
+
+    .blog-toc-item a:hover {
+      color: var(--accent);
+    }
+
+    .blog-toc-num {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      width: 24px;
+      text-align: right;
+    }
+
+    /* Blog Articles */
+    .blog-article {
+      margin-bottom: 48px;
+      padding-bottom: 48px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .blog-article:last-child {
+      border-bottom: none;
+    }
+
+    .blog-part-label {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 8px;
+    }
+
+    .blog-article h2 {
+      font-family: var(--display);
+      font-size: clamp(1.4rem, 2.5vw, 1.9rem);
+      font-weight: 700;
+      margin-bottom: 16px;
+      line-height: 1.25;
+    }
+
+    .blog-article h3 {
+      font-family: var(--display);
+      font-size: 1.15rem;
+      font-weight: 600;
+      margin: 28px 0 12px;
+      color: var(--accent2);
+    }
+
+    .blog-article p {
+      color: var(--text-secondary);
+      font-size: 0.92rem;
+      margin-bottom: 14px;
+      line-height: 1.75;
+    }
+
+    .blog-article ul,
+    .blog-article ol {
+      margin: 12px 0 16px 20px;
+      color: var(--text-secondary);
+      font-size: 0.92rem;
+    }
+
+    .blog-article li {
+      margin-bottom: 6px;
+      line-height: 1.65;
+    }
+
+    .blog-article strong {
+      color: var(--text);
+    }
+
+    .blog-article blockquote {
+      border-left: 3px solid var(--accent);
+      padding: 12px 20px;
+      margin: 16px 0;
+      background: rgba(56, 189, 248, 0.04);
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      color: var(--text-secondary);
+      font-style: italic;
+    }
+
+    .blog-article code {
+      font-family: var(--mono);
+      font-size: 0.82rem;
+      background: rgba(56, 189, 248, 0.1);
+      padding: 2px 6px;
+      border-radius: 4px;
+      color: var(--accent);
+    }
+
+    .blog-article pre {
+      background: #0d1117;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 18px;
+      overflow-x: auto;
+      margin: 16px 0;
+    }
+
+    .blog-article pre code {
+      background: none;
+      padding: 0;
+      color: var(--text-secondary);
+      font-size: 0.78rem;
+      line-height: 1.7;
+    }
+
+    .blog-table-wrap {
+      overflow-x: auto;
+      margin: 16px 0;
+    }
+
+    .blog-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.85rem;
+    }
+
+    .blog-table th,
+    .blog-table td {
+      padding: 10px 14px;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .blog-table th {
+      color: var(--accent);
+      font-weight: 600;
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      background: var(--bg-surface2);
+    }
+
+    .blog-table td {
+      color: var(--text-secondary);
+    }
+
+    .blog-table tr:hover td {
+      background: rgba(56, 189, 248, 0.03);
+    }
+
+    /* ===== FOOTER ===== */
+    .footer {
+      background: var(--bg-surface);
+      border-top: 1px solid var(--border);
+      padding: 40px 0 24px;
+    }
+
+    .footer-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .footer-brand-name {
+      font-weight: 800;
+      font-size: 1.05rem;
+    }
+
+    .footer-brand-art {
+      background: linear-gradient(135deg, #00e5ff 0%, #a855f7 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .footer-tagline {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .footer-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      border-radius: 20px;
+      background: var(--bg-surface2);
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      font-size: 0.74rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+
+    .footer-pill:hover {
+      border-color: var(--accent);
+      color: var(--text);
+      text-decoration: none;
+    }
+
+    .footer-bottom {
+      text-align: center;
+      padding-top: 20px;
+      border-top: 1px solid var(--border);
+      margin-top: 24px;
+      font-size: 0.74rem;
+      color: var(--text-muted);
+      max-width: 1200px;
+      margin-left: auto;
+      margin-right: auto;
+      padding-left: 24px;
+      padding-right: 24px;
+    }
+
+    /* ===== ANIMATIONS ===== */
+    @keyframes pulse-ring {
+
+      0%,
+      100% {
+        box-shadow: 0 0 0 0 rgba(56, 189, 248, 0.4);
+      }
+
+      50% {
+        box-shadow: 0 0 0 8px rgba(56, 189, 248, 0);
+      }
+    }
+
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateY(12px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .animate-in {
+      animation: slideIn 0.5s var(--ease) both;
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 768px) {
+      .sim-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .pipeline-stages {
+        flex-direction: column;
+      }
+
+      .pipeline-arrow {
+        transform: rotate(90deg);
+      }
+
+      .deploy-visual {
+        flex-direction: column;
+      }
+
+      .dora-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .blog-toc-list {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- ===== HUB HEADER ===== -->
+  <header class="hub-header">
+    <div class="hub-container">
+      <div class="hub-left">
+        <a href="index.html" class="hub-brand" title="CodeByArt Software Engineering Platform">
+          <svg width="26" height="26" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="cba-grad-ci" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#00e5ff" />
+                <stop offset="50%" stop-color="#6366f1" />
+                <stop offset="100%" stop-color="#b14aff" />
+              </linearGradient>
+            </defs>
+            <rect width="32" height="32" rx="8" fill="#141c2b" stroke="rgba(255,255,255,0.14)" />
+            <path d="M10 11L5 16L10 21" stroke="url(#cba-grad-ci)" stroke-width="2.5" stroke-linecap="round"
+              stroke-linejoin="round" />
+            <path d="M22 11L27 16L22 21" stroke="url(#cba-grad-ci)" stroke-width="2.5" stroke-linecap="round"
+              stroke-linejoin="round" />
+            <path d="M18 9L14 23" stroke="url(#cba-grad-ci)" stroke-width="2.5" stroke-linecap="round" />
+          </svg>
+          <div>
+            <span>CODE<span class="hub-brand-art">BYART</span></span>
+            <span class="hub-brand-sub">SWE Platform</span>
+          </div>
+        </a>
+        <a href="index.html" class="hub-return-btn" title="Return to LeetCode 150 Hub">
+          <span>&larr;</span> <span>LeetCode 150</span>
+        </a>
+      </div>
+
+      <nav class="hub-tabs">
+        <a href="index.html" class="hub-tab">🎯 LeetCode 150</a>
+        <a href="dsa_roadmap.html" class="hub-tab">🗺️ 775-Day Roadmap</a>
+        <a href="dsa_pattern_guide.html" class="hub-tab">💡 Pattern Guide</a>
+        <div class="hub-more-dropdown" id="moreDropdown">
+          <button type="button" class="hub-more-trigger active"
+            onclick="this.parentElement.classList.toggle('open')">
+            📦 More <span class="caret">▾</span>
+          </button>
+          <div class="hub-more-menu">
+            <div class="hub-more-header">DevOps & Engineering</div>
+            <a href="cicd_guide.html" class="hub-more-item active">
+              <span class="hub-more-item-icon">🔄</span>
+              <div>
+                <div style="font-weight:600;">CI/CD Complete Guide</div>
+                <div style="font-size:0.68rem;color:var(--text-muted);">Zero to Production Pipelines</div>
+              </div>
+            </a>
+          </div>
+        </div>
+      </nav>
+
+      <div class="hub-network">
+        <a href="https://www.linkedin.com/in/kamal-patel-61a8201a0/" target="_blank" rel="noopener noreferrer"
+          class="hub-pill hub-pill-linkedin" title="Kamal Patel on LinkedIn">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
+            <path
+              d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 10.9v8.37H9.2V10.9H6.46M7.83 6.45a1.6 1.6 0 1 0 0 3.2 1.6 1.6 0 0 0 0-3.2Z" />
+          </svg>
+          <span>Kamal Patel</span>
+        </a>
+        <div class="hub-dropdown" id="hubDropdown">
+          <button type="button" class="hub-pill" style="cursor:pointer;"
+            onclick="this.parentElement.classList.toggle('open')" title="Websites & Contact">
+            <span>Connect ▾</span>
+          </button>
+          <div class="hub-dropdown-menu">
+            <div class="hub-dropdown-header">Collaboration &amp; Contact</div>
+            <a href="mailto:codebyart@gmail.com" class="hub-dropdown-item">
+              <span>✉️</span>
+              <div>
+                <div style="font-weight:600;font-size:0.78rem;">codebyart@gmail.com</div>
+                <div style="font-size:0.68rem;color:var(--text-muted);">Collaboration &amp; Inquiries</div>
+              </div>
+            </a>
+            <div class="hub-dropdown-divider"></div>
+            <div class="hub-dropdown-header">Official Websites</div>
+            <a href="https://codebyart.com" target="_blank" rel="noopener noreferrer" class="hub-dropdown-item">
+              <span class="hub-pill-dot"></span>
+              <div>
+                <div style="font-weight:600;font-size:0.78rem;">codebyart.com</div>
+                <div style="font-size:0.68rem;color:var(--text-muted);">Where Code Meets Artistry</div>
+              </div>
+            </a>
+            <a href="https://connectkreations.com" target="_blank" rel="noopener noreferrer" class="hub-dropdown-item">
+              <span>🌐</span>
+              <div>
+                <div style="font-weight:600;font-size:0.78rem;">connectkreations.com</div>
+                <div style="font-size:0.68rem;color:var(--text-muted);">Partner Network</div>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ===== HERO ===== -->
+  <section class="cicd-hero">
+    <div class="page-container">
+      <div class="hero-label">Interactive Learning</div>
+      <h1 class="hero-title">CI/CD From <span class="gradient">Zero to Production</span></h1>
+      <p class="hero-subtitle">A ten-part deep dive into Continuous Integration, Continuous Delivery and Continuous
+        Deployment — from the first commit to a self-healing, secure, observable pipeline. Learn by doing with
+        interactive simulations.</p>
+      <div class="hero-actions">
+        <a href="#simulations" class="btn btn-primary">🚀 Launch Simulations</a>
+        <a href="#blog" class="btn btn-outline">📖 Read the Guide</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== DORA METRICS ===== -->
+  <section class="page-container" style="padding-bottom: 40px;">
+    <div class="section-label">Key Metrics</div>
+    <div class="section-heading">DORA — The Four Keys to Elite DevOps</div>
+    <div class="section-desc">The DORA research program proves that speed and stability are not trade-offs. Track these
+      to measure your delivery performance.</div>
+    <div class="dora-grid">
+      <div class="dora-card">
+        <div class="dora-card-value">Multiple/day</div>
+        <div class="dora-card-label">Deployment Frequency</div>
+        <div class="dora-card-target">Elite target</div>
+      </div>
+      <div class="dora-card">
+        <div class="dora-card-value">&lt; 1 hour</div>
+        <div class="dora-card-label">Lead Time for Changes</div>
+        <div class="dora-card-target">Commit → Production</div>
+      </div>
+      <div class="dora-card">
+        <div class="dora-card-value">&lt; 5%</div>
+        <div class="dora-card-label">Change Failure Rate</div>
+        <div class="dora-card-target">Elite benchmark</div>
+      </div>
+      <div class="dora-card">
+        <div class="dora-card-value">&lt; 1 hour</div>
+        <div class="dora-card-label">Time to Restore</div>
+        <div class="dora-card-target">Mean recovery time</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SIMULATIONS ===== -->
+  <section id="simulations" class="page-container">
+    <div class="section-divider">
+      <div class="section-label">Interactive Learning</div>
+      <div class="section-heading">Simulation-Based Learning Lab</div>
+      <div class="section-desc">Don't just read about CI/CD — experience it. Run pipelines, compare deployment
+        strategies, and explore the test pyramid interactively.</div>
+    </div>
+
+    <!-- Pipeline Simulator -->
+    <div class="pipeline-sim animate-in">
+      <div class="pipeline-sim-header">
+        <div class="pipeline-sim-title">🔧 Pipeline Simulator</div>
+        <div class="pipeline-controls">
+          <button class="pipeline-btn" onclick="injectFailure()">💥 Inject Failure</button>
+          <button class="pipeline-btn run-btn" id="runPipelineBtn" onclick="runPipeline()">▶ Run Pipeline</button>
+        </div>
+      </div>
+
+      <div class="pipeline-stages" id="pipelineStages">
+        <div class="pipeline-stage" data-stage="checkout">
+          <div class="stage-icon">📥</div>
+          <div class="stage-name">Checkout</div>
+          <div class="stage-time">—</div>
+        </div>
+        <div class="pipeline-arrow">→</div>
+        <div class="pipeline-stage" data-stage="lint">
+          <div class="stage-icon">🔍</div>
+          <div class="stage-name">Lint & Format</div>
+          <div class="stage-time">—</div>
+        </div>
+        <div class="pipeline-arrow">→</div>
+        <div class="pipeline-stage" data-stage="test">
+          <div class="stage-icon">🧪</div>
+          <div class="stage-name">Unit Tests</div>
+          <div class="stage-time">—</div>
+        </div>
+        <div class="pipeline-arrow">→</div>
+        <div class="pipeline-stage" data-stage="build">
+          <div class="stage-icon">🏗️</div>
+          <div class="stage-name">Build</div>
+          <div class="stage-time">—</div>
+        </div>
+        <div class="pipeline-arrow">→</div>
+        <div class="pipeline-stage" data-stage="security">
+          <div class="stage-icon">🛡️</div>
+          <div class="stage-name">Security Scan</div>
+          <div class="stage-time">—</div>
+        </div>
+        <div class="pipeline-arrow">→</div>
+        <div class="pipeline-stage" data-stage="deploy">
+          <div class="stage-icon">🚀</div>
+          <div class="stage-name">Deploy</div>
+          <div class="stage-time">—</div>
+        </div>
+      </div>
+
+      <div class="pipeline-log" id="pipelineLog">
+        <div class="log-line"><span class="log-time">[--:--]</span> <span class="log-msg info">Pipeline ready.
+            Click "Run Pipeline" to begin...</span></div>
+      </div>
+    </div>
+
+    <!-- Deployment Strategy Simulator -->
+    <div class="deploy-sim animate-in">
+      <div class="pipeline-sim-title" style="margin-bottom: 18px;">🎯 Deployment Strategy Visualizer</div>
+      <div class="deploy-strategies" id="deployStrategies">
+        <button class="strategy-pill active" data-strategy="rolling" onclick="showStrategy('rolling')">Rolling
+          Update</button>
+        <button class="strategy-pill" data-strategy="bluegreen" onclick="showStrategy('bluegreen')">Blue/Green</button>
+        <button class="strategy-pill" data-strategy="canary" onclick="showStrategy('canary')">Canary</button>
+        <button class="strategy-pill" data-strategy="recreate" onclick="showStrategy('recreate')">Recreate</button>
+      </div>
+      <div class="deploy-visual" id="deployVisual"></div>
+      <div class="deploy-desc" id="deployDesc"></div>
+    </div>
+
+    <!-- Test Pyramid -->
+    <div class="pyramid-sim animate-in">
+      <div class="pipeline-sim-title" style="margin-bottom: 6px;">🔺 Interactive Test Pyramid</div>
+      <p style="color: var(--text-secondary); font-size: 0.88rem; margin-bottom: 8px;">Click each layer to learn more
+        about the testing strategy.</p>
+
+      <div class="pyramid-visual" id="pyramidVisual">
+        <div class="pyramid-layer" onclick="showPyramidDetail('e2e')" data-layer="e2e"
+          style="max-width: 300px;">
+          <div class="pyramid-layer-icon">🌐</div>
+          <div class="pyramid-layer-info">
+            <div class="pyramid-layer-name">E2E / UI Tests</div>
+            <div class="pyramid-layer-meta">Few · Slow · Expensive</div>
+          </div>
+          <div class="pyramid-layer-bar" style="min-width: 60px;">
+            <div class="pyramid-layer-fill" style="width: 15%; background: var(--accent-red);"></div>
+          </div>
+        </div>
+        <div class="pyramid-layer" onclick="showPyramidDetail('integration')" data-layer="integration"
+          style="max-width: 420px;">
+          <div class="pyramid-layer-icon">🔗</div>
+          <div class="pyramid-layer-info">
+            <div class="pyramid-layer-name">Integration / API / Contract Tests</div>
+            <div class="pyramid-layer-meta">Moderate · Balanced</div>
+          </div>
+          <div class="pyramid-layer-bar">
+            <div class="pyramid-layer-fill" style="width: 45%; background: var(--accent-orange);"></div>
+          </div>
+        </div>
+        <div class="pyramid-layer active" onclick="showPyramidDetail('unit')" data-layer="unit"
+          style="max-width: 560px;">
+          <div class="pyramid-layer-icon">⚡</div>
+          <div class="pyramid-layer-info">
+            <div class="pyramid-layer-name">Unit Tests</div>
+            <div class="pyramid-layer-meta">Many · Fast · Cheap · Isolated</div>
+          </div>
+          <div class="pyramid-layer-bar" style="min-width: 100px;">
+            <div class="pyramid-layer-fill" style="width: 85%; background: var(--accent-green);"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="pyramid-detail active" id="pyramidDetail-unit">
+        <h4>⚡ Unit Tests — The Foundation of Confidence</h4>
+        <p>Unit tests verify individual functions and modules in isolation. They run in milliseconds, catch logic errors
+          immediately, and form the broad base of your testing pyramid. Aim for 80%+ coverage on new code.</p>
+        <div class="tools-list">
+          <span class="tool-tag">Jest</span>
+          <span class="tool-tag">Vitest</span>
+          <span class="tool-tag">pytest</span>
+          <span class="tool-tag">JUnit</span>
+          <span class="tool-tag">Go test</span>
+        </div>
+      </div>
+      <div class="pyramid-detail" id="pyramidDetail-integration">
+        <h4>🔗 Integration Tests — Verifying Component Interaction</h4>
+        <p>Integration tests check that components work together correctly — service plus a real database in a container
+          (via Testcontainers), API contract tests (Pact), and cross-service communication. They catch the bugs unit
+          tests miss.</p>
+        <div class="tools-list">
+          <span class="tool-tag">Testcontainers</span>
+          <span class="tool-tag">Pact</span>
+          <span class="tool-tag">Supertest</span>
+          <span class="tool-tag">REST Assured</span>
+        </div>
+      </div>
+      <div class="pyramid-detail" id="pyramidDetail-e2e">
+        <h4>🌐 E2E Tests — Critical User Journeys</h4>
+        <p>End-to-end tests simulate real user workflows (login → checkout → payment). Use them sparingly — only for the
+          most critical paths. They're slow, expensive, and brittle, but catch the integration gaps nothing else can.</p>
+        <div class="tools-list">
+          <span class="tool-tag">Playwright</span>
+          <span class="tool-tag">Cypress</span>
+          <span class="tool-tag">Selenium</span>
+          <span class="tool-tag">k6 (perf)</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== BLOG SECTION ===== -->
+  <section id="blog" class="blog-section">
+    <div class="page-container">
+      <div class="section-divider" style="padding-top: 20px;">
+        <div class="section-label">Complete Guide</div>
+        <div class="section-heading">The CI/CD Deep-Dive Blog</div>
+        <div class="section-desc">Ten chapters covering everything from git strategy to self-healing production
+          pipelines. Bookmark and study at your own pace.</div>
+      </div>
+
+      <!-- Table of Contents -->
+      <div class="blog-toc">
+        <div class="blog-toc-title">📑 Table of Contents</div>
+        <ol class="blog-toc-list">
+          <li class="blog-toc-item"><span class="blog-toc-num">01</span><a href="#part-1">Why CI/CD Exists: The Problem
+              It Solves</a></li>
+          <li class="blog-toc-item"><span class="blog-toc-num">02</span><a href="#part-2">Core Concepts and
+              Vocabulary</a></li>
+          <li class="blog-toc-item"><span class="blog-toc-num">03</span><a href="#part-3">Git, Branching & Repo
+              Strategy</a></li>
+          <li class="blog-toc-item"><span class="blog-toc-num">04</span><a href="#part-4">Continuous Integration in
+              Depth</a></li>
+          <li class="blog-toc-item"><span class="blog-toc-num">05</span><a href="#part-5">Testing Strategy: The Heart of
+              Trust</a></li>
+          <li class="blog-toc-item"><span class="blog-toc-num">06</span><a href="#part-6">Building & Packaging
+              Artifacts</a></li>
+          <li class="blog-toc-item"><span class="blog-toc-num">07</span><a href="#part-7">Continuous Delivery &
+              Deployment Strategies</a></li>
+          <li class="blog-toc-item"><span class="blog-toc-num">08</span><a href="#part-8">Infrastructure as Code &
+              GitOps</a></li>
+          <li class="blog-toc-item"><span class="blog-toc-num">09</span><a href="#part-9">Security, Observability &
+              Governance</a></li>
+          <li class="blog-toc-item"><span class="blog-toc-num">10</span><a href="#part-10">Measuring, Scaling & Roadmap
+              to Mastery</a></li>
+        </ol>
+      </div>
+
+      <!-- Part 1 -->
+      <article class="blog-article" id="part-1">
+        <div class="blog-part-label">Part 01</div>
+        <h2>Why CI/CD Exists: The Problem It Solves</h2>
+        <p>Picture a team of eight developers in 2005. Each works on a feature branch for six weeks. Release day arrives, and everyone merges at once. The build breaks. Two features conflict in ways nobody anticipated. Someone "just needs to fix one thing" and it takes three days. QA tests for two weeks. Deployment happens on a Saturday night, manually, from a 40-step Word document.</p>
+        <p>This is <strong>integration hell</strong>, and it has three root causes:</p>
+        <ul>
+          <li><strong>Big batches.</strong> The larger a change, the harder it is to understand, test and debug.</li>
+          <li><strong>Late feedback.</strong> A bug found six weeks after it was written costs 10–100× more to fix than one found in six minutes.</li>
+          <li><strong>Manual, unrepeatable processes.</strong> Humans are inconsistent. Scripts are not.</li>
+        </ul>
+        <blockquote>Make small changes, verify them automatically, and ship them continuously, so that releasing software becomes <strong>boring</strong>.</blockquote>
+        <p>Boring is the goal. Elite teams deploy dozens or hundreds of times a day not because they're reckless, but because each deployment is so small and so well verified that it carries almost no risk.</p>
+      </article>
+
+      <!-- Part 2 -->
+      <article class="blog-article" id="part-2">
+        <div class="blog-part-label">Part 02</div>
+        <h2>Core Concepts and Vocabulary</h2>
+        <h3>Continuous Integration (CI)</h3>
+        <p>Developers merge small changes into a shared mainline <strong>at least daily</strong>. Every merge triggers an automated build and test run. The key outcome: the main branch is always in a known-good state.</p>
+        <h3>Continuous Delivery (CD)</h3>
+        <p>Every change that passes the pipeline is <strong>releasable</strong>. The artifact is built, tested, staged and ready, but a human presses the button to release to production.</p>
+        <h3>Continuous Deployment</h3>
+        <p>Every change that passes the pipeline is <strong>automatically released to production</strong> with no human gate. This requires strong automated testing, feature flags and observability.</p>
+        <pre><code>Commit ──► Build ──► Test ──► Package ──► Deploy to Staging ──► Release
+  │                                                                │
+  └──────── Continuous Integration ───────┘                        │
+  └──────────────── Continuous Delivery (manual release) ──────────┤
+  └──────────────── Continuous Deployment (automatic release) ─────┘</code></pre>
+        <h3>The Golden Principles</h3>
+        <ol>
+          <li><strong>Build once, deploy many.</strong> Build the artifact a single time and promote the same artifact through every environment.</li>
+          <li><strong>Everything as code.</strong> Pipelines, infrastructure, config and policies live in version control.</li>
+          <li><strong>Fail fast.</strong> Run the fastest, cheapest checks first.</li>
+          <li><strong>Keep the pipeline fast.</strong> Over 10 minutes for CI feedback and developers stop waiting.</li>
+          <li><strong>The pipeline is the only path to production.</strong> No SSH-and-hotfix.</li>
+          <li><strong>Broken main is the top priority.</strong> Stop and fix it before anything else.</li>
+        </ol>
+      </article>
+
+      <!-- Part 3 -->
+      <article class="blog-article" id="part-3">
+        <div class="blog-part-label">Part 03</div>
+        <h2>Designing the Foundation: Git, Branching & Repo Strategy</h2>
+        <h3>Choosing a Branching Strategy</h3>
+        <p><strong>Trunk-Based Development (recommended)</strong> — Developers commit to <code>main</code> frequently. Incomplete work is hidden behind feature flags. This is what DORA's top performers overwhelmingly use.</p>
+        <p><strong>GitHub Flow</strong> — Short-lived feature branches, pull request, review, merge to <code>main</code>, deploy. Simple and effective.</p>
+        <p><strong>GitFlow</strong> — <code>develop</code>, <code>release/*</code>, <code>hotfix/*</code> branches. Suits scheduled-release products but adds merge overhead. Avoid for web services.</p>
+        <h3>Pull Request Hygiene</h3>
+        <ul>
+          <li>Keep PRs small: ideally under 400 lines changed.</li>
+          <li>Require at least one review and passing CI before merge.</li>
+          <li>Use <strong>branch protection</strong>: no direct pushes to <code>main</code>.</li>
+          <li>Use <strong>CODEOWNERS</strong> so the right experts review the right paths.</li>
+        </ul>
+        <h3>Conventional Commits</h3>
+        <pre><code>feat(auth): add passkey login          → minor bump (1.4.0 → 1.5.0)
+fix(api): handle null customer id      → patch bump (1.5.0 → 1.5.1)
+feat!: drop v1 endpoints               → major bump (1.5.1 → 2.0.0)</code></pre>
+      </article>
+
+      <!-- Part 4 -->
+      <article class="blog-article" id="part-4">
+        <div class="blog-part-label">Part 04</div>
+        <h2>Continuous Integration in Depth</h2>
+        <h3>Anatomy of a Great CI Pipeline</h3>
+        <p>A well-designed CI run is ordered from cheapest/fastest to most expensive:</p>
+        <pre><code>1. Checkout & restore cache            (seconds)
+2. Lint & format check                 (seconds)
+3. Static analysis / type check        (seconds to a minute)
+4. Unit tests                          (1–3 min)
+5. Build                               (1–5 min)
+6. Integration tests                   (3–8 min)
+7. Security scans (SAST, deps, secrets)(parallel)
+8. Package & publish artifact          (1 min)</code></pre>
+        <h3>CI Best Practices</h3>
+        <ol>
+          <li><strong>Cache aggressively, but correctly.</strong> Cache dependencies keyed on lockfile hash.</li>
+          <li><strong>Make builds hermetic and reproducible.</strong> Pin versions — lockfiles, digest-pinned base images.</li>
+          <li><strong>Kill flaky tests ruthlessly.</strong> A flaky test teaches the team to ignore red builds.</li>
+          <li><strong>Use ephemeral, clean environments.</strong> Each job should start from a clean slate.</li>
+          <li><strong>Concurrency control.</strong> Cancel obsolete runs on the same branch.</li>
+          <li><strong>Treat the pipeline as a product.</strong> Version it, review changes, give it an owner.</li>
+        </ol>
+        <h3>Choosing a CI/CD Platform</h3>
+        <div class="blog-table-wrap">
+          <table class="blog-table">
+            <thead>
+              <tr><th>Tool</th><th>Best For</th><th>Notes</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>GitHub Actions</td><td>GitHub-hosted repos</td><td>Huge marketplace, YAML, tight integration</td></tr>
+              <tr><td>GitLab CI/CD</td><td>All-in-one DevOps</td><td>Excellent built-in security & environments</td></tr>
+              <tr><td>Jenkins</td><td>Max customization</td><td>Powerful but high maintenance</td></tr>
+              <tr><td>CircleCI</td><td>Speed & parallelism</td><td>Orbs for reuse</td></tr>
+              <tr><td>Argo CD / Flux</td><td>K8s GitOps delivery</td><td>Pair with a CI tool for build side</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </article>
+
+      <!-- Part 5 -->
+      <article class="blog-article" id="part-5">
+        <div class="blog-part-label">Part 05</div>
+        <h2>Testing Strategy: The Heart of Trust</h2>
+        <p>CI/CD is only as trustworthy as its tests. Continuous deployment without good tests is just continuous breakage.</p>
+        <h3>The Test Pyramid</h3>
+        <p>Use the interactive test pyramid above to explore each layer. The key insight: invest heavily in fast, cheap unit tests as your base. Use integration tests to verify component interactions. Reserve expensive E2E tests for critical user journeys only.</p>
+        <h3>Coverage: Use It Wisely</h3>
+        <p>Coverage tells you what code is <strong>not</strong> tested, not whether tested code is well tested. Set a sensible floor (e.g., 80% on new code) and enforce it as a quality gate, but do not worship the number.</p>
+        <h3>Shift-Left Quality Checks</h3>
+        <ul>
+          <li>Linters and formatters (ESLint, Ruff, gofmt)</li>
+          <li>Type checkers (TypeScript, mypy)</li>
+          <li>Static analysis (SonarQube, CodeQL, Semgrep)</li>
+          <li>Dependency vulnerability scans (Dependabot, Renovate, Trivy)</li>
+          <li>Secret scanning (Gitleaks, TruffleHog)</li>
+        </ul>
+      </article>
+
+      <!-- Part 6 -->
+      <article class="blog-article" id="part-6">
+        <div class="blog-part-label">Part 06</div>
+        <h2>Building & Packaging Artifacts</h2>
+        <h3>The Immutable Artifact</h3>
+        <p>Your pipeline's most important output is an <strong>immutable, versioned, traceable artifact</strong>. Whatever you tested is exactly what you ship. Never rebuild for production.</p>
+        <h3>Containerization with Docker</h3>
+        <pre><code># ---------- Build stage ----------
+FROM node:22-alpine AS build
+WORKDIR /app
+COPY package*.json ./
+RUN npm ci
+COPY . .
+RUN npm run build && npm prune --omit=dev
+
+# ---------- Runtime stage ----------
+FROM gcr.io/distroless/nodejs22-debian12:nonroot
+WORKDIR /app
+COPY --from=build /app/dist ./dist
+COPY --from=build /app/node_modules ./node_modules
+ENV NODE_ENV=production
+USER nonroot
+CMD ["dist/server.js"]</code></pre>
+        <h3>Tagging & Versioning</h3>
+        <p>Never deploy <code>:latest</code>. Tag with the <strong>git SHA</strong> for traceability (<code>myapp:3f9c2ab</code>), the <strong>semantic version</strong> for humans (<code>myapp:1.8.2</code>), and ideally deploy by <strong>digest</strong> (<code>myapp@sha256:...</code>).</p>
+        <h3>Supply Chain Integrity</h3>
+        <ul>
+          <li><strong>SBOM</strong> — inventory every component (Syft, CycloneDX)</li>
+          <li><strong>Signing</strong> — sign images with Sigstore/cosign</li>
+          <li><strong>Provenance attestations</strong> — SLSA framework</li>
+          <li><strong>Dependency pinning</strong> — lockfiles, Renovate, allow-lists</li>
+        </ul>
+      </article>
+
+      <!-- Part 7 -->
+      <article class="blog-article" id="part-7">
+        <div class="blog-part-label">Part 07</div>
+        <h2>Continuous Delivery & Deployment Strategies</h2>
+        <p>Use the <strong>Deployment Strategy Visualizer</strong> above to see each strategy in action. Here's the theory behind them:</p>
+        <h3>Environment Promotion</h3>
+        <pre><code>Artifact ─► Dev (auto) ─► Staging (auto + smoke/e2e) ─► [approval?] ─► Production</code></pre>
+        <p>Same artifact, different configuration. Staging should mirror production as closely as practical.</p>
+        <h3>Feature Flags — The Most Powerful Idea</h3>
+        <p>Deploy code <strong>dark</strong>, then release by toggling flags per user, percentage or cohort. This <strong>decouples deployment from release</strong> — the single most powerful idea in modern delivery. Tools: LaunchDarkly, Unleash, Flagsmith, OpenFeature.</p>
+        <h3>Database Migrations: The Hard Part</h3>
+        <p>Use the <strong>expand/contract</strong> pattern: (1) Add the new column (backward-compatible), (2) Dual-write and backfill, (3) Switch reads, (4) Drop old column in a later release.</p>
+      </article>
+
+      <!-- Part 8 -->
+      <article class="blog-article" id="part-8">
+        <div class="blog-part-label">Part 08</div>
+        <h2>Infrastructure as Code & GitOps</h2>
+        <h3>Infrastructure as Code (IaC)</h3>
+        <p>Servers clicked into existence in a console are unreproducible. Define infrastructure in code instead:</p>
+        <ul>
+          <li><strong>Terraform / OpenTofu</strong> — declarative, multi-cloud</li>
+          <li><strong>Pulumi</strong> — infrastructure in TypeScript, Python, Go</li>
+          <li><strong>AWS CDK / CloudFormation / Azure Bicep</strong></li>
+          <li><strong>Crossplane</strong> — cloud resources through K8s APIs</li>
+        </ul>
+        <h3>GitOps: Git as the Source of Truth</h3>
+        <pre><code>Developer ─► PR ─► CI builds image ─► CI updates image tag in config repo
+                                                  │
+                                      Argo CD detects change
+                                                  │
+                                    Syncs desired state to cluster</code></pre>
+        <p><strong>Why it's powerful:</strong> Complete audit history, cluster credentials never leave the cluster, disaster recovery is pointing a new cluster at the repo.</p>
+        <h3>Secrets Management</h3>
+        <p>Never commit secrets. Use secret managers (Vault, AWS Secrets Manager), External Secrets Operator for K8s, Sealed Secrets/SOPS for encrypted-in-Git workflows. Prefer short-lived, dynamically issued credentials.</p>
+      </article>
+
+      <!-- Part 9 -->
+      <article class="blog-article" id="part-9">
+        <div class="blog-part-label">Part 09</div>
+        <h2>Security, Observability & Governance (DevSecOps)</h2>
+        <h3>Security Belongs in the Pipeline</h3>
+        <div class="blog-table-wrap">
+          <table class="blog-table">
+            <thead>
+              <tr><th>Stage</th><th>Control</th><th>Tools</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Pre-commit</td><td>Secret detection</td><td>Gitleaks, TruffleHog</td></tr>
+              <tr><td>PR / Build</td><td>SAST (code analysis)</td><td>CodeQL, Semgrep, SonarQube</td></tr>
+              <tr><td>PR / Build</td><td>SCA (dependencies)</td><td>Dependabot, Snyk</td></tr>
+              <tr><td>Build</td><td>Container scanning</td><td>Trivy, Grype</td></tr>
+              <tr><td>Pre-deploy</td><td>Policy as code</td><td>OPA, Kyverno</td></tr>
+              <tr><td>Deploy</td><td>Signature verification</td><td>cosign, Kyverno</td></tr>
+              <tr><td>Runtime</td><td>Threat detection</td><td>Falco</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <h3>Observability: The Three Pillars</h3>
+        <ul>
+          <li><strong>Metrics</strong> (Prometheus, Datadog) — rates, errors, latency, saturation</li>
+          <li><strong>Logs</strong> (Loki, ELK) — structured, correlated by trace ID</li>
+          <li><strong>Traces</strong> (OpenTelemetry, Jaeger) — follow a request across services</li>
+        </ul>
+        <p>Define <strong>SLIs/SLOs</strong> (e.g., 99.9% of requests succeed under 300ms). Wire automated rollback to SLO breaches.</p>
+      </article>
+
+      <!-- Part 10 -->
+      <article class="blog-article" id="part-10">
+        <div class="blog-part-label">Part 10</div>
+        <h2>Measuring, Scaling & a Roadmap to Mastery</h2>
+        <h3>Practical Adoption Roadmap</h3>
+        <ul>
+          <li><strong>Phase 1 (weeks 1–4):</strong> Everything in Git, protected main, PR reviews, automated build + unit tests + lint.</li>
+          <li><strong>Phase 2 (weeks 4–10):</strong> Containerize, publish versioned artifacts, add integration tests, get CI under 10 min.</li>
+          <li><strong>Phase 3 (months 3–5):</strong> Automated deploy to staging, IaC, secrets in a manager, practiced rollback.</li>
+          <li><strong>Phase 4 (months 5–8):</strong> Feature flags, canary deployments, SLOs, GitOps.</li>
+          <li><strong>Phase 5 (month 8+):</strong> Continuous deployment, policy as code, signed artifacts, SLSA, internal developer platform.</li>
+        </ul>
+        <h3>Common Anti-Patterns</h3>
+        <div class="blog-table-wrap">
+          <table class="blog-table">
+            <thead>
+              <tr><th>Anti-Pattern</th><th>Why It Hurts</th><th>Fix</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Rebuilding per environment</td><td>"It worked in staging" surprises</td><td>Build once, promote the artifact</td></tr>
+              <tr><td>Long-lived feature branches</td><td>Merge pain, delayed feedback</td><td>Trunk-based + feature flags</td></tr>
+              <tr><td>Slow, flaky pipelines</td><td>Developers ignore CI</td><td>Parallelize, cache, quarantine flakes</td></tr>
+              <tr><td>Manual production tweaks</td><td>Drift, unreproducible state</td><td>Everything through pipeline / GitOps</td></tr>
+              <tr><td>No rollback plan</td><td>Long outages</td><td>Automated rollback, practiced regularly</td></tr>
+              <tr><td>Ignoring red builds</td><td>Trust collapses</td><td>"Stop the line": fix main first</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <h3>Final Thoughts</h3>
+        <p>CI/CD is not a tool you install. It is a <strong>discipline of small batches, fast feedback, automation and shared ownership</strong>. Start small: automate your build today, add tests this week, deploy to staging next month. Each step pays for itself.</p>
+        <ol>
+          <li>Integrate early and often.</li>
+          <li>Automate everything repeatable.</li>
+          <li>Build once, promote everywhere.</li>
+          <li>Test at every level, and trust your tests.</li>
+          <li>Make deployment boring and release a business decision.</li>
+          <li>Observe, measure and learn from every change.</li>
+        </ol>
+      </article>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div>
+        <div class="footer-brand-name">CODE<span class="footer-brand-art">BYART</span></div>
+        <p class="footer-tagline">Software Engineering & CI/CD Mastery Platform</p>
+        <p style="font-size: 0.74rem; color: var(--text-muted); margin-top: 4px;">Engineered & Curated by <a
+            href="https://www.linkedin.com/in/kamal-patel-61a8201a0/" target="_blank"
+            rel="noopener noreferrer" style="color: var(--accent);">Kamal Patel</a></p>
+      </div>
+      <div class="footer-links">
+        <a href="https://codebyart.com" target="_blank" rel="noopener noreferrer" class="footer-pill">🚀
+          codebyart.com</a>
+        <a href="https://connectkreations.com" target="_blank" rel="noopener noreferrer" class="footer-pill">🌐
+          connectkreations.com</a>
+        <a href="https://www.linkedin.com/in/kamal-patel-61a8201a0/" target="_blank" rel="noopener noreferrer"
+          class="footer-pill">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor">
+            <path
+              d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 10.9v8.37H9.2V10.9H6.46M7.83 6.45a1.6 1.6 0 1 0 0 3.2 1.6 1.6 0 0 0 0-3.2Z" />
+          </svg>
+          Kamal Patel
+        </a>
+        <a href="mailto:codebyart@gmail.com" class="footer-pill">✉️ codebyart@gmail.com</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 CodeByArt &middot; Powered by CodeByArt & ConnectKreations</p>
+    </div>
+  </footer>
+
+  <script>
+    // ===== PIPELINE SIMULATOR =====
+    let pipelineRunning = false;
+    let shouldFail = false;
+    let failStage = '';
+
+    const stages = [
+      { id: 'checkout', name: 'Checkout', duration: 800, logs: ['Cloning repository...', 'Restoring cache (npm, 284MB)...', 'Cache restored in 1.2s'] },
+      { id: 'lint', name: 'Lint & Format', duration: 1200, logs: ['Running ESLint on 847 files...', 'Running Prettier check...', '0 errors, 0 warnings ✓'] },
+      { id: 'test', name: 'Unit Tests', duration: 2000, logs: ['Running 1,247 tests across 12 suites...', 'Test Suites: 12 passed, 12 total', 'Tests: 1,247 passed, Coverage: 87.3%'] },
+      { id: 'build', name: 'Build', duration: 1500, logs: ['Building production bundle...', 'Multi-stage Docker build (node:22-alpine)...', 'Image: ghcr.io/acme/app:a3f9c2b (42MB)'] },
+      { id: 'security', name: 'Security Scan', duration: 1800, logs: ['Running Trivy container scan...', 'Running CodeQL SAST analysis...', '0 critical, 0 high vulnerabilities ✓'] },
+      { id: 'deploy', name: 'Deploy', duration: 1000, logs: ['Deploying to staging environment...', 'Running smoke tests (12/12 passed)...', 'Deployment successful! Health check: OK ✓'] }
+    ];
+
+    function getLogEl() { return document.getElementById('pipelineLog'); }
+    function getStageEl(id) { return document.querySelector(`.pipeline-stage[data-stage="${id}"]`); }
+
+    function addLog(time, msg, type = '') {
+      const log = getLogEl();
+      const line = document.createElement('div');
+      line.className = 'log-line';
+      line.innerHTML = `<span class="log-time">[${time}]</span> <span class="log-msg ${type}">${msg}</span>`;
+      log.appendChild(line);
+      log.scrollTop = log.scrollHeight;
+    }
+
+    function resetPipeline() {
+      const log = getLogEl();
+      log.innerHTML = '<div class="log-line"><span class="log-time">[--:--]</span> <span class="log-msg info">Pipeline ready. Click "Run Pipeline" to begin...</span></div>';
+      document.querySelectorAll('.pipeline-stage').forEach(s => {
+        s.classList.remove('running', 'passed', 'failed');
+        s.querySelector('.stage-time').textContent = '—';
+      });
+    }
+
+    function formatTime(ms) {
+      const s = Math.floor(ms / 1000);
+      return `${String(Math.floor(s / 60)).padStart(2, '0')}:${String(s % 60).padStart(2, '0')}`;
+    }
+
+    async function runPipeline() {
+      if (pipelineRunning) return;
+      pipelineRunning = true;
+      const btn = document.getElementById('runPipelineBtn');
+      btn.disabled = true;
+      btn.textContent = '⏳ Running...';
+
+      resetPipeline();
+      addLog('00:00', '🚀 Pipeline triggered by push to main', 'info');
+
+      let totalTime = 0;
+      let failed = false;
+
+      for (const stage of stages) {
+        if (failed) break;
+        const el = getStageEl(stage.id);
+        el.classList.add('running');
+        addLog(formatTime(totalTime), `▶ Starting ${stage.name}...`, 'info');
+
+        for (const logMsg of stage.logs) {
+          await sleep(stage.duration / stage.logs.length);
+          totalTime += stage.duration / stage.logs.length;
+
+          if (shouldFail && stage.id === failStage && logMsg === stage.logs[stage.logs.length - 1]) {
+            addLog(formatTime(totalTime), `✗ ${stage.name} FAILED: ${getFailureMsg(stage.id)}`, 'error');
+            el.classList.remove('running');
+            el.classList.add('failed');
+            el.querySelector('.stage-time').textContent = 'FAILED';
+            failed = true;
+            break;
+          }
+
+          addLog(formatTime(totalTime), `  ${logMsg}`, '');
+        }
+
+        if (!failed) {
+          el.classList.remove('running');
+          el.classList.add('passed');
+          el.querySelector('.stage-time').textContent = `${(stage.duration / 1000).toFixed(1)}s`;
+          addLog(formatTime(totalTime), `✓ ${stage.name} passed`, 'success');
+        }
+      }
+
+      if (!failed) {
+        addLog(formatTime(totalTime), '🎉 Pipeline completed successfully!', 'success');
+      } else {
+        addLog(formatTime(totalTime), '❌ Pipeline failed. Fix and re-run.', 'error');
+      }
+
+      shouldFail = false;
+      pipelineRunning = false;
+      btn.disabled = false;
+      btn.textContent = '▶ Run Pipeline';
+    }
+
+    function injectFailure() {
+      const stageIds = ['lint', 'test', 'build', 'security'];
+      failStage = stageIds[Math.floor(Math.random() * stageIds.length)];
+      shouldFail = true;
+      const log = getLogEl();
+      addLog('--:--', `💥 Failure injection armed for: ${failStage.toUpperCase()}`, 'warn');
+    }
+
+    function getFailureMsg(stageId) {
+      const msgs = {
+        lint: 'ESLint found 3 errors in src/api/handler.ts',
+        test: 'FAIL src/auth.test.ts — Expected 200 but received 401',
+        build: 'TypeScript compilation error: Property "user" does not exist on type',
+        security: 'CRITICAL: CVE-2026-1234 found in lodash@4.17.20'
+      };
+      return msgs[stageId] || 'Unknown error';
+    }
+
+    function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
+
+    // ===== DEPLOYMENT STRATEGY SIMULATOR =====
+    const deployData = {
+      rolling: {
+        visual: [
+          { label: 'v1 ✓', cls: 'old', sub: 'Instance 1' },
+          { label: 'v2 ★', cls: 'new', sub: 'Instance 2 (updated)' },
+          { label: 'v2 ★', cls: 'new', sub: 'Instance 3 (updated)' },
+          { label: 'v1 ✓', cls: 'old', sub: 'Instance 4 (waiting)' }
+        ],
+        desc: '<strong>Rolling Update:</strong> Replace instances gradually. Two versions coexist briefly (requires backward compatibility). Kubernetes default. No downtime, but requires your app to handle both old and new versions simultaneously.'
+      },
+      bluegreen: {
+        visual: [
+          { label: 'v1 (Blue)', cls: 'old', sub: 'Current — receiving traffic' },
+          { label: 'v2 (Green)', cls: 'new', sub: 'Idle — tested & ready' }
+        ],
+        desc: '<strong>Blue/Green:</strong> Run two identical environments. Deploy to idle "Green", test it, then switch traffic from "Blue" instantly. Rollback is just a router flip. Cost: double capacity during the switch.'
+      },
+      canary: {
+        visual: [
+          { label: 'v1 (95%)', cls: 'old', sub: 'Stable — majority traffic' },
+          { label: 'v2 (5%)', cls: 'canary', sub: 'Canary — monitored closely' }
+        ],
+        desc: '<strong>Canary:</strong> Route a small percentage (1%→5%→25%→100%) to the new version while automatically comparing error rate and latency against the baseline. Abort automatically on regression. Tools: Argo Rollouts, Flagger, Istio.'
+      },
+      recreate: {
+        visual: [
+          { label: 'v1 ✗', cls: 'down', sub: 'Stopped' },
+          { label: 'v2 ★', cls: 'new', sub: 'Starting...' }
+        ],
+        desc: '<strong>Recreate:</strong> Stop the old version completely, then start the new one. Simplest strategy but causes <strong>downtime</strong> between stop and start. Only suitable for dev environments or batch processing systems.'
+      }
+    };
+
+    function showStrategy(strategy) {
+      document.querySelectorAll('.strategy-pill').forEach(p => p.classList.remove('active'));
+      document.querySelector(`.strategy-pill[data-strategy="${strategy}"]`).classList.add('active');
+
+      const data = deployData[strategy];
+      const visual = document.getElementById('deployVisual');
+      visual.innerHTML = data.visual.map(v =>
+        `<div class="server-block ${v.cls}"><div>${v.label}</div><div style="font-size:0.68rem;opacity:0.7;font-family:var(--sans);">${v.sub}</div></div>`
+      ).join('');
+
+      document.getElementById('deployDesc').innerHTML = data.desc;
+    }
+
+    // ===== TEST PYRAMID =====
+    function showPyramidDetail(layer) {
+      document.querySelectorAll('.pyramid-layer').forEach(l => l.classList.remove('active'));
+      document.querySelector(`.pyramid-layer[data-layer="${layer}"]`).classList.add('active');
+      document.querySelectorAll('.pyramid-detail').forEach(d => d.classList.remove('active'));
+      document.getElementById(`pyramidDetail-${layer}`).classList.add('active');
+    }
+
+    // ===== DROPDOWN CLOSE ON OUTSIDE CLICK =====
+    document.addEventListener('click', function (e) {
+      document.querySelectorAll('.hub-dropdown.open, .hub-more-dropdown.open').forEach(dd => {
+        if (!dd.contains(e.target)) dd.classList.remove('open');
+      });
+    });
+
+    // Initialize
+    showStrategy('rolling');
+  </script>
+</body>
+
+</html>
