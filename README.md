@@ -42,6 +42,7 @@ The suite integrates three comprehensive preparation tools connected via a unifi
 | 🗺️ **775-Day Comprehensive Roadmap** | `dsa_roadmap.html` | Exhaustive 26-month journey broken into 6 developmental phases with month navigation, deep algorithmic thought processes, and category filtering. | 2,325 Problems · 26 Months |
 | 💡 **DSA Algorithmic Pattern Guide** | `dsa_pattern_guide.html` | Interactive pattern archetype manual detailing scenario triggers, identification clues, time/space complexities, and classic problem links across 15+ algorithmic topics. | 15+ Algorithmic Topics |
 | 🔄 **CI/CD From Zero to Production** | `cicd_guide.html` | Interactive DevOps lab with live Pipeline Simulator, Deployment Strategy Visualizer (Rolling, Blue/Green, Canary, Recreate), Test Pyramid, and 10-chapter deep-dive blog. | Complete DevOps Curriculum |
+| 🧪 **SDET & SWE Question Bank** | `sdet_software_engineering_interview_question_bank.html` | Comprehensive 71-topic interview study workspace covering Python, OOP, Testing & Automation, CI/CD, OS & Memory, Distributed Systems, React, and Behavioral questions with progress tracking and PDF export. | 71 Topic Groups · 200+ Questions |
 
 ---
 
@@ -93,6 +94,8 @@ dsa-mastery-hub/
 ├── dsa_roadmap.html           # 775-Day Comprehensive Curriculum (2,325 problems)
 ├── dsa_pattern_guide.html     # DSA Algorithmic Pattern Guide
 ├── DSA Pattern Guide.html     # Backward-compatible alias
+├── cicd_guide.html            # CI/CD Complete Interactive Guide & DevOps Lab
+├── sdet_software_engineering_interview_question_bank.html # SDET & SWE Comprehensive Question Bank
 ├── styles.css                 # Modern design system & responsive styling
 ├── app.js                     # Application logic, streaks, reminders & state engine
 ├── data.js                    # Parsed dataset of 163 roadmap entries

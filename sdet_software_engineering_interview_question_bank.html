@@ -1,0 +1,411 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0b1120">
+<title>SDET &amp; Software Engineering Interview Question Bank — CodeByArt</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0b1120;--panel:#111b2e;--panel2:#16233a;--text:#e9eef8;--muted:#94a3b8;--line:#22324d;--line-light:rgba(255,255,255,0.08);--accent:#38bdf8;--accent2:#818cf8;--green:#4ade80;--shadow:0 12px 30px rgba(0,0,0,0.35);--sans:'Inter',system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;--mono:'JetBrains Mono',monospace}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:110px}
+body{margin:0;background:radial-gradient(ellipse at 15% 0%,#172a4d 0,transparent 45%),radial-gradient(ellipse at 85% 20%,#151e36 0,transparent 40%),var(--bg);color:var(--text);font:15px/1.65 var(--sans);min-height:100vh}
+button,input{font:inherit}button{cursor:pointer}
+a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}
+
+/* Hub Global Header (Unified CodeByArt) */
+.hub-header{background:rgba(11,17,32,0.92);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:200;padding:8px 20px}
+.hub-container{display:flex;align-items:center;justify-content:space-between;max-width:1350px;margin:0 auto;gap:12px}
+.hub-left{display:flex;align-items:center;gap:14px}
+.hub-brand{display:flex;align-items:center;gap:8px;color:var(--text);text-decoration:none;font-weight:800;font-size:1.05rem;letter-spacing:-0.02em}
+.hub-brand:hover{text-decoration:none}
+.hub-brand-art{background:linear-gradient(135deg,#00e5ff 0%,#a855f7 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.hub-brand-sub{font-size:0.62rem;font-family:var(--mono);color:var(--muted);text-transform:uppercase;letter-spacing:0.08em;font-weight:600;display:block;line-height:1;margin-top:2px}
+.hub-return-btn{display:inline-flex;align-items:center;gap:5px;padding:4px 10px;border-radius:6px;background:var(--panel2);border:1px solid var(--line);color:var(--muted);font-size:0.76rem;font-weight:500;text-decoration:none;transition:all 0.2s ease}
+.hub-return-btn:hover{color:var(--accent);border-color:var(--accent);text-decoration:none}
+.hub-tabs{display:flex;align-items:center;gap:4px;background:var(--panel2);padding:3px;border-radius:8px;border:1px solid var(--line)}
+.hub-tab{padding:5px 12px;border-radius:6px;color:var(--muted);text-decoration:none;font-size:0.8rem;font-weight:500;transition:all 0.2s ease;white-space:nowrap}
+.hub-tab:hover{color:var(--text);background:rgba(255,255,255,0.06);text-decoration:none}
+.hub-tab.active{background:var(--accent);color:#0b1120;font-weight:700}
+.hub-more-dropdown{position:relative;display:inline-flex}
+.hub-more-trigger{padding:5px 12px;border-radius:6px;color:var(--muted);font-size:0.8rem;font-weight:500;cursor:pointer;background:none;border:none;font-family:inherit;transition:all 0.2s ease;white-space:nowrap}
+.hub-more-trigger:hover,.hub-more-dropdown.open .hub-more-trigger,.hub-more-dropdown:hover .hub-more-trigger{color:var(--text);background:rgba(255,255,255,0.06)}
+.hub-more-trigger.active{background:var(--accent);color:#0b1120;font-weight:700}
+.hub-more-trigger .caret{display:inline-block;transition:transform 0.2s ease;margin-left:2px;font-size:0.65rem}
+.hub-more-dropdown.open .hub-more-trigger .caret,.hub-more-dropdown:hover .hub-more-trigger .caret{transform:rotate(180deg)}
+.hub-more-menu{position:absolute;top:calc(100% + 8px);left:0;min-width:240px;background:#111b2e;border:1px solid var(--line);border-radius:10px;box-shadow:0 16px 36px rgba(0,0,0,0.55);padding:6px;z-index:1000;opacity:0;visibility:hidden;transform:translateY(-6px);transition:opacity 0.2s ease,transform 0.2s ease,visibility 0.2s;pointer-events:none}
+.hub-more-dropdown:hover .hub-more-menu,.hub-more-dropdown.open .hub-more-menu{opacity:1;visibility:visible;transform:translateY(0);pointer-events:auto}
+.hub-more-header{font-size:0.62rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--muted);padding:6px 10px 4px}
+.hub-more-header:not(:first-child){margin-top:4px;padding-top:6px;border-top:1px solid rgba(255,255,255,0.08)}
+.hub-more-item{display:flex;align-items:center;gap:8px;padding:8px 10px;border-radius:6px;color:var(--text);text-decoration:none;font-size:0.8rem;font-weight:500;transition:all 0.15s ease}
+.hub-more-item:hover{background:rgba(56,189,248,0.12);color:var(--accent);text-decoration:none}
+.hub-more-item.active{background:rgba(56,189,248,0.18);color:var(--accent)}
+.hub-more-item-icon{font-size:1rem;width:20px;text-align:center}
+.hub-network{display:flex;align-items:center;gap:6px}
+.hub-pill{display:inline-flex;align-items:center;gap:5px;padding:4px 10px;border-radius:99px;background:var(--panel2);border:1px solid var(--line);color:var(--muted);text-decoration:none;font-size:0.72rem;font-weight:600;transition:all 0.2s ease;white-space:nowrap}
+.hub-pill:hover{color:var(--text);border-color:var(--accent);text-decoration:none}
+.hub-pill-dot{width:5px;height:5px;border-radius:50%;background:#00e5ff}
+.hub-pill-linkedin:hover{color:#38bdf8;border-color:#0a66c2}
+.hub-dropdown{position:relative;display:inline-flex}
+.hub-dropdown-menu{position:absolute;top:calc(100% + 8px);right:0;width:240px;background:#111b2e;border:1px solid var(--line);border-radius:8px;box-shadow:0 10px 25px rgba(0,0,0,0.45);padding:6px;z-index:1000;opacity:0;visibility:hidden;transform:translateY(-4px);transition:all 0.2s ease;pointer-events:none}
+.hub-dropdown:hover .hub-dropdown-menu,.hub-dropdown.open .hub-dropdown-menu{opacity:1;visibility:visible;transform:translateY(0);pointer-events:auto}
+.hub-dropdown-header{font-size:0.64rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--muted);padding:6px 10px 4px}
+.hub-dropdown-item{display:flex;align-items:center;gap:8px;padding:6px 10px;border-radius:6px;color:var(--text);text-decoration:none;font-size:0.78rem;transition:all 0.15s ease}
+.hub-dropdown-item:hover{background:rgba(56,189,248,0.12);color:var(--accent);text-decoration:none}
+.hub-dropdown-divider{height:1px;background:var(--line);margin:4px 0}
+
+/* Page Layout & Components */
+.bank-hero{padding:38px 22px 28px;border-bottom:1px solid var(--line);background:radial-gradient(ellipse at 50% 0%,rgba(56,189,248,0.08) 0%,transparent 65%),rgba(8,14,27,0.72)}
+.wrap{max-width:1280px;margin:auto}
+.eyebrow{color:var(--accent);font-weight:700;letter-spacing:0.12em;text-transform:uppercase;font-size:0.75rem;display:inline-flex;align-items:center;gap:6px}
+.eyebrow::before{content:"";display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--accent)}
+h1{font-size:clamp(2rem,4.5vw,3.2rem);line-height:1.12;letter-spacing:-0.035em;margin:12px 0 14px;max-width:950px;font-weight:800}
+.gradient-text{background:linear-gradient(135deg,#00e5ff 0%,#a855f7 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.bank-hero p{color:var(--muted);max-width:840px;margin:0;font-size:1.02rem;line-height:1.6}
+.stats{display:flex;gap:12px;flex-wrap:wrap;margin-top:24px}
+.stat{border:1px solid var(--line);background:rgba(16,27,45,0.85);border-radius:12px;padding:12px 18px;min-width:135px;backdrop-filter:blur(8px);transition:all 0.2s ease}
+.stat:hover{border-color:rgba(56,189,248,0.35);transform:translateY(-2px)}
+.stat b{display:block;font-size:1.45rem;color:var(--accent);font-weight:800;font-family:var(--mono)}
+.stat span{color:var(--muted);font-size:0.8rem;font-weight:500}
+.toolbar{position:sticky;top:48px;z-index:100;background:rgba(11,17,32,0.94);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid var(--line);padding:12px 20px}
+.tools{max-width:1280px;margin:auto;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.search{flex:1;min-width:230px;background:rgba(16,27,45,0.9);color:var(--text);border:1px solid var(--line);border-radius:10px;padding:10px 14px;outline:none;font-size:0.88rem;transition:border-color 0.2s ease,box-shadow 0.2s ease}
+.search:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(56,189,248,0.15)}
+.btn{border:1px solid var(--line);border-radius:9px;background:var(--surface2);color:var(--text);padding:8px 14px;font-size:0.82rem;font-weight:500;transition:all 0.2s ease;white-space:nowrap}
+.btn:hover{border-color:var(--accent);color:#fff;transform:translateY(-1px)}
+.btn.primary{background:linear-gradient(135deg,#00e5ff 0%,#38bdf8 100%);color:#06121e;border-color:transparent;font-weight:700}
+.btn.primary:hover{filter:brightness(1.1);box-shadow:0 4px 14px rgba(0,229,255,0.35)}
+.progress-wrap{height:4px;background:rgba(36,50,74,0.6)}
+.progress{height:100%;width:0;background:linear-gradient(90deg,#00e5ff,#818cf8,#a855f7);box-shadow:0 0 8px rgba(0,229,255,0.5);transition:width 0.25s ease}
+.layout{max-width:1280px;margin:26px auto;padding:0 20px;display:grid;grid-template-columns:280px minmax(0,1fr);gap:26px}
+aside{align-self:start;position:sticky;top:110px;max-height:calc(100vh - 130px);overflow-y:auto;background:rgba(17,27,46,0.7);backdrop-filter:blur(8px);border:1px solid var(--line);border-radius:14px;padding:14px}
+aside h2{font-size:0.8rem;margin:4px 8px 12px;color:var(--muted);text-transform:uppercase;letter-spacing:0.09em;font-weight:700}
+.navlink{display:block;text-decoration:none;color:var(--muted);padding:8px 10px;border-radius:8px;font-size:0.85rem;line-height:1.35;transition:all 0.15s ease}
+.navlink:hover{background:var(--surface2);color:var(--text);text-decoration:none}
+main{min-width:0}
+.intro{background:linear-gradient(120deg,rgba(21,38,65,0.85),rgba(17,27,46,0.85));border:1px solid var(--line);border-radius:14px;padding:20px 22px;margin-bottom:24px;box-shadow:var(--shadow)}
+.intro h2{margin:0 0 6px;font-size:1.15rem;font-weight:700}
+.intro p{margin:0;color:var(--muted);font-size:0.92rem;line-height:1.6}
+.section{margin:0 0 36px;scroll-margin-top:110px}
+.section-title{display:flex;align-items:center;gap:12px;margin:0 0 16px;font-size:1.38rem;letter-spacing:-0.02em;font-weight:750}
+.section-number{display:grid;place-items:center;width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,rgba(0,229,255,0.15),rgba(99,102,241,0.2));border:1px solid rgba(56,189,248,0.3);color:var(--accent);font-size:0.9rem;font-weight:800;font-family:var(--mono);flex-shrink:0}
+.topic{border:1px solid var(--line);background:rgba(17,27,46,0.82);border-radius:13px;margin:12px 0;overflow:hidden;box-shadow:var(--shadow);transition:border-color 0.2s ease,box-shadow 0.2s ease}
+.topic:hover{border-color:rgba(56,189,248,0.35);box-shadow:0 8px 24px rgba(0,0,0,0.35)}
+.topic summary{list-style:none;cursor:pointer;padding:16px 18px;display:flex;align-items:flex-start;gap:12px;transition:background 0.15s ease}
+.topic summary::-webkit-details-marker{display:none}
+.topic summary:after{content:"＋";margin-left:auto;color:var(--accent);font-size:1.2rem;font-weight:700;padding-left:8px;line-height:1}
+.topic[open] summary:after{content:"−"}
+.topic summary:hover{background:rgba(35,53,80,0.45)}
+.qnum{font-size:0.78rem;color:var(--accent);font-weight:800;min-width:30px;padding-top:2px;font-family:var(--mono)}
+.topic-name{font-weight:750;font-size:1rem;line-height:1.4;color:var(--text)}
+.topic-description{font-size:0.9rem;color:var(--muted);font-weight:400;margin-top:4px;line-height:1.5}
+.topic-body{padding:0 20px 20px 60px}
+.example{border-left:3px solid var(--accent2);background:#0d1728;border-radius:0 8px 8px 0;padding:12px 14px;margin:10px 0 16px;color:#d9e5f5;white-space:pre-wrap;overflow-wrap:anywhere;font-family:var(--mono);font-size:0.85rem;line-height:1.55}
+.topic-body h4{margin:14px 0 8px;font-size:0.82rem;text-transform:uppercase;letter-spacing:0.08em;color:var(--muted);font-weight:700}
+.question-list{padding-left:22px;margin:0}
+.question-list li{padding:4px 0;color:#cbd5e1;font-size:0.92rem}
+.done-label{display:inline-flex;align-items:center;gap:9px;margin:16px 0 0;color:var(--muted);font-size:0.88rem;cursor:pointer;user-select:none}
+.done-label input{accent-color:#22c55e;width:17px;height:17px;cursor:pointer}
+.topic.done{border-color:rgba(34,197,94,0.5);background:rgba(14,31,40,0.85)}
+.topic.done .topic-name:after{content:"  ✓";color:var(--green);font-size:0.9em;font-weight:800}
+.empty{display:none;border:1px dashed var(--line);padding:36px;border-radius:14px;color:var(--muted);text-align:center;font-size:0.95rem}
+
+/* CodeByArt Footer */
+.site-footer{border-top:1px solid var(--line);background:rgba(8,14,27,0.88);padding:32px 20px 24px;margin-top:50px;color:var(--muted);font-size:0.86rem}
+.footer-wrap{max-width:1280px;margin:auto;text-align:center}
+.footer-brand{font-size:1.05rem;font-weight:800;letter-spacing:-0.02em;color:var(--text);margin-bottom:6px}
+.footer-desc{max-width:720px;margin:0 auto 14px;font-size:0.84rem;line-height:1.55;color:var(--muted)}
+.footer-meta{font-size:0.78rem;display:flex;justify-content:center;align-items:center;gap:12px;flex-wrap:wrap;color:var(--muted)}
+.footer-meta a{color:var(--accent)}
+
+@media(max-width:900px){
+  .hub-container{flex-wrap:wrap}
+  .hub-tabs{overflow-x:auto;max-width:100%}
+  .layout{grid-template-columns:1fr}
+  aside{position:static;max-height:none}
+  .nav-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:2px}
+  .topic-body{padding-left:18px}
+}
+@media print{
+  body{background:white;color:#111;font-size:11pt}
+  .hub-header,.toolbar,aside,.progress-wrap,.done-label,.site-footer{display:none!important}
+  .layout{display:block;margin:0;padding:0}
+  .bank-hero{background:white;color:#111;padding:0 0 18px}
+  .bank-hero p,.topic-description,.intro p{color:#444}
+  .topic,.intro{background:white;border:1px solid #bbb;box-shadow:none;break-inside:avoid}
+  .topic summary:after{display:none}
+  .topic-body{display:block!important}
+  .section{break-before:auto}
+  .example{background:#f4f4f4;color:#111}
+  .section-title{color:#111}
+  a{color:#111}
+}
+</style>
+</head>
+<body>
+<!-- ===== HUB GLOBAL HEADER ===== -->
+<header class="hub-header">
+  <div class="hub-container">
+    <div class="hub-left">
+      <a href="index.html" class="hub-brand" title="CodeByArt Software Engineering Platform">
+        <svg width="26" height="26" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="cba-grad-sdet" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#00e5ff" />
+              <stop offset="50%" stop-color="#6366f1" />
+              <stop offset="100%" stop-color="#b14aff" />
+            </linearGradient>
+          </defs>
+          <rect width="32" height="32" rx="8" fill="#141c2b" stroke="rgba(255,255,255,0.14)" />
+          <path d="M10 11L5 16L10 21" stroke="url(#cba-grad-sdet)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+          <path d="M22 11L27 16L22 21" stroke="url(#cba-grad-sdet)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+          <path d="M18 9L14 23" stroke="url(#cba-grad-sdet)" stroke-width="2.5" stroke-linecap="round" />
+        </svg>
+        <div>
+          <span>CODE<span class="hub-brand-art">BYART</span></span>
+          <span class="hub-brand-sub">SWE Platform</span>
+        </div>
+      </a>
+      <a href="index.html" class="hub-return-btn" title="Return to LeetCode 150 Hub">
+        <span>&larr;</span> <span>LeetCode 150</span>
+      </a>
+    </div>
+
+    <nav class="hub-tabs">
+      <a href="index.html" class="hub-tab">🎯 LeetCode 150</a>
+      <a href="dsa_roadmap.html" class="hub-tab">🗺️ 775-Day Roadmap</a>
+      <a href="dsa_pattern_guide.html" class="hub-tab">💡 Pattern Guide</a>
+      <div class="hub-more-dropdown" id="hubMoreDropdown">
+        <button type="button" class="hub-more-trigger active" onclick="this.parentElement.classList.toggle('open')">
+          📦 More <span class="caret">▾</span>
+        </button>
+        <div class="hub-more-menu">
+          <div class="hub-more-header">DevOps &amp; Engineering</div>
+          <a href="cicd_guide.html" class="hub-more-item">
+            <span class="hub-more-item-icon">🔄</span>
+            <div>
+              <div style="font-weight:600;">CI/CD Complete Guide</div>
+              <div style="font-size:0.68rem;color:var(--muted);">Zero to Production Pipelines</div>
+            </div>
+          </a>
+          <div class="hub-more-header">Interview &amp; QA</div>
+          <a href="sdet_software_engineering_interview_question_bank.html" class="hub-more-item active">
+            <span class="hub-more-item-icon">🧪</span>
+            <div>
+              <div style="font-weight:600;">SDET &amp; SWE Question Bank</div>
+              <div style="font-size:0.68rem;color:var(--muted);">Coding, QA &amp; System Design</div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </nav>
+
+    <div class="hub-network">
+      <a href="https://www.linkedin.com/in/kamal-patel-61a8201a0/" target="_blank" rel="noopener noreferrer"
+        class="hub-pill hub-pill-linkedin" title="Kamal Patel on LinkedIn">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 10.9v8.37H9.2V10.9H6.46M7.83 6.45a1.6 1.6 0 1 0 0 3.2 1.6 1.6 0 0 0 0-3.2Z" />
+        </svg>
+        <span>Kamal Patel</span>
+      </a>
+      <div class="hub-dropdown" id="hubDropdown">
+        <button type="button" class="hub-pill" style="cursor:pointer;"
+          onclick="this.parentElement.classList.toggle('open')" title="Websites &amp; Contact">
+          <span>Connect ▾</span>
+        </button>
+        <div class="hub-dropdown-menu">
+          <div class="hub-dropdown-header">Collaboration &amp; Contact</div>
+          <a href="mailto:codebyart@gmail.com" class="hub-dropdown-item">
+            <span>✉️</span>
+            <div>
+              <div style="font-weight:600;font-size:0.78rem;">codebyart@gmail.com</div>
+              <div style="font-size:0.68rem;color:var(--muted);">Collaboration &amp; Inquiries</div>
+            </div>
+          </a>
+          <div class="hub-dropdown-divider"></div>
+          <div class="hub-dropdown-header">Official Websites</div>
+          <a href="https://codebyart.com" target="_blank" rel="noopener noreferrer" class="hub-dropdown-item">
+            <span class="hub-pill-dot"></span>
+            <div>
+              <div style="font-weight:600;font-size:0.78rem;">codebyart.com</div>
+              <div style="font-size:0.68rem;color:var(--muted);">Where Code Meets Artistry</div>
+            </div>
+          </a>
+          <a href="https://connectkreations.com" target="_blank" rel="noopener noreferrer" class="hub-dropdown-item">
+            <span>🌐</span>
+            <div>
+              <div style="font-weight:600;font-size:0.78rem;">connectkreations.com</div>
+              <div style="font-size:0.68rem;color:var(--muted);">Partner Network</div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ===== HERO HEADER ===== -->
+<header class="bank-hero">
+<div class="wrap">
+<div class="eyebrow">Interview Preparation Workspace</div>
+<h1>SDET &amp; Software Engineering<br><span class="gradient-text">Interview Question Bank</span></h1>
+<p>A comprehensive, searchable study guide covering Python coding, DSA, OOP, SDET automation, API testing, Jenkins CI/CD, operating systems, memory &amp; caching, distributed backend systems, React, and behavioral interview questions. Use the live search, expand any topic, and track preparation progress.</p>
+<div class="stats">
+<div class="stat"><b id="topicCount">—</b><span>Topic groups</span></div>
+<div class="stat"><b id="questionCount">—</b><span>Follow-up questions</span></div>
+<div class="stat"><b id="sectionCount">—</b><span>Major sections</span></div>
+<div class="stat"><b id="progressText">0%</b><span>Topics completed</span></div>
+</div>
+</div>
+</header>
+<div class="toolbar">
+<div class="tools">
+<input class="search" id="search" type="search" placeholder="Search questions, e.g. PyTest, TLB, palindrome…" aria-label="Search interview questions">
+<button class="btn" id="expandAll">Expand all</button>
+<button class="btn" id="collapseAll">Collapse all</button>
+<button class="btn" id="clearSearch">Clear search</button>
+<button class="btn" id="printPage">Print / Save PDF</button>
+<button class="btn primary" id="exportProgress">Export progress</button>
+</div>
+</div>
+<div class="progress-wrap"><div class="progress" id="progressBar"></div></div>
+<div class="layout">
+<aside>
+<h2>Contents</h2>
+<nav class="nav-list" id="nav"></nav>
+</aside>
+<main>
+<div class="intro">
+<h2>How to use this guide</h2>
+<p>Start with coding and DSA, then cover core CS, testing automation and CI/CD, followed by system design. Topic examples and follow-up prompts are included where relevant. The pattern-matching example uses the standard one-to-one pattern definition.</p>
+</div>
+<div id="content"></div>
+<div class="empty" id="empty">No matching topics. Try a different keyword.</div>
+</main>
+</div>
+<footer class="site-footer">
+  <div class="footer-wrap">
+    <div class="footer-brand">
+      <span>CODE<span class="hub-brand-art">BYART</span></span>
+      <span style="font-size:0.8rem;font-weight:500;color:var(--muted);margin-left:6px;">SWE Platform</span>
+    </div>
+    <p class="footer-desc">SDET &amp; Software Engineering Comprehensive Question Bank · Self-contained study workspace with progress auto-saved in your browser localStorage.</p>
+    <div class="footer-meta">
+      <span>© 2026 CodeByArt</span>
+      <span>•</span>
+      <span>Engineered &amp; Curated by <a href="https://www.linkedin.com/in/kamal-patel-61a8201a0/" target="_blank" rel="noopener noreferrer">Kamal Patel</a></span>
+      <span>•</span>
+      <a href="mailto:codebyart@gmail.com">codebyart@gmail.com</a>
+    </div>
+  </div>
+<script>
+const bank = [{"title": "1. Python coding and problem-solving", "topics": [{"id": 1, "title": "List comprehension: square only even numbers", "description": "Given a list, square even numbers and leave odd numbers unchanged.", "example": "Input: [1, 4, 3, 6, 8] → Output: [1, 16, 3, 36, 64]", "questions": ["Can you solve this without list comprehension?", "What is the time complexity?", "What happens if the input list is empty?", "How would you handle negative even numbers?", "How would you retain only the squared even numbers?"]}, {"id": 2, "title": "Find strings that match a given pattern", "description": "Return strings with the same character-repetition structure as a pattern; characters need not be identical.", "example": "words = [\"badc\", \"abab\", \"dddd\", \"dede\", \"yyxx\"], pattern = \"baba\". Under standard pattern matching, output: [\"abab\", \"dede\", \"yyxx\"].", "questions": ["How can you solve this using two dictionaries?", "How do you ensure two pattern characters do not map to the same string character?", "What is the complexity for n strings of length m?", "How do you handle strings of different lengths?", "How do you generalize to digits or other symbols?"]}, {"id": 3, "title": "Product of array elements except the current element", "description": "Replace each element with the product of every other element, without dividing the total product by the current element.", "example": "Input: [1, 2, 3, 4] → Output: [24, 12, 8, 6]", "questions": ["Can you solve it without division?", "Can you achieve O(n) time?", "Can you reduce auxiliary space to O(1), excluding output?", "How should zeros, negative numbers and large products be handled?", "What if the input contains multiple zeros?"]}, {"id": 4, "title": "Find all unique pairs whose sum equals a target", "description": "Return unique value pairs that sum to a target.", "example": "nums = [1, 2, 3, 4, 3, 5], target = 6 → [(1, 5), (2, 4), (3, 3)]", "questions": ["Can you solve it using a hash set in expected O(n)?", "How does sorting plus two pointers work?", "How do you avoid duplicate pairs?", "What if distinct index pairs are required?", "How do you return indices instead of values?"]}, {"id": 5, "title": "Trapping rainwater", "description": "Given bar heights, calculate how much rainwater is trapped.", "example": "heights = [0,1,0,2,1,0,1,3,2,1,2,1] → 6", "questions": ["Explain the brute-force solution.", "Solve using prefix and suffix maximum arrays.", "Solve using two pointers with O(1) auxiliary space.", "Compare time and space complexities.", "How do empty, increasing and decreasing arrays behave?"]}, {"id": 6, "title": "Longest run of repeated characters", "description": "Find the start index and length of the longest consecutive run of the same character.", "example": "s = \"aaabbccccdde\" → start index 5, length 4, character c (zero-based indexing).", "questions": ["What if multiple runs have the same maximum length?", "Should the first or last longest run be returned?", "How do you solve this in one pass?", "How would you return all longest runs?", "How do you handle an empty string?"]}, {"id": 7, "title": "Reverse a string", "description": "Reverse a string without relying on a built-in reverse operation.", "example": "Example: 'hello' → 'olleh'", "questions": ["Solve using two pointers.", "Solve using a stack.", "What are the time and space complexities?", "How do you handle Unicode characters?", "How does reversing a string differ from reversing word order?"]}, {"id": 8, "title": "Check whether a string is a palindrome", "description": "Determine whether a string reads the same forward and backward.", "example": "Example: 'racecar' → True", "questions": ["How do you ignore spaces, punctuation and capitalization?", "Solve using two pointers.", "How do you test empty and one-character strings?", "How do you find all palindromic substrings?", "What is the difference between a substring and a subsequence?"]}, {"id": 9, "title": "Find the largest element in an array", "description": "Find the largest number without sorting.", "example": "Example: [3, 9, 2, 7] → 9", "questions": ["What is the time complexity?", "How do you find the second-largest distinct element?", "How do you handle duplicate maximum values?", "What if the array is empty?", "How do you find both minimum and maximum in one traversal?"]}, {"id": 10, "title": "Remove duplicates from an array", "description": "Remove duplicate values while preserving the first-occurrence order.", "example": "Example: [3, 1, 3, 2, 1] → [3, 1, 2]", "questions": ["Solve using a set.", "Solve without an additional set.", "What if the array is already sorted?", "How do you count element frequencies?", "How do duplicate values differ from duplicate index pairs?"]}, {"id": 11, "title": "Reverse an integer", "description": "Reverse the digits of an integer.", "example": "Example: 12340 → 4321", "questions": ["How do you handle negative integers?", "How do you handle trailing zeros?", "What if the reversed number exceeds the integer range?", "Can you solve it arithmetically instead of converting to a string?"]}, {"id": 12, "title": "Reverse the order of words", "description": "Reverse word order while preserving characters within each word.", "example": "\"Python makes testing easier\" → \"easier testing makes Python\"", "questions": ["How do you preserve or normalize whitespace?", "How do you reverse each word instead?", "Can you solve it without a built-in split-and-reverse shortcut?"]}, {"id": 13, "title": "Three numbers sum to a target", "description": "Determine whether three distinct array positions sum to the target.", "example": "Example: [−1, 0, 1, 2], target = 0 → a valid triplet is (−1, 0, 1).", "questions": ["Explain the O(n³) brute-force solution.", "How does sorting plus two pointers improve complexity?", "How do you avoid duplicate triplets?", "What if only existence is required?"]}, {"id": 14, "title": "Check whether two binary trees are identical", "description": "Determine whether two trees have the same structure and corresponding values.", "example": "Compare both node values and child structure.", "questions": ["Solve recursively.", "Solve iteratively using a queue.", "What are the time and space complexities?", "Why can comparing only node values be insufficient?"]}, {"id": 15, "title": "Convert a binary tree into its mirror", "description": "Swap the left and right child of every node.", "example": "The output tree is the mirror image of the input tree.", "questions": ["Solve recursively.", "Solve using iterative DFS or BFS.", "What is the time complexity?", "Does the original tree need to be preserved?"]}, {"id": 16, "title": "Clone a directed graph", "description": "Create a deep copy of all nodes reachable from a given graph node, preserving edges.", "example": "The clone must preserve cycles, self-loops and neighbor relationships.", "questions": ["Why is a hash map needed?", "How do you handle cycles?", "How do you preserve multiple edges or self-loops?", "Solve using DFS and BFS.", "What are the time and space complexities?"]}]}, {"title": "2. Advanced DSA and coding-round problems", "topics": [{"id": 17, "title": "Minimize the maximum candies in a jar", "description": "Split jars into two nonempty jars at most maxOperations times; minimize the maximum final jar size.", "example": "nums=[9], maxOperations=2 → 3; nums=[2,2], maxOperations=1 → 2; nums=[2,4,8,2], maxOperations=4 → 2.", "questions": ["Why is binary search on the answer appropriate?", "For candidate maximum m, how many splits does a jar of size x need?", "How do you prove feasibility is monotonic?", "What are the time and space complexities?", "How do you handle large values?"]}, {"id": 18, "title": "Rearrange so adjacent elements differ", "description": "Rearrange an array so no two adjacent values are equal, or report No.", "example": "A valid arrangement exists only when the most frequent value can be separated by the other values.", "questions": ["What condition involving maximum frequency determines feasibility?", "Can you construct a solution using a max heap?", "Can sorting and swaps solve it?", "What are the time and space complexities?", "Why does a value appearing more than half the time make a solution impossible?", "What if the most frequent value appears exactly half the time?", "What if there is only one distinct value?"]}, {"id": 19, "title": "Reverse linked-list nodes in groups of k", "description": "Implement a singly linked list, read input, reverse nodes in groups of k, and print output. In this variant, reverse the final incomplete group too.", "example": "Example: 1→2→3→4→5, k=2 → 2→1→4→3→5.", "questions": ["Solve recursively and iteratively.", "How do you reconnect each group?", "How do you handle k=1, empty lists and lists shorter than k?", "What are the time and auxiliary-space complexities?", "How does this differ from the variant that leaves an incomplete final group unchanged?"]}, {"id": 20, "title": "Closest palindrome", "description": "Find the closest different palindromic number, clarifying distance and tie-breaking rules.", "example": "For a numeric string, consider palindromes formed from nearby prefixes and boundary candidates.", "questions": ["How do you generate candidates from the prefix?", "Why is checking each neighboring integer inefficient?", "How do you handle powers of ten such as 1000?", "How do you handle single-digit numbers?", "How do you break equal-distance ties?", "What are the time and space complexities?"]}, {"id": 21, "title": "Graph algorithms", "description": "Graph theory and traversal problems.", "example": "Topics: adjacency lists/matrices, directed/undirected and weighted/unweighted graphs.", "questions": ["Explain BFS and DFS.", "Detect cycles in directed and undirected graphs.", "Determine graph connectivity and connected components.", "Find shortest paths in unweighted graphs; when is Dijkstra appropriate?", "What is topological sorting?", "Explain DSU and cycle detection.", "Find islands in a 2D grid.", "Compare minimum spanning trees and shortest-path trees."]}, {"id": 22, "title": "Bit manipulation", "description": "Solve problems using bitwise operations and masks.", "example": "Operations: AND, OR, XOR, NOT, left shift and right shift.", "questions": ["Check odd/even and powers of two.", "Count set bits.", "Find a unique element when others appear twice.", "Set, clear or toggle a specific bit.", "Find two unique numbers when others occur twice.", "What is a bitmask?", "How can bit operations reduce memory use?"]}, {"id": 23, "title": "Dynamic programming", "description": "Identify overlapping subproblems and optimal substructure, then solve with memoization or tabulation.", "example": "Topics: Fibonacci, climbing stairs, knapsack, LCS, LIS, coin change and grid paths.", "questions": ["What is dynamic programming?", "Compare memoization and tabulation.", "Solve Fibonacci and climbing stairs.", "Solve 0/1 knapsack and coin change.", "Explain longest common subsequence and longest increasing subsequence.", "How do you identify optimal substructure?", "How do you reduce a 2D DP table to 1D?", "Compare time and space complexities."]}, {"id": 24, "title": "Binary trees and binary search trees", "description": "Tree traversal, validation, balancing and search problems.", "example": "Topics: preorder, inorder, postorder, level-order, BST properties.", "questions": ["Find tree height and check balance.", "Find lowest common ancestor.", "Validate a BST.", "Find kth smallest in a BST.", "Serialize and deserialize a tree.", "Perform iterative level-order traversal.", "Distinguish complete, full, perfect and balanced trees."]}, {"id": 25, "title": "Linked lists", "description": "Linked-list fundamentals and common transformations.", "example": "Topics: singly and doubly linked lists, node allocation, deletion and traversal.", "questions": ["Compare linked lists with arrays.", "What is the time complexity of insertion, deletion and search?", "Reverse a list and find its middle in one traversal.", "Detect a cycle using Floyd's algorithm and find its start.", "Merge sorted lists and remove the nth node from the end.", "Reverse nodes in groups of k.", "Compare recursive and iterative reversal."]}, {"id": 26, "title": "Hash tables and hash maps", "description": "Explain hash functions, collisions, resizing and implementation.", "example": "Topics: chaining, open addressing, probing and load factor.", "questions": ["What are average and worst-case complexities?", "Explain separate chaining and open addressing.", "What are linear probing, quadratic probing and double hashing?", "What is primary clustering?", "Why and how does a hash table resize?", "What makes a good hash function?", "Compare hash tables with balanced trees.", "How would you implement a hash table from scratch?"]}, {"id": 27, "title": "Arrays, searching and sorting", "description": "Solve common array, binary search and sorting problems.", "example": "Topics: rotated arrays, duplicates, majority element, kth largest and maximum subarray.", "questions": ["Find first and last occurrence in a sorted array.", "Search a rotated sorted array.", "Find a missing number and a majority element.", "Find kth largest.", "Explain quicksort, mergesort and heapsort.", "Merge two sorted arrays.", "Use Kadane's algorithm for maximum subarray sum.", "Explain stable versus unstable sorting."]}, {"id": 28, "title": "Scheduling and algorithmic reasoning", "description": "Choose appropriate algorithms and explain trade-offs.", "example": "Topics: round robin, greedy algorithms, priority queues and complexity analysis.", "questions": ["Compare FCFS and round-robin scheduling.", "Schedule jobs with different execution times.", "When does a greedy algorithm fail?", "How can a priority queue process tasks?", "Compare greedy algorithms with DP.", "How do you choose between brute force, hashing, sorting and binary search?", "How do you explain an approach before coding?", "How do you test edge cases and hidden cases?"]}]}, {"title": "3. OOPs, programming languages and design", "topics": [{"id": 29, "title": "OOP fundamentals", "description": "Explain object-oriented programming and its four pillars.", "example": "Concepts: encapsulation, abstraction, inheritance and polymorphism.", "questions": ["What problem did OOP solve?", "Explain each pillar with a practical example.", "What are compile-time and runtime polymorphism?", "Compare method overloading and overriding.", "Compare interfaces and abstract classes.", "What are constructors and destructors?", "Explain public, private and protected.", "Explain single, multilevel, hierarchical, multiple and hybrid inheritance.", "Identify inheritance from a diagram.", "What is the diamond problem and how does C++ address it?", "Compare composition and inheritance; explain aggregation."]}, {"id": 30, "title": "Advanced OOPs and language internals", "description": "Explain runtime dispatch, object lifetime and resource management.", "example": "Topics: vtables, virtual functions, RAII, pointers and smart pointers.", "questions": ["What are virtual functions, vtables and pure virtual functions?", "Why might a polymorphic base class need a virtual destructor?", "Compare shallow and deep copies.", "Explain copy and move constructors.", "What is RAII?", "Compare unique_ptr, shared_ptr and weak_ptr.", "Compare stack and heap allocation.", "Compare static and dynamic binding.", "Compare references and pointers.", "What happens when a null pointer is dereferenced?", "Explain Singleton, Factory, Strategy and Observer patterns.", "What are SOLID principles and dependency injection?", "Compare Java and C++ memory management, inheritance and execution.", "Compare exceptions, errors and undefined behavior."]}, {"id": 31, "title": "Linked-list implementation and coding fundamentals", "description": "Implement a linked list from scratch and handle input/output.", "example": "Include node definition, dynamic allocation and memory cleanup.", "questions": ["Insert at head, tail and a given position.", "Delete by value and release allocated memory.", "Read console input and print the list.", "Handle invalid input and empty lists.", "Test a recursive implementation.", "What is recursion depth and how can it cause stack overflow?", "When is iteration preferable to recursion?"]}, {"id": 32, "title": "Programming language fundamentals", "description": "Compare common Python and C++ concepts.", "example": "Topics: types, mutability, iterators, exceptions, concurrency and memory.", "questions": ["Compiled versus interpreted; static versus dynamic typing.", "Mutable versus immutable Python objects.", "List, tuple, set and dictionary.", "== versus is in Python.", "Iterators, generators and decorators.", "Python exception handling and shallow/deep copy.", "Processes, threads and async tasks.", "What is the Python GIL?", "Compare malloc/free with new/delete.", "Explain memory leaks, dangling pointers and wild pointers.", "How do AddressSanitizer and Valgrind help?"]}]}, {"title": "4. Software testing and SDET", "topics": [{"id": 33, "title": "SDET and testing fundamentals", "description": "Explain SDET responsibilities, testing processes and test levels.", "example": "Topics: SDLC, STLC, QA/QC, verification and validation.", "questions": ["How does an SDET differ from a manual tester and developer?", "What are the phases of STLC?", "Compare test plan, test strategy, scenario and case.", "Compare positive and negative testing, exploratory and ad-hoc testing.", "Compare black-box, white-box and grey-box testing.", "Compare functional and non-functional testing.", "Explain smoke, sanity, regression and retesting.", "Explain unit, integration, system and acceptance testing.", "Compare performance, load, stress and endurance testing.", "What are risk-based testing, coverage, test pyramid and shift-left testing?", "What is continuous testing?"]}, {"id": 34, "title": "Test design and defect management", "description": "Design tests and manage defects effectively.", "example": "Topics: equivalence partitions, boundaries, decision tables and state transitions.", "questions": ["Write effective test cases from requirements.", "Identify ambiguous requirements and missing acceptance criteria.", "Explain equivalence partitioning and boundary-value analysis.", "Explain decision-table, state-transition and pairwise testing.", "Prioritize tests when time is limited.", "Explain defect life cycle, severity versus priority and defect leakage.", "What belongs in a bug report?", "Reproduce intermittent defects and handle unreproducible bugs.", "Explain defect density, walkthroughs and inspections.", "Test a login, payment workflow, text box or file upload.", "Test edge cases when requirements are incomplete."]}, {"id": 35, "title": "Automation framework architecture", "description": "Design maintainable, reusable and reliable test automation.", "example": "Topics: data-driven, keyword-driven, hybrid frameworks and POM.", "questions": ["When should a test be automated?", "What are the main components of a scalable framework?", "Explain Page Object Model and its trade-offs.", "Separate test logic, data and utilities.", "Manage configuration, credentials and environment setup securely.", "Use fixtures and setup/teardown.", "Manage dependencies, logs, screenshots and reports.", "Measure coverage and framework reliability.", "Decide which tests remain manual.", "Maintain the framework as the application changes.", "Handle flaky tests and review automation code."]}, {"id": 36, "title": "Selenium and web UI automation", "description": "Automate browser workflows reliably.", "example": "Topics: WebDriver, Grid, waits, locators and browser interactions.", "questions": ["Compare WebDriver and Selenium Grid.", "Compare implicit, explicit and fluent waits.", "Handle dynamic elements and stale element exceptions.", "Compare XPath and CSS selectors.", "Handle alerts, iframes, tabs and windows.", "Upload/download files and interact with tables.", "Use assertions and failure screenshots.", "Execute tests in parallel and across browsers.", "Why avoid fixed sleep calls?", "Handle authentication and session persistence.", "Reduce flaky tests and execution time."]}, {"id": 37, "title": "PyTest and Python automation", "description": "Build and maintain PyTest suites.", "example": "Topics: fixtures, markers, parameterization, mocking and reporting.", "questions": ["What are fixtures and their scopes?", "What is conftest.py?", "Use parametrize and markers.", "Skip tests conditionally and assert expected exceptions.", "Mock dependencies and use monkeypatch.", "Share fixtures and handle setup/teardown.", "Generate JUnit XML and HTML reports.", "Run tests in parallel with pytest-xdist.", "Rerun failures without concealing defects.", "Debug tests and organize large projects.", "Test asynchronous Python code."]}, {"id": 38, "title": "API and web service testing", "description": "Automate REST, SOAP and gRPC services.", "example": "Topics: HTTP methods, status codes, schemas, auth and CI integration.", "questions": ["Compare REST, SOAP and gRPC.", "Explain GET, POST, PUT, PATCH and DELETE; compare PUT and PATCH.", "Explain common 2xx, 4xx and 5xx status codes.", "Compare authentication and authorization.", "Validate headers, query/path parameters, body and schema.", "Test invalid input, pagination, sorting, rate limiting and idempotency.", "Test tokens, API keys and OAuth.", "Automate with Postman, requests and PyTest.", "Chain API calls and mock dependent services.", "Test latency, retries, backward compatibility and errors.", "Validate API/database consistency and protect secrets in logs."]}, {"id": 39, "title": "Database and SQL testing", "description": "Validate persisted data, integrity and query behavior.", "example": "Topics: keys, joins, transactions, normalization and indexes.", "questions": ["Validate records after an API operation.", "Compare primary and foreign keys.", "Explain SQL joins and find duplicates.", "Find the second-highest salary.", "Explain normalization and ACID.", "Compare DELETE, TRUNCATE and DROP.", "Test integrity, migrations and transaction rollback.", "Compare SQL and NoSQL.", "Identify slow queries and index trade-offs.", "Prevent SQL injection.", "Validate consistency across microservices."]}, {"id": 40, "title": "TDD and BDD", "description": "Explain test-first development and behavior-driven specifications.", "example": "Topics: red-green-refactor and Given-When-Then.", "questions": ["What is TDD and its red-green-refactor cycle?", "How does BDD differ from TDD?", "What is Given-When-Then?", "How do acceptance criteria guide automated tests?", "What are the benefits and drawbacks of writing tests first?", "How would you introduce TDD to an existing codebase?"]}]}, {"title": "5. Jenkins, CI/CD and Git", "topics": [{"id": 41, "title": "Jenkins failure notifications", "description": "Configure notifications for failed builds and test runs.", "example": "Include build number, failed stage, console log and report link.", "questions": ["Configure email, Slack or Teams alerts.", "Notify only on failure or when status changes.", "Include build and report details.", "Manage notification credentials securely.", "Reduce duplicate/noisy notifications.", "Route notifications to the appropriate team."]}, {"id": 42, "title": "Jenkins pipeline fundamentals", "description": "Explain Jenkins jobs, Jenkinsfiles and pipeline stages.", "example": "Topics: declarative/scripted pipelines, agents and post actions.", "questions": ["Compare Freestyle and Pipeline jobs.", "What is a Jenkinsfile?", "Compare declarative and scripted pipelines.", "Explain stages, steps, agents, controllers and agents.", "Trigger builds using commits, webhooks or cron.", "Pass parameters and manage credentials.", "Archive artifacts and test reports.", "Use post success, failure and always actions.", "Handle cleanup, environment variables and agent-specific failures.", "Secure Jenkins permissions."]}, {"id": 43, "title": "API automation in CI/CD", "description": "Integrate API tests into deployment pipelines.", "example": "Separate smoke, regression and integration suites.", "questions": ["Structure API test scripts.", "Supply environment URLs and credentials safely.", "Run tests after deployment.", "Publish reports and gate deployments on critical failures.", "Test backward compatibility and mock dependencies.", "Distinguish product failures from environment failures.", "Preserve diagnostic artifacts."]}, {"id": 44, "title": "Reduce CI/CD build time", "description": "Optimize test execution without sacrificing essential coverage.", "example": "Measure slow stages, parallelize tests and reduce redundant work.", "questions": ["Identify slowest tests and stages.", "Parallelize suites across agents.", "Select tests based on changed code.", "Reduce unnecessary setup/teardown.", "Use dependency and build caching safely.", "Prioritize smoke tests and optimize regression suites.", "Manage flaky tests responsibly.", "Measure time savings and quality impact."]}, {"id": 45, "title": "Git and collaboration", "description": "Use version control and code review safely.", "example": "Topics: fetch/pull, merge/rebase, conflict resolution and PRs.", "questions": ["Compare git fetch and git pull.", "Compare merge and rebase.", "Resolve conflicts and safely revert commits.", "Compare reset and revert.", "Manage release branches and hotfixes.", "What should a pull request description contain?", "Review automation code and secure secrets.", "Use CI checks for code quality.", "Handle concurrent edits to a shared framework."]}]}, {"title": "6. Operating systems, memory and caching", "topics": [{"id": 46, "title": "Operating systems fundamentals", "description": "Explain processes, threads, synchronization and scheduling.", "example": "Topics: context switches, system calls and IPC.", "questions": ["Compare process and thread; concurrency and parallelism.", "What is a context switch?", "Compare user and kernel modes.", "What are system calls and a process control block?", "Explain process and thread states.", "Compare shared memory and message passing.", "Explain race conditions and critical sections.", "Compare mutex, semaphore and spinlock.", "Explain deadlock, starvation, livelock and priority inversion."]}, {"id": 47, "title": "CPU scheduling algorithms", "description": "Compare scheduling policies and performance measures.", "example": "Topics: FCFS, SJF, SRTF, priority and round robin.", "questions": ["Explain the time quantum.", "Compare preemptive and non-preemptive scheduling.", "Define waiting, turnaround and response time.", "Which policies suit interactive systems?", "How does starvation occur?", "What is aging?"]}, {"id": 48, "title": "Virtual memory and memory management", "description": "Explain address translation and memory allocation.", "example": "Topics: page tables, TLB, page faults and fragmentation.", "questions": ["Compare virtual, logical and physical addresses.", "What are paging, page tables and TLB?", "What happens on a TLB miss?", "Compare page fault and segmentation fault.", "Explain demand paging and page replacement.", "Compare FIFO, LRU and optimal replacement.", "What is thrashing?", "Compare internal and external fragmentation.", "What are memory-mapped files?", "Compare stack and heap; explain memory leaks.", "What happens on null-pointer dereference?", "How do virtual memory and caching improve performance?"]}, {"id": 49, "title": "Multithreading and synchronization", "description": "Design safe concurrent programs.", "example": "Topics: thread pools, locks, atomics and condition variables.", "questions": ["When should threads be used instead of processes?", "Explain producer-consumer.", "How do locks protect shared resources?", "Compare mutex, semaphore, condition variable and reader-writer lock.", "What are atomic operations and reentrant locks?", "How do you avoid deadlocks?", "Design a background thread to clean expired cache entries.", "Shut down workers safely and handle exceptions.", "Test races and explain the Python GIL."]}, {"id": 50, "title": "Caching fundamentals and web caching", "description": "Explain cache behavior, policies and HTTP caching.", "example": "Topics: hit ratio, locality, invalidation and cache stampede.", "questions": ["Why cache, and which data is suitable?", "Compare in-memory cache and database.", "Define cache hits, misses and hit ratio.", "Explain temporal/spatial locality and CPU cache levels.", "What is a cache line and cache coherence?", "Compare browser, CDN and server-side caching.", "Explain Cache-Control, ETag and Last-Modified.", "Explain cache-aside, write-through and write-back.", "What are cache stampede, avalanche and penetration?", "Prevent stale data and estimate memory requirements.", "How do you measure cache impact?"]}, {"id": 51, "title": "LRU/LFU cache with expiry", "description": "Design a fixed-capacity cache with variable expiry times.", "example": "Discuss data structures, complexity, capacity eviction and concurrency.", "questions": ["Compare LRU and LFU.", "Implement LRU with a hash map and doubly linked list.", "Implement LFU and break frequency ties.", "How do you account for variable entry sizes?", "Track per-entry expiry times.", "Compare lazy expiry, periodic cleanup and exact expiry.", "Use a min-heap or timing wheel to find upcoming expirations.", "Design a cleanup thread and synchronize reads/writes/deletes.", "Handle updates while cleanup is running.", "Prevent stale heap records when expiry changes.", "Test expiry boundaries and race conditions.", "Analyze get, put, eviction and expiry complexity.", "Adapt the design to a distributed cache."]}]}, {"title": "7. Backend and system design", "topics": [{"id": 52, "title": "Detect unusual backend load", "description": "Detect abnormal traffic and server conditions in a food-delivery startup.", "example": "Monitor requests, resource utilization, errors and latency.", "questions": ["Which metrics reveal unusual load?", "Distinguish legitimate spikes from denial-of-service attacks.", "Measure requests per second and concurrency.", "Monitor CPU, memory, disk and network.", "Establish baselines and configure alerts.", "Correlate logs, metrics and distributed traces."]}, {"id": 53, "title": "Estimate and distribute backend load", "description": "Estimate traffic and scale backend services.", "example": "Topics: horizontal/vertical scaling and load balancing.", "questions": ["Estimate peak users, requests per second, DB load and storage.", "Compare horizontal and vertical scaling.", "Distribute requests across servers.", "Explain round-robin, least-connections and weighted balancing.", "How do health checks identify unhealthy servers?", "Handle a sudden tenfold traffic increase.", "Scale a database and design autoscaling policies."]}, {"id": 54, "title": "Latency and performance testing", "description": "Measure responsiveness, throughput and bottlenecks.", "example": "Topics: percentiles, load/stress/soak tests and acceptance criteria.", "questions": ["Compare latency and throughput.", "Explain p50, p90, p95 and p99.", "Measure API latency.", "Test normal, peak and extreme loads.", "Identify application, database and network bottlenecks.", "How do pooling and caching affect latency?", "Compare client-side and server-side latency.", "Define acceptance criteria and make tests reproducible."]}, {"id": 55, "title": "Microservices and distributed systems", "description": "Explain service architecture, failures and consistency.", "example": "Topics: gateways, tracing, Saga, retries and idempotency.", "questions": ["Compare microservices and monoliths.", "Compare synchronous and asynchronous communication.", "What are service discovery and API gateways?", "Explain distributed tracing and eventual consistency.", "What is a Saga?", "Explain circuit breakers, retries and timeouts.", "Prevent retry storms and duplicate processing.", "Compare at-most-once, at-least-once and exactly-once processing.", "Test partial failures and version compatibility."]}, {"id": 56, "title": "Database sharding and scalability", "description": "Scale databases using partitioning, replication and indexing.", "example": "Topics: shard keys, consistent hashing and replicas.", "questions": ["Compare sharding and replication.", "What is a shard key and hot shard?", "How do you rebalance shards?", "What is consistent hashing?", "Compare indexing and sharding.", "Explain read replicas and stale reads.", "What is connection pooling?", "Test cross-shard consistency and transactions."]}, {"id": 57, "title": "What happens when you click a URL?", "description": "Explain the browser-to-server request lifecycle.", "example": "Topics: DNS, TCP, TLS, HTTP, rendering and caches.", "questions": ["Explain DNS resolution.", "Explain the TCP three-way handshake.", "How does TLS establish a secure connection?", "Compare HTTP and HTTPS.", "What roles do web servers, app servers and databases play?", "Explain cookies, sessions and local storage.", "Explain browser and CDN caching.", "Compare server-side and client-side rendering.", "Troubleshoot slow pages, DNS failures and HTTP 500."]}, {"id": 58, "title": "Distributed systems architecture", "description": "Handle messaging, resilience and partial failures.", "example": "Topics: CAP, queues, backpressure and dead-letter queues.", "questions": ["Explain the CAP theorem.", "Compare consistency and availability.", "What are message queues and Kafka/RabbitMQ used for?", "What is backpressure?", "Design retries for background jobs.", "What is a dead-letter queue?", "Prevent duplicate message processing.", "Monitor distributed applications.", "Design graceful degradation for noncritical service failures."]}]}, {"title": "8. JavaScript, React and frontend engineering", "topics": [{"id": 59, "title": "JavaScript fundamentals", "description": "Explain JavaScript scope, execution and asynchronous behavior.", "example": "Topics: var/let/const, closures, event loop and promises.", "questions": ["Compare var, let and const.", "What is hoisting and a closure?", "Explain call stack, task queue and microtask queue.", "Compare synchronous and asynchronous JavaScript.", "Explain promises, async and await.", "Compare == and ===; null and undefined.", "Explain arrow functions and this.", "Explain prototypal inheritance and event propagation.", "Compare debounce and throttle.", "How do you investigate JavaScript memory leaks?"]}, {"id": 60, "title": "React fundamentals", "description": "Explain React components, state and rendering.", "example": "Topics: hooks, props, state and error boundaries.", "questions": ["What is the virtual DOM?", "Compare props and state.", "Explain useState, useEffect, useMemo and useCallback.", "How does React decide to re-render?", "Why are stable list keys important?", "Compare controlled and uncontrolled components.", "Explain prop drilling, Context API and global state.", "What are fragments and error boundaries?", "How do you test React components?"]}, {"id": 61, "title": "Directory-tree UI from an API", "description": "Build a hierarchical file/folder UI from API data.", "example": "Support nested structures, expand/collapse and lazy loading.", "questions": ["Represent folders and files in a data model.", "Convert a flat API response into a tree.", "Implement expand/collapse behavior.", "Lazy-load folder contents.", "Handle loading, error and empty states.", "Prevent unnecessary re-renders.", "Handle thousands of items and API pagination.", "Preserve expansion state and test malformed responses."]}, {"id": 62, "title": "Implement lazy loading", "description": "Load resources only when they are needed.", "example": "Topics: image loading, React.lazy, Suspense and Intersection Observer.", "questions": ["Compare lazy and eager loading.", "Lazy-load images and React components.", "What is code splitting and dynamic import?", "How do React.lazy and Suspense work?", "Load content as the user scrolls.", "Handle loading failures and duplicate requests.", "Measure performance improvements."]}, {"id": 63, "title": "Web performance optimization", "description": "Diagnose and improve frontend performance.", "example": "Topics: rendering, bundle size, virtualization and Core Web Vitals.", "questions": ["Improve a slow React application.", "Identify unnecessary re-renders.", "When should memoization be used?", "What are risks of overusing memoization?", "Virtualize a table with thousands of rows.", "Explain Core Web Vitals and tree shaking.", "Reduce bundle size and detect memory leaks.", "Profile slow rendering."]}]}, {"title": "9. Additional SDET questions and Java examples", "topics": [{"id": 64, "title": "General testing and quality", "description": "Additional testing questions and practical scenarios.", "example": "Topics: release readiness, field validation, defect handling and documentation.", "questions": ["How does SDET differ from manual QA in coding and debugging?", "How do you decide whether a feature is release-ready?", "What are ad-hoc and monkey testing?", "What is alpha testing?", "When should a defect block release?", "Test a text field without changing its styling.", "Validate length, special characters and allowed formats.", "Perform code reviews and identify testability problems.", "Compare walkthroughs and formal inspections.", "Maintain test documentation as requirements evolve."]}, {"id": 65, "title": "Automation troubleshooting", "description": "Diagnose unstable tests and environment-dependent failures.", "example": "Topics: dynamic locators, synchronization and diagnostic reports.", "questions": ["Handle changing element identifiers.", "Resolve synchronization problems.", "Debug tests that pass locally but fail in CI.", "Handle intermittent failures and order-dependent tests.", "Handle external service downtime.", "Separate product, test-code and environment failures.", "Prevent retries from hiding defects.", "Make reports useful to developers."]}, {"id": 66, "title": "TDD, BDD and CI integration", "description": "Integrate test-first development into continuous delivery.", "example": "Topics: test execution, reports and pipeline gates.", "questions": ["How does TDD identify defects early?", "How does BDD express business-readable behavior?", "Compare TDD and BDD.", "What is continuous integration testing?", "Run tests automatically after commits.", "Configure CI execution and publish HTML reports.", "What is TestNG used for?", "Run tests in parallel.", "Choose pre-merge versus nightly regression tests."]}, {"id": 67, "title": "Java-oriented coding and language questions", "description": "Common coding and Java fundamentals, even when the primary language is Python or C++.", "example": "Topics: strings, arrays, collections and exceptions.", "questions": ["Reverse a string and check a palindrome.", "Find the largest array element and remove duplicates.", "Reverse an integer and calculate factorial.", "Compare == and equals() in Java.", "What does null instanceof Object evaluate to?", "What does null == null evaluate to?", "Compare arrays and ArrayList.", "Swap two numbers without a temporary variable.", "What does trim() do?", "Check whether a string is empty or null.", "Compare checked and unchecked exceptions.", "Compare ArrayList and LinkedList.", "Use HashSet for deduplication and HashMap for frequencies.", "Explain final and interfaces versus abstract classes."]}]}, {"title": "10. Projects, design and behavioral rounds", "topics": [{"id": 68, "title": "Project and internship deep dive", "description": "Explain project architecture, personal contribution, testing and impact.", "example": "Prepare a concise overview followed by technical depth.", "questions": ["What problem did the project solve and what did you personally build?", "Explain architecture, technology choices and data flow.", "What was the hardest defect and its root cause?", "How did you measure quality or performance improvement?", "Explain test strategy, API/database validation and test data.", "What was automated versus manual?", "How did you manage reviews, version control and collaboration?", "What would you redesign today?", "Explain your internship contribution.", "Explain the architecture to a nontechnical manager."]}, {"id": 69, "title": "Design patterns and software design", "description": "Explain reusable software design approaches.", "example": "Topics: Singleton, Factory, Strategy, Observer, Repository, SOLID and dependency injection.", "questions": ["What is a design pattern?", "Explain Singleton and its limitations.", "Explain Factory, Strategy and Observer.", "What is the Repository pattern?", "What is dependency injection?", "Compare composition and inheritance.", "How do SOLID principles improve maintainability?", "Design a reusable automation framework.", "Make a framework easier to extend and test.", "How do you avoid tightly coupled code?", "When is a pattern unnecessary?"]}, {"id": 70, "title": "Introduction and behavioral questions", "description": "Prepare clear, honest answers about experience and collaboration.", "example": "Topics: education, strengths, learning, teamwork and priorities.", "questions": ["Tell me about yourself.", "Walk me through your education and technical experience.", "Compare your online and offline semester experiences.", "What skills did you develop outside coursework?", "What is your strongest programming language?", "Which project best demonstrates your engineering skills?", "What are your strengths and areas for improvement?", "Why this role and why software development/testing?", "Describe learning an unfamiliar technology under a deadline.", "Describe a technical disagreement with a teammate.", "How do you prioritize competing deadlines?", "How do you respond to feedback?", "Describe a mistake and what you learned."]}, {"id": 71, "title": "Food-delivery startup system-design scenario", "description": "Respond to a sudden traffic surge during a promotion.", "example": "Cover monitoring, scaling, caching, reliability and testing.", "questions": ["Detect unusual backend load and estimate peak demand.", "Distribute requests and scale application servers.", "Detect unhealthy instances and database bottlenecks.", "Use caching without serving incorrect order data.", "Measure latency and throughput.", "Keep checkout/payment reliable during partial outages.", "Monitor during the event and test before the next promotion.", "Diagnose slowness when CPU is low.", "Prevent duplicate orders on client retries.", "Prioritize reliability work for a small team."]}]}];
+const content = document.getElementById('content');
+const nav = document.getElementById('nav');
+const search = document.getElementById('search');
+const topicCount = bank.reduce((n,s)=>n+s.topics.length,0);
+const questionCount = bank.reduce((n,s)=>n+s.topics.reduce((m,t)=>m+t.questions.length,0),0);
+document.getElementById('topicCount').textContent = topicCount;
+document.getElementById('questionCount').textContent = questionCount;
+document.getElementById('sectionCount').textContent = bank.length;
+
+function safeLoadProgress(){
+  try { return JSON.parse(localStorage.getItem('sdet-question-bank-progress') || '[]'); }
+  catch(e){ return []; }
+}
+let completed = new Set(safeLoadProgress());
+const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+function render(){
+  content.innerHTML = '';
+  nav.innerHTML = '';
+  bank.forEach((section, si) => {
+    const sid = 'section-' + si;
+    const link = document.createElement('a');
+    link.className = 'navlink'; link.href = '#' + sid;
+    link.textContent = section.title;
+    nav.appendChild(link);
+    const sectionEl = document.createElement('section');
+    sectionEl.className = 'section'; sectionEl.id = sid;
+    sectionEl.innerHTML = `<h2 class="section-title"><span class="section-number">${si+1}</span><span>${esc(section.title.replace(/^\\d+\\.\\s*/,''))}</span></h2>`;
+    section.topics.forEach(topic => {
+      const allText = [topic.title,topic.description,topic.example,...topic.questions,section.title].join(' ').toLowerCase();
+      const detail = document.createElement('details');
+      detail.className = 'topic' + (completed.has(topic.id) ? ' done' : '');
+      detail.dataset.search = allText;
+      detail.dataset.topicId = topic.id;
+      const example = topic.example ? `<div class="example">${esc(topic.example)}</div>` : '';
+      detail.innerHTML = `
+        <summary>
+          <span class="qnum">Q${topic.id}</span>
+          <span class="topic-name-wrap"><div class="topic-name">${esc(topic.title)}</div><div class="topic-description">${esc(topic.description)}</div></span>
+        </summary>
+        <div class="topic-body">
+          ${example}
+          <h4>Interview questions and follow-ups</h4>
+          <ol class="question-list">${topic.questions.map(q=>`<li>${esc(q)}</li>`).join('')}</ol>
+          <label class="done-label"><input type="checkbox" class="done-check" ${completed.has(topic.id)?'checked':''}> Mark this topic as prepared</label>
+        </div>`;
+      detail.querySelector('.done-check').addEventListener('change', e => {
+        if(e.target.checked) completed.add(topic.id); else completed.delete(topic.id);
+        detail.classList.toggle('done',e.target.checked);
+        saveProgress(); updateProgress();
+      });
+      sectionEl.appendChild(detail);
+    });
+    content.appendChild(sectionEl);
+  });
+  filterTopics();
+  updateProgress();
+}
+function saveProgress(){
+  try { localStorage.setItem('sdet-question-bank-progress',JSON.stringify([...completed])); } catch(e){}
+}
+function updateProgress(){
+  const pct = topicCount ? Math.round(completed.size/topicCount*100) : 0;
+  document.getElementById('progressText').textContent = pct + '%';
+  document.getElementById('progressBar').style.width = pct + '%';
+}
+function filterTopics(){
+  const term = search.value.trim().toLowerCase();
+  let visible = 0;
+  document.querySelectorAll('.topic').forEach(d => {
+    const match = !term || d.dataset.search.includes(term);
+    d.style.display = match ? '' : 'none';
+    if(match) visible++;
+    if(term && match) d.open = true;
+  });
+  document.querySelectorAll('.section').forEach(s => {
+    const any = [...s.querySelectorAll('.topic')].some(d=>d.style.display!=='none');
+    s.style.display = any ? '' : 'none';
+  });
+  document.getElementById('empty').style.display = visible ? 'none' : 'block';
+}
+search.addEventListener('input',filterTopics);
+document.getElementById('expandAll').addEventListener('click',()=>document.querySelectorAll('.topic').forEach(d=>{if(d.style.display!=='none')d.open=true;}));
+document.getElementById('collapseAll').addEventListener('click',()=>document.querySelectorAll('.topic').forEach(d=>d.open=false));
+document.getElementById('clearSearch').addEventListener('click',()=>{search.value='';filterTopics();search.focus();});
+document.getElementById('printPage').addEventListener('click',()=>{document.querySelectorAll('.topic').forEach(d=>{if(d.style.display!=='none')d.open=true;});window.print();});
+document.getElementById('exportProgress').addEventListener('click',()=>{
+  const report = bank.map(s=>s.title+'\\n'+s.topics.map(t=>(completed.has(t.id)?'[x] ':'[ ] ')+t.title).join('\\n')).join('\\n\\n');
+  const blob = new Blob([report],{type:'text/plain;charset=utf-8'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');a.href=url;a.download='interview-preparation-progress.txt';a.click();URL.revokeObjectURL(url);
+});
+render();
+
+// Close dropdowns on outside click or Escape key
+document.addEventListener('click', function (e) {
+  document.querySelectorAll('.hub-dropdown.open, .hub-more-dropdown.open').forEach(dd => {
+    if (!dd.contains(e.target)) dd.classList.remove('open');
+  });
+});
+document.addEventListener('keydown', function (e) {
+  if (e.key === 'Escape') {
+    document.querySelectorAll('.hub-dropdown.open, .hub-more-dropdown.open').forEach(dd => dd.classList.remove('open'));
+  }
+});
+</script>
+</body>
+</html>
