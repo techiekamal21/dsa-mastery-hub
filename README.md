@@ -38,6 +38,7 @@ The suite integrates three comprehensive preparation tools connected via a unifi
 
 | Portal | File | Description | Problems Covered |
 |---|---|---|---|
+| 🏠 **Platform Homepage** | `home.html` | Central, high-impact landing page showcasing all interconnected engineering portals with dynamic stats counter, user onboarding, and responsive glassmorphism. | Central Hub Entrypoint |
 | 🎯 **LeetCode 150 Tracker** | `index.html` | Daily 90-day progress tracker with interactive checkboxes, SVG circular completion ring, consecutive streak engine, in-app daily reminder system, problem notes modal, and 90-day activity heatmap. | 150 Curated Problems |
 | 🗺️ **775-Day Comprehensive Roadmap** | `dsa_roadmap.html` | Exhaustive 26-month journey broken into 6 developmental phases with month navigation, deep algorithmic thought processes, and category filtering. | 2,325 Problems · 26 Months |
 | 💡 **DSA Algorithmic Pattern Guide** | `dsa_pattern_guide.html` | Interactive pattern archetype manual detailing scenario triggers, identification clues, time/space complexities, and classic problem links across 15+ algorithmic topics. | 15+ Algorithmic Topics |
@@ -90,6 +91,7 @@ Open `index.html` directly in any web browser (`Chrome`, `Safari`, `Firefox`, `E
 
 ```
 dsa-mastery-hub/
+├── home.html                  # Central Platform Homepage & Unified Launchpad
 ├── index.html                 # Main LeetCode 150 Interactive Tracker
 ├── dsa_roadmap.html           # 775-Day Comprehensive Curriculum (2,325 problems)
 ├── dsa_pattern_guide.html     # DSA Algorithmic Pattern Guide
