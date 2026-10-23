@@ -23,3 +23,7 @@ This file tracks upcoming enhancements, planned features, and deferred items.
 5. **CI/CD Visual YAML Workflow Builder**:
    - *Status*: Open / Future Enhancement
    - *Description*: Add an interactive GitHub Actions / GitLab CI YAML visual drag-and-drop generator in `cicd_guide.html` allowing users to export production-ready `.github/workflows/ci.yml` files.
+
+6. **SDET Question Bank Mock Interview Mode & Timer**:
+   - *Status*: Open / Future Enhancement
+   - *Description*: Add an interactive mock interview practice mode in `sdet_software_engineering_interview_question_bank.html` that randomly selects 5 questions across categories with a 30-minute answer recording / notes workspace.

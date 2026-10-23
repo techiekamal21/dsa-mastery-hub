@@ -1,5 +1,30 @@
 # Changelog — DSA and Software Engineering V.0.1
 
+## [0.3.0] — 2026-10-23
+
+### Added: SDET & Software Engineering Interview Question Bank Portal & Global "More" Integration
+
+**Date:** 2026-10-23  
+**Timestamp:** 23:40 IST  
+
+**Files Modified / Added:**
+- `sdet_software_engineering_interview_question_bank.html` — Upgraded and integrated comprehensive 71-topic interview study workspace:
+  - Redesigned visual aesthetics with CodeByArt unified dark design system tokens (`#0b1120`, Inter & JetBrains Mono typography, cyan/purple gradient accents).
+  - Integrated unified top navigation header (`.hub-header`) featuring CodeByArt brand emblem, `← LeetCode 150` return button, navigation tabs (LeetCode 150, 775-Day Roadmap, Pattern Guide), active `More ▾` dropdown, LinkedIn profile pill, and interactive `Connect ▾` dropdown.
+  - Enhanced workspace features: live instant keyword search filtering, collapsible topic group cards, question checklists with `localStorage` persistence, interactive progress bar, Print/Save PDF mode, and text progress report export.
+  - Added event listeners for outside-click and Escape key dropdown dismissal.
+- `index.html` — Updated `#navMoreMenu` with new "Interview & QA" section header and SDET & SWE Question Bank link (`🧪`).
+- `dsa_roadmap.html` — Updated `.hub-more-menu` with "Interview & QA" section header and SDET Question Bank link.
+- `dsa_pattern_guide.html` — Updated `.hub-more-menu` with "Interview & QA" section header and SDET Question Bank link.
+- `DSA Pattern Guide.html` — Updated backward-compatible alias `.hub-more-menu` with "Interview & QA" section header and SDET Question Bank link.
+- `cicd_guide.html` — Updated `.hub-more-menu` with "Interview & QA" section header and SDET Question Bank link.
+- `README.md` — Updated Core Portals table and repository directory tree to include SDET Question Bank portal.
+- `testing/test_runner.py` — Expanded automated test suite from 38 to 50 test cases (POS-01..38, NEG-01..12) validating SDET question bank existence, 71 topic groups, interactive tools, cross-platform dropdown links across all 6 pages, and negative fallbacks.
+- `testing/test-results.md` — Updated test execution report confirming all 50 automated tests pass with 0 failures.
+- `docs/open-items.md` — Added future enhancement item for SDET Mock Interview Mode with random question selection and timer.
+
+---
+
 ## [0.2.0] — 2026-10-13
 
 ### Added: CI/CD From Zero to Production Interactive Guide & "More" Dropdown Menu
