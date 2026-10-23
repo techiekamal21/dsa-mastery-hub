@@ -1,5 +1,35 @@
 # Changelog — DSA and Software Engineering V.0.1
 
+## [0.4.0] — 2026-10-24
+
+### Added: Professional Platform Homepage (`home.html`), User Name Onboarding, Cross-Portal Welcome Sync & Cross-Device / iOS Compatibility
+
+**Date:** 2026-10-24  
+**Timestamp:** 00:20 IST  
+
+**Files Modified / Added:**
+- `home.html` *(New)* — Standalone, professional entry-point landing page for the CodeByArt DSA & Software Engineering Platform:
+  - Animated glassmorphic hero section with drifting radial-gradient orb background, subtle CSS grid overlay, and a branded eyebrow pill.
+  - Animated stat counter bar (150 problems, 2,325 curriculum, 71 topics, 5 portals, zero backend) with easeOut counter animation.
+  - 5-portal showcase grid with per-portal color themes (indigo, cyan, violet, emerald, amber), subtle 3D tilt-on-hover effect, top accent bars, feature chips, and deep-link CTAs.
+  - 6-item platform DNA feature strip with glassmorphic cards and hover micro-interactions.
+  - About section with creator bio, social link pills, and 2×2 stat card grid.
+  - Sticky glassmorphic top nav, scroll-triggered section reveal animations, read scroll progress bar, and branded footer with all portal quick-links.
+  - Personalized Name Onboarding Modal (`#nameModalOverlay`): allows visitors to enter their name with persistent `localStorage` storage (`cba-user-name`).
+  - Welcome banner (`#welcomeBar`) with inline name display, edit button, and top navigation greeting pill (`#topNavWelcome`).
+  - iOS Safari & Cross-Device Hardening: explicit `16px` font size on inputs to prevent unwanted iOS auto-zoom, `-webkit-appearance: none` on buttons/inputs, full `viewport-fit=cover` and `env(safe-area-inset-top)` offsets, `100dvh` viewport support, `-webkit-backdrop-filter` prefixes across all glassmorphic elements, and mobile-friendly layouts down to 320px/375px (iPhone SE).
+- `index.html` — Added `🏠 Home` tab to navigation and integrated global welcome sync script displaying `👋 Hi, [Name]` in `.nav-network`.
+- `dsa_roadmap.html` — Added `🏠 Home` tab to `.hub-tabs` and integrated global welcome sync script in `.hub-network`.
+- `dsa_pattern_guide.html` — Added `🏠 Home` tab to `.hub-tabs` and integrated global welcome sync script in `.hub-network`.
+- `DSA Pattern Guide.html` — Added `🏠 Home` tab to `.hub-tabs` and integrated global welcome sync script in `.hub-network`.
+- `cicd_guide.html` — Added `🏠 Home` tab to `.hub-tabs` and integrated global welcome sync script in `.hub-network`.
+- `sdet_software_engineering_interview_question_bank.html` — Added `🏠 Home` tab to `.hub-tabs` and integrated global welcome sync script in `.hub-network`.
+- `README.md` — Updated Core Portals table and Directory Structure with `home.html`.
+- `testing/test_runner.py` — Expanded automated test suite from 50 to 63 test cases (POS-01..47, NEG-01..16) covering homepage validity, iOS safe-area configuration, portal links, name modal elements, cross-portal welcome sync, responsive breakpoints, XSS sanitization, empty input rejections, and viewport validation.
+- `testing/test-results.md` — Updated test execution report confirming 63/63 tests passing (100% pass rate).
+
+---
+
 ## [0.3.0] — 2026-10-23
 
 ### Added: SDET & Software Engineering Interview Question Bank Portal & Global "More" Integration

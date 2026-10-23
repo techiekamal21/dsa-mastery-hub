@@ -1460,6 +1460,7 @@
       </div>
 
       <nav class="hub-tabs">
+        <a href="home.html" class="hub-tab" title="Platform Homepage">🏠 Home</a>
         <a href="index.html" class="hub-tab">🎯 LeetCode 150</a>
         <a href="dsa_roadmap.html" class="hub-tab">🗺️ 775-Day Roadmap</a>
         <a href="dsa_pattern_guide.html" class="hub-tab">💡 Pattern Guide</a>
@@ -2245,6 +2246,26 @@ CMD ["dist/server.js"]</code></pre>
         if (!dd.contains(e.target)) dd.classList.remove('open');
       });
     });
+
+    // ===== GLOBAL WELCOME SYNC =====
+    (function () {
+      try {
+        var raw = localStorage.getItem('cba-user-name');
+        if (!raw) return;
+        var name = raw.replace(/[<>"'&]/g, '').trim().slice(0, 30);
+        if (!name) return;
+        var host = document.querySelector('.hub-network');
+        if (!host || document.getElementById('cbaUserWelcomePill')) return;
+        var pill = document.createElement('a');
+        pill.id = 'cbaUserWelcomePill';
+        pill.href = 'home.html';
+        pill.title = 'Hello, ' + name + '! Click to visit Home';
+        pill.className = 'hub-pill';
+        pill.style.cssText = 'display:inline-flex;align-items:center;gap:4px;border-color:rgba(0,229,255,0.3);background:rgba(0,229,255,0.08);color:#00e5ff;text-decoration:none;font-weight:600;';
+        pill.innerHTML = '👋 <span>Hi, <strong style="color:#00e5ff;">' + name + '</strong></span>';
+        host.insertBefore(pill, host.firstChild);
+      } catch (e) {}
+    })();
 
     // Initialize
     showStrategy('rolling');
