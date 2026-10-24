@@ -1168,6 +1168,7 @@
       .contribute-btn { width: 100%; justify-content: center; }
     }
   </style>
+  <link rel="stylesheet" href="shared-nav.css">
 </head>
 <body>
 
@@ -1182,23 +1183,7 @@
   </div>
   <div class="bg-grid" aria-hidden="true"></div>
 
-  <!-- ================================================================
-       TOP NAV
-       ================================================================ -->
-  <header class="top-nav" id="topNav">
-    <a href="home.html" class="nav-brand" aria-label="CodeByArt Home">
-      <span class="nav-brand-word">CODE</span><span class="nav-brand-art">BYART</span>
-      <span class="nav-badge">SWE Platform</span>
-    </a>
-    <nav class="nav-links" aria-label="Primary navigation">
-      <button type="button" id="topNavWelcome" class="nav-link" style="display:none;align-items:center;gap:5px;cursor:pointer;border:1px solid rgba(0,229,255,0.25);background:rgba(0,229,255,0.08);color:var(--cyan);font-weight:600;" title="Click to change your name">👋 <span id="topNavName"></span></button>
-      <a href="#portals"   class="nav-link">Portals</a>
-      <a href="#features"  class="nav-link">Features</a>
-      <a href="#about"     class="nav-link">About</a>
-      <a href="https://www.linkedin.com/in/kamal-patel-61a8201a0/" target="_blank" rel="noopener noreferrer" class="nav-link">LinkedIn</a>
-      <a href="index.html" class="nav-cta">Start Practicing →</a>
-    </nav>
-  </header>
+
 
   <!-- Welcome bar (shown when name is set) -->
   <div class="welcome-bar hidden" id="welcomeBar" role="status" aria-live="polite">
@@ -1533,30 +1518,7 @@
     </div>
   </section>
 
-  <!-- ================================================================
-       FOOTER
-       ================================================================ -->
-  <footer class="site-footer" role="contentinfo">
-    <div class="footer-inner">
-      <div>
-        <div class="footer-brand">
-          <span class="footer-brand-name">CODE<span class="footer-brand-art">BYART</span></span>
-          <span style="font-size:0.7rem;color:var(--text-muted);font-weight:500;">SWE Platform</span>
-        </div>
-        <p class="footer-copy" style="margin-top:0.5rem;">
-          © 2026 CodeByArt · Engineered &amp; Curated by <a href="https://www.linkedin.com/in/kamal-patel-61a8201a0/" target="_blank" rel="noopener noreferrer" style="color:var(--cyan)">Kamal Patel</a>
-        </p>
-      </div>
-      <nav class="footer-links" aria-label="Footer links">
-        <a href="index.html">LeetCode 150</a>
-        <a href="dsa_roadmap.html">Roadmap</a>
-        <a href="dsa_pattern_guide.html">Patterns</a>
-        <a href="cicd_guide.html">CI/CD</a>
-        <a href="sdet_software_engineering_interview_question_bank.html">SDET Bank</a>
-        <a href="https://github.com/techiekamal21/dsa-mastery-hub" target="_blank" rel="noopener noreferrer">GitHub</a>
-      </nav>
-    </div>
-  </footer>
+
 
   <script>
     /* ================================================================
@@ -1699,6 +1661,9 @@
         input.style.borderColor = '';
         try { localStorage.setItem(STORAGE_KEY, name); } catch (e) {}
         showWelcomeBar(name);
+        if (typeof window.cbaUpdateProfile === 'function') {
+          window.cbaUpdateProfile(name);
+        }
       }
 
       // On load
@@ -1731,5 +1696,6 @@
       });
     }());
   </script>
+  <script src="shared-nav.js" data-page="home"></script>
 </body>
 </html>
