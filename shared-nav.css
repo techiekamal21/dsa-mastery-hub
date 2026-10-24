@@ -170,6 +170,14 @@ body.has-cba-nav aside {
   display: inline-flex;
   align-items: center;
 }
+.cba-more-dd::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  height: 14px;
+}
 .cba-more-trigger {
   display: inline-flex;
   align-items: center;
@@ -185,6 +193,7 @@ body.has-cba-nav aside {
   transition: all 0.18s ease;
   cursor: pointer;
   font-family: var(--sn-font);
+  -webkit-tap-highlight-color: transparent;
 }
 .cba-more-trigger:hover,
 .cba-more-dd:hover .cba-more-trigger,
@@ -207,6 +216,7 @@ body.has-cba-nav aside {
   top: calc(100% + 10px);
   left: 0;
   min-width: 260px;
+  max-width: min(300px, calc(100vw - 2rem));
   background: var(--sn-surface2);
   border: 1px solid var(--sn-border);
   border-radius: 14px;
@@ -220,6 +230,14 @@ body.has-cba-nav aside {
   pointer-events: none;
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
+}
+.cba-more-menu::before {
+  content: '';
+  position: absolute;
+  top: -14px;
+  left: 0;
+  right: 0;
+  height: 14px;
 }
 .cba-more-dd:hover .cba-more-menu,
 .cba-more-dd.open .cba-more-menu {
@@ -810,17 +828,31 @@ body.has-cba-nav aside {
    RESPONSIVE
    ═══════════════════════════════════════════════ */
 @media (max-width: 900px) {
-  .cba-nav-tab .cba-tab-label { display: none; }
-  .cba-nav-tab { padding: 0.38rem 0.55rem; }
+  .cba-nav-tab .cba-tab-label,
+  .cba-more-trigger .cba-tab-label-text { display: none; }
+  .cba-nav-tab, .cba-more-trigger { padding: 0.38rem 0.55rem; }
+}
+@media (max-width: 768px) {
+  .cba-more-menu {
+    left: auto;
+    right: 0;
+    max-width: min(280px, 90vw);
+  }
 }
 @media (max-width: 680px) {
   .cba-nav-logo-text { display: none; }
-  .cba-nav-tab .cba-tab-label { display: none; }
+  .cba-nav-tab .cba-tab-label,
+  .cba-more-trigger .cba-tab-label-text { display: none; }
   .cba-nav-tab.cba-tab-home .cba-tab-label { display: inline; }
   .cba-nav { padding: 0 0.75rem; gap: 0.25rem; }
   .cba-profile-name { max-width: 60px; }
-  .cba-profile-menu, .cba-settings-menu {
+  .cba-profile-menu, .cba-settings-menu, .cba-more-menu {
     width: min(290px, 94vw);
+    min-width: unset;
+  }
+  .cba-more-menu {
+    left: auto;
+    right: 0;
   }
 }
 @media (max-width: 480px) {
@@ -829,4 +861,12 @@ body.has-cba-nav aside {
   .cba-footer-inner { flex-direction: column; align-items: flex-start; }
   .cba-footer-links { gap: 0.85rem; }
   .cba-modal { padding: 1.5rem; border-radius: 16px; }
+  .cba-more-menu {
+    position: fixed;
+    top: calc(var(--sn-nav-h) + 6px);
+    left: 0.5rem;
+    right: 0.5rem;
+    width: auto;
+    max-width: calc(100vw - 1rem);
+  }
 }
