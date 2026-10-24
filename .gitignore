@@ -40,6 +40,5 @@ yarn-error.log*
 *.xlsx
 *.xls
 *.csv
-testing/
 
 
