@@ -550,6 +550,14 @@
   };
 
   /* ── Theme Toggle ── */
+  function initTheme() {
+    var savedTheme = 'dark';
+    try {
+      savedTheme = localStorage.getItem(THEME_KEY) || localStorage.getItem('lc-theme') || 'dark';
+    } catch (e) {}
+    document.documentElement.setAttribute('data-theme', savedTheme);
+  }
+
   window.cbaToggleTheme = function () {
     closeAllDropdowns();
     if (typeof window.toggleTheme === 'function') {
@@ -558,7 +566,10 @@
       var current = document.documentElement.getAttribute('data-theme') || 'dark';
       var next = current === 'dark' ? 'light' : 'dark';
       document.documentElement.setAttribute('data-theme', next);
-      try { localStorage.setItem(THEME_KEY, next); } catch (e) {}
+      try {
+        localStorage.setItem(THEME_KEY, next);
+        localStorage.setItem('lc-theme', next);
+      } catch (e) {}
     }
     updateThemeUI();
     var currentTheme = document.documentElement.getAttribute('data-theme') || 'dark';
@@ -644,6 +655,7 @@
      INIT
      ══════════════════════════════════════════════════════════════ */
   function init() {
+    initTheme();
     inject();
     loadProfile();
     updateThemeUI();

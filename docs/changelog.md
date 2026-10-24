@@ -1,5 +1,32 @@
 # Changelog — DSA and Software Engineering V.0.1
 
+## [0.5.1] — 2026-10-24
+
+### Fixed: Roadmap Content Rendering (Syntax Error Fix), More Dropdown Visibility (`overflow: visible`), and Pattern Guide Dark Theme Alignment
+
+**Date:** 2026-10-24  
+**Timestamp:** 13:25 IST  
+**Branch:** `main`  
+
+**Files Modified:**
+- `dsa_roadmap.html`:
+  - Resolved `SyntaxError: Unexpected end of input` caused by a truncated legacy event listener (`document.addEventListener('click', ...)`).
+  - Restored full JavaScript execution so `render()` properly populates `#mainArea` with all 2,325 curriculum problems, category cards, month goals, and difficulty filters.
+- `shared-nav.css`:
+  - Fixed More dropdown clipping by changing `.cba-nav-tabs` from `overflow: hidden` to `overflow: visible`.
+  - Added `:hover` pseudo-class states to `.cba-more-dd` for both desktop hover opening and click/touch toggle accessibility.
+- `shared-nav.js`:
+  - Added `initTheme()` function to read theme preference from `localStorage` (`cba-theme` or legacy `lc-theme`, defaulting to `'dark'`) and apply `data-theme` to `document.documentElement` on initial load.
+- `dsa_pattern_guide.html`:
+  - Updated `:root` CSS variables to default to the platform's unified dark theme palette (`--bg: #0b1120`, `--card: #131d31`, `--tx: #e6e8eb`, `--bd: #223049`, `--ac: #a5a0ff`) with zero loss of existing topics, patterns, clues, or problem questions.
+  - Added `:root[data-theme="light"]` and `:root[data-theme="dark"]` rules for explicit theme switching.
+- `DSA Pattern Guide.html`:
+  - Synchronized backward-compatible alias with unified dark theme default tokens and data-theme rules.
+- `docs/bugs.md`:
+  - Documented BUG-004 (roadmap script syntax error and more dropdown clipping) and BUG-005 (pattern guide theme mismatch) along with their resolutions.
+
+---
+
 ## [0.5.0] — 2026-10-24
 
 ### Added: Unified Header with Profile Dropdown, Settings Dropdown (Export, Import, Save, Theme, Reminder, Cache Clear, Reset All), Safety Warning Modals, and Consistent Cross-Platform Footer
