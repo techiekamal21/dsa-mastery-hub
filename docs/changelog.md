@@ -1,5 +1,112 @@
 # Changelog — DSA and Software Engineering V.0.1
 
+## [0.5.0] — 2026-10-24
+
+### Added: Unified Header with Profile Dropdown, Settings Dropdown (Export, Import, Save, Theme, Reminder, Cache Clear, Reset All), Safety Warning Modals, and Consistent Cross-Platform Footer
+
+**Date:** 2026-10-24  
+**Timestamp:** 12:55 IST  
+**Branch:** `feature/unified-header-profile-settings-footer`  
+
+**Files Modified / Added:**
+- `shared-nav.js` *(New)* — Standalone global navigation engine injected across all portals:
+  - **Unified Navigation Shell (`#cba-top-nav`)**: Fixed 58px high-performance top navbar with glassmorphism (`rgba(6, 8, 16, 0.85)` + `backdrop-filter: blur(24px)`), dynamic scroll shadow (`.scrolled`), CodeByArt SVG logo emblem with linear gradient, brand mark, and portal tab navigation (`Home`, `LeetCode 150`, `775-Day Roadmap`, `Pattern Guide`, `More ▾`).
+  - **User Profile Dropdown (`#cba-profile-dd`)**:
+    - Header avatar badge displaying first letter uppercase with gradient initial.
+    - User display name display (defaults to "Guest" until configured).
+    - In-place name editor input with max 40-character limit, sanitized input (stripping `<>\"'&`), and iOS 16px font to prevent mobile auto-zoom.
+    - "Save Name →" button persisting to `localStorage` key `cba-user-name` and triggering live synchronization with on-page greetings (e.g., `#welcomeBar`, `#welcomeName`, `#topNavWelcome`).
+    - "✕ Clear & Reset Name" button restoring guest status.
+    - Global API hook `window.cbaUpdateProfile(name)` exposed for portal-specific onboarding flows (e.g. `home.html` welcome modal).
+  - **Settings Dropdown (`#cba-settings-dd`)**:
+    - Dedicated `⚙️` settings trigger in the header separating utility actions from the main navigation.
+    - **Data Management**:
+      - `📤 Export Progress`: Downloads a timestamped JSON file (`codebyart-backup-YYYY-MM-DD.json`) containing all platform keys from `localStorage`.
+      - `📥 Import Progress`: Triggers a safety confirmation warning modal explaining data merge and overwrite risks before opening file picker (`.json`), parsing and validating JSON dictionary structure, restoring keys, and reloading cleanly.
+      - `💾 Save Snapshot`: Forces an immediate progress checkpoint to `localStorage` (hooks into `window.saveProgress()` where available).
+    - **Preferences**:
+      - `🌙 / ☀️ Toggle Theme`: Toggles between dark and light themes, hooks into `window.toggleTheme()` on LeetCode tracker, sets `data-theme` attribute, persists to `cba-theme`, and dynamically updates dropdown label and icon.
+      - `⏰ Daily Reminder`: Opens the study reminder modal (hooks into `window.openReminderModal()` on LeetCode tracker or directs user to configuration).
+    - **Danger Zone**:
+      - `🧹 Clear Cache`: Warns user before clearing non-progress UI state keys (`cba-theme`, `cba-sidebar`, `cba-collapse`, `lc-theme`, `sdet-collapse`, `filter-state`) while reassuring the user that their solved problems, progress, notes, and profile name are 100% safe.
+      - `🗑️ Reset All Progress`: Triggers a severe, high-danger confirmation modal that warns of permanent data wipe and strictly requires the user to type the word `"RESET"` before allowing confirmation. Clears `localStorage` and redirects cleanly to `home.html`.
+  - **Glassmorphic Warning / Confirmation Modal (`#cba-warning-overlay`)**:
+    - Accessible, centered modal dialog with warning emoji, header, explanatory message, warning highlight box, optional confirmation input field, and Cancel / Confirm action buttons.
+    - Supports dismissal via overlay backdrop click, Cancel button, or Escape keyboard key.
+  - **Toast Notification System (`#cba-toast`)**:
+    - Floating bottom toast component (`z-index: 99998`) with smooth cubic-bezier slide-in animation, color-coded borders (green for success, amber for warnings, rose for errors), and automatic 3.2s auto-dismiss.
+  - **Standardized Footer (`.cba-footer`)**:
+    - Clean, modern layout rendered uniformly across all portals.
+    - Links to all 5 core portals + Home + GitHub repository.
+    - Developer attribution: `© 2026 CodeByArt · Engineered by Kamal Patel` linking to Kamal Patel's LinkedIn.
+- `shared-nav.css` *(New)* — Design tokens, component rules, and layout offsets:
+  - Custom tokens: `--sn-bg`, `--sn-border`, `--sn-surface`, `--sn-text`, `--sn-cyan`, `--sn-violet`, `--sn-grad`, `--sn-nav-h: 58px`.
+  - Layout compensation: `body.has-cba-nav` with `padding-top: var(--sn-nav-h) !important;`.
+  - Sticky element offsets: `.sidebar`, `.toolbar`, and `aside` offsets adjusted to accommodate the fixed 58px header.
+  - Multi-tier responsive breakpoints (`@media (max-width: 900px)`, `@media (max-width: 680px)`, `@media (max-width: 480px)`): hides verbose labels, collapses tabs into More dropdown on ultra-small viewports, ensures dropdown menus fit within `min(290px, 94vw)`, and wraps footer links cleanly.
+- `home.html`:
+  - Linked `shared-nav.css` in `<head>`.
+  - Removed obsolete `#topNav` and redundant `.site-footer`.
+  - Updated onboarding modal save action to call `window.cbaUpdateProfile(name)` ensuring instant navbar synchronization.
+  - Appended `<script src="shared-nav.js" data-page="home"></script>`.
+- `index.html` (LeetCode 150 Tracker):
+  - Linked `shared-nav.css` in `<head>`.
+  - Removed obsolete `.top-nav` and old static footer.
+  - Preserved hero stats, search/filter toolbar, problem tables, reminder modal, and notes modal.
+  - Appended `<script src="shared-nav.js" data-page="leetcode"></script>`.
+- `dsa_roadmap.html`:
+  - Linked `shared-nav.css` in `<head>`.
+  - Removed old `.hub-header` and inline welcome sync script.
+  - Appended `<script src="shared-nav.js" data-page="roadmap"></script>`.
+- `dsa_pattern_guide.html`:
+  - Linked `shared-nav.css` in `<head>`.
+  - Removed old `.hub-header` and inline welcome sync script.
+  - Appended `<script src="shared-nav.js" data-page="patterns"></script>`.
+- `DSA Pattern Guide.html`:
+  - Linked `shared-nav.css` in `<head>`.
+  - Removed old `.hub-header` and inline welcome sync script.
+  - Appended `<script src="shared-nav.js" data-page="patterns"></script>`.
+- `cicd_guide.html`:
+  - Linked `shared-nav.css` in `<head>`.
+  - Removed old `.hub-header`, old footer, and inline welcome sync script.
+  - Appended `<script src="shared-nav.js" data-page="cicd"></script>`.
+- `sdet_software_engineering_interview_question_bank.html`:
+  - Linked `shared-nav.css` in `<head>`.
+  - Removed old `.hub-header`, old `.site-footer`, and inline welcome sync script.
+  - Appended `<script src="shared-nav.js" data-page="sdet"></script>`.
+- `testing/test_runner.py`:
+  - Updated test assertions to validate `shared-nav.js` and `shared-nav.css` syntax, responsive layout tokens, presence across all 7 pages, profile controls, settings dropdown actions, modal warning system, toast notifications, scoped cache clear logic, and sticky layout compensation.
+  - Added negative test cases: NEG-17 (strict "RESET" confirmation verification), NEG-18 (corrupted/non-object JSON import rejection), NEG-19 (profile name truncation at 40 chars), and NEG-20 (safe default fallback for unknown data-page).
+- `testing/test-results.md`:
+  - Updated test execution report with 63 total tests executed (43 Positive + 20 Negative), achieving 100% pass rate.
+
+---
+
+## [0.4.1] — 2026-10-24
+
+### Changed: Homepage Creator Section Redesign + "Want to Contribute?" Section Added
+
+**Date:** 2026-10-24  
+**Timestamp:** 12:14 IST  
+**Branch:** `feature/homepage-creator-contribute-section`  
+**PR:** [#8 — feat(home): redesign creator section](https://github.com/techiekamal21/dsa-mastery-hub/pull/8)
+
+**Files Modified:**
+- `home.html` — About / Creator section redesign:
+  - **Removed**: 4 stat data cards on the right column of the About section (150 LeetCode Problems, 2,325 Curriculum Problems, 71 Interview Topics, 5 Integrated Portals). The `.about-right` two-column grid and `.about-card`/`.about-card-val` styles were removed entirely.
+  - **Redesigned layout**: `.about-inner` changed from a `grid (1fr 1fr)` to a `flex column` layout with `max-width: 860px` centered — giving the creator block a focused, full-width treatment.
+  - **Added**: "Want to Contribute?" card (`.contribute-card`) placed below the creator bio, featuring:
+    - Glassmorphic dual-gradient border (cyan → violet)
+    - `::before` radial gradient overlay for visual depth
+    - "Contribute on GitHub" primary CTA (gradient brand, GitHub SVG icon)
+    - "Connect on LinkedIn" LinkedIn-blue-tinted button (LinkedIn SVG icon)
+    - "Send an Email" secondary button → `codebyart@gmail.com`
+    - "Visit Website" secondary button → `codebyart.com`
+  - **Social btn update**: Added `white-space: nowrap` to prevent social pills from breaking across lines on narrow viewports.
+  - **Responsive updates**: Removed obsolete `@media (max-width: 900px)` `.about-inner` and `.about-right` rules; added `.contribute-header` column stacking, `.contribute-btn` wrapping, and full-width contribute buttons at `≤400px`.
+
+---
+
 ## [0.4.0] — 2026-10-24
 
 ### Added: Professional Platform Homepage (`home.html`), User Name Onboarding, Cross-Portal Welcome Sync & Cross-Device / iOS Compatibility
