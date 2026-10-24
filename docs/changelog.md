@@ -1,5 +1,43 @@
 # Changelog — DSA and Software Engineering V.0.1
 
+## [0.5.2] — 2026-10-24
+
+### Fixed: More Dropdown Hover Bridge, Mobile Viewport Boundary Clamping, Touch Interactivity, and Asset Cache-Busting
+
+**Date:** 2026-10-24  
+**Timestamp:** 13:55 IST  
+**Branch:** `fix/deployed-more-dropdown-and-cache-busting`  
+
+**Files Modified:**
+- `shared-nav.css`:
+  - Added invisible pseudo-element hover bridges (`.cba-more-dd::after` and `.cba-more-menu::before`) eliminating mouse-out collapse over the 10px spacing gap.
+  - Added responsive right-anchoring and viewport bounding rules (`max-width: min(300px, calc(100vw - 2rem))`) for screens <= 768px and <= 680px.
+  - Added full-width fixed sheet presentation for mobile devices <= 480px (`position: fixed; left: 0.5rem; right: 0.5rem; top: calc(var(--sn-nav-h) + 6px)`), preventing horizontal cutoff or off-screen clipping.
+  - Added `.cba-tab-label-text` collapsing rules on screens <= 900px and <= 680px so "More ▾" shrinks to icon-only (`📦 ▾`) without colliding with profile and tab controls.
+- `shared-nav.js`:
+  - Wrapped "More" label text with `<span class="cba-tab-label-text">` to support responsive icon-only display on narrow screens.
+  - Synchronized `aria-expanded` state on trigger button (`#cba-more-btn`) across all dropdown operations.
+  - Added `touchstart` listener on document body for reliable mobile outside-tap closing.
+  - Added cache-busting query parameter `shared-nav.css?v=0.5.2` in `inject()` dynamic loader.
+- `home.html`:
+  - Updated stylesheet link to `shared-nav.css?v=0.5.2` and script tag to `shared-nav.js?v=0.5.2` for instant CDN/browser cache invalidation.
+- `index.html`:
+  - Updated stylesheet link to `shared-nav.css?v=0.5.2` and script tag to `shared-nav.js?v=0.5.2`.
+- `dsa_roadmap.html`:
+  - Updated stylesheet link to `shared-nav.css?v=0.5.2` and script tag to `shared-nav.js?v=0.5.2`.
+- `dsa_pattern_guide.html`:
+  - Updated stylesheet link to `shared-nav.css?v=0.5.2` and script tag to `shared-nav.js?v=0.5.2`.
+- `DSA Pattern Guide.html`:
+  - Updated stylesheet link to `shared-nav.css?v=0.5.2` and script tag to `shared-nav.js?v=0.5.2`.
+- `cicd_guide.html`:
+  - Updated stylesheet link to `shared-nav.css?v=0.5.2` and script tag to `shared-nav.js?v=0.5.2`.
+- `sdet_software_engineering_interview_question_bank.html`:
+  - Updated stylesheet link to `shared-nav.css?v=0.5.2` and script tag to `shared-nav.js?v=0.5.2`.
+- `docs/bugs.md`:
+  - Logged `BUG-006` with comprehensive diagnosis and solution details.
+
+---
+
 ## [0.5.1] — 2026-10-24
 
 ### Fixed: Roadmap Content Rendering (Syntax Error Fix), More Dropdown Visibility (`overflow: visible`), and Pattern Guide Dark Theme Alignment

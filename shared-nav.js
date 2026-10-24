@@ -53,7 +53,7 @@
     var moreHtml = '<div class="cba-more-dd" id="cba-more-dd">' +
       '<button type="button" class="cba-more-trigger' + moreActive + '" id="cba-more-btn" onclick="cbaToggleMore(event)" aria-haspopup="true" aria-expanded="false" title="More Portals">' +
       '<span class="cba-nav-tab-icon">📦</span>' +
-      '<span class="cba-tab-label">More <span class="cba-more-caret">▾</span></span>' +
+      '<span class="cba-tab-label"><span class="cba-tab-label-text">More</span> <span class="cba-more-caret">▾</span></span>' +
       '</button>' +
       '<div class="cba-more-menu" id="cba-more-menu" role="menu">' +
         '<div class="cba-menu-section">DevOps &amp; Engineering</div>' +
@@ -215,7 +215,7 @@
     if (!document.querySelector('link[href*="shared-nav.css"]')) {
       var link = document.createElement('link');
       link.rel = 'stylesheet';
-      link.href = 'shared-nav.css';
+      link.href = 'shared-nav.css?v=0.5.2';
       document.head.insertBefore(link, document.head.firstChild);
     }
 
@@ -332,23 +332,35 @@
       var el = document.getElementById(id);
       if (el) el.classList.remove('open');
     });
+    var moreBtn = document.getElementById('cba-more-btn');
+    if (moreBtn) moreBtn.setAttribute('aria-expanded', 'false');
+    var profBtn = document.getElementById('cba-profile-trigger');
+    if (profBtn) profBtn.setAttribute('aria-expanded', 'false');
+    var setBtn = document.getElementById('cba-settings-btn');
+    if (setBtn) setBtn.setAttribute('aria-expanded', 'false');
   }
 
   window.cbaToggleMore = function (e) {
-    if (e) e.stopPropagation();
+    if (e && e.stopPropagation) e.stopPropagation();
     var el = document.getElementById('cba-more-dd');
-    var wasOpen = el && el.classList.contains('open');
-    closeAllDropdowns();
-    if (el && !wasOpen) el.classList.add('open');
-  };
-
-  window.cbaToggleProfile = function (e) {
-    if (e) e.stopPropagation();
-    var el = document.getElementById('cba-profile-dd');
+    var btn = document.getElementById('cba-more-btn');
     var wasOpen = el && el.classList.contains('open');
     closeAllDropdowns();
     if (el && !wasOpen) {
       el.classList.add('open');
+      if (btn) btn.setAttribute('aria-expanded', 'true');
+    }
+  };
+
+  window.cbaToggleProfile = function (e) {
+    if (e && e.stopPropagation) e.stopPropagation();
+    var el = document.getElementById('cba-profile-dd');
+    var btn = document.getElementById('cba-profile-trigger');
+    var wasOpen = el && el.classList.contains('open');
+    closeAllDropdowns();
+    if (el && !wasOpen) {
+      el.classList.add('open');
+      if (btn) btn.setAttribute('aria-expanded', 'true');
       setTimeout(function () {
         var inp = document.getElementById('cba-profile-input');
         if (inp) inp.focus();
@@ -357,11 +369,15 @@
   };
 
   window.cbaToggleSettings = function (e) {
-    if (e) e.stopPropagation();
+    if (e && e.stopPropagation) e.stopPropagation();
     var el = document.getElementById('cba-settings-dd');
+    var btn = document.getElementById('cba-settings-btn');
     var wasOpen = el && el.classList.contains('open');
     closeAllDropdowns();
-    if (el && !wasOpen) el.classList.add('open');
+    if (el && !wasOpen) {
+      el.classList.add('open');
+      if (btn) btn.setAttribute('aria-expanded', 'true');
+    }
   };
 
   /* Close on outside click */
@@ -369,6 +385,12 @@
     var nav = document.getElementById('cba-top-nav');
     if (nav && !nav.contains(e.target)) closeAllDropdowns();
   });
+
+  /* Close on outside touch for mobile devices */
+  document.addEventListener('touchstart', function (e) {
+    var nav = document.getElementById('cba-top-nav');
+    if (nav && !nav.contains(e.target)) closeAllDropdowns();
+  }, { passive: true });
 
   /* ESC to close dropdowns & modals */
   document.addEventListener('keydown', function (e) {
