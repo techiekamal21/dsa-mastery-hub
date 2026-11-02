@@ -11,9 +11,7 @@
   <b>A unified, cross-platform engineering portal featuring an Interactive 90-Day LeetCode 150 Tracker, 775-Day Comprehensive Curriculum (2,325 problems), and Algorithmic Pattern Guide.</b>
 </p>
 
-
 <p align="center">
-  <a href="https://www.linkedin.com/in/kamal-patel-61a8201a0/">💼 Kamal Patel</a> •
   <a href="https://codebyart.com">🚀 codebyart.com</a> •
   <a href="https://connectkreations.com">🌐 connectkreations.com</a> •
   <a href="mailto:codebyart@gmail.com">✉️ codebyart@gmail.com</a> •
@@ -21,12 +19,11 @@
   <a href="#core-portals">📦 Portals</a>
 </p>
 
-
 ---
 
 ## 🌟 Overview
 
-The **CodeByArt DSA Mastery Hub** is an open-source, client-side engineering platform engineered for developers preparing for top-tier software engineering technical interviews. 
+The **CodeByArt DSA Mastery Hub** is an open-source, client-side engineering platform engineered for developers preparing for top-tier software engineering technical interviews.
 
 **Zero backend requirements. Zero API keys. Zero build steps.** Everything runs instantly in your browser with offline-first persistence powered by `localStorage`.
 
@@ -34,7 +31,7 @@ The **CodeByArt DSA Mastery Hub** is an open-source, client-side engineering pla
 
 ## 📦 Core Portals
 
-The suite integrates three comprehensive preparation tools connected via a unified global navigation bar:
+The suite integrates six comprehensive preparation tools connected via a unified global navigation bar:
 
 | Portal | File | Description | Problems Covered |
 |---|---|---|---|
@@ -49,12 +46,12 @@ The suite integrates three comprehensive preparation tools connected via a unifi
 
 ## 🚀 Key Features
 
-- **Direct LeetCode Integration**: Every problem includes direct, preserved links to `https://leetcode.com/problems/...` with external launch triggers.
+- **Direct LeetCode Integration**: Every problem links directly to `https://leetcode.com/problems/...` with one-click external launch triggers.
 - **Progress Tracking & Daily Streaks**: Real-time completion calculation with consecutive day streak counting (`🔥`) and all-time best streak tracking.
 - **90-Day Interactive Activity Heatmap**: Visual matrix tracking daily completion status with color codes (pending, partial, complete) that double as instant day filters.
 - **Daily Reminders & Notifications**: Built-in customizable timer with Web Notification API support and in-app toast alerts.
 - **Problem Notes Modal**: Add, review, and persist personalized approach notes and complexity analyses for each problem (`📝`).
-- **Data Portability**: Full JSON export (`📤`) and import (`📥`) capabilities to backup progress or synchronize across devices.
+- **Data Portability**: Full JSON export (`📤`) and import (`📥`) capabilities to back up progress or synchronize across devices.
 - **Multi-Platform & Mobile Optimized**: Responsive grid systems with safe-area insets (`env(safe-area-inset-top)`), touch targets (>44px), and sticky navigation offsets.
 - **Dark & Light Mode**: Persistent dual-theme design system with custom CSS tokens and glassmorphic styling.
 
@@ -63,13 +60,15 @@ The suite integrates three comprehensive preparation tools connected via a unifi
 ## ⚡ Quick Start
 
 ### 1. Clone the Repository
+
 ```bash
 git clone https://github.com/techiekamal21/dsa-mastery-hub.git
 cd dsa-mastery-hub
 ```
 
 ### 2. Run Locally
-Because this project is built with zero runtime dependencies, you can run it with any static server:
+
+Because this project has **zero runtime dependencies**, you can launch it with any static server:
 
 **Using Python:**
 ```bash
@@ -83,7 +82,7 @@ npx serve -p 8080
 ```
 
 **Or simply double-click:**
-Open `index.html` directly in any web browser (`Chrome`, `Safari`, `Firefox`, `Edge`).
+Open `index.html` directly in any modern browser (`Chrome`, `Safari`, `Firefox`, `Edge`).
 
 ---
 
@@ -97,11 +96,13 @@ dsa-mastery-hub/
 ├── dsa_pattern_guide.html     # DSA Algorithmic Pattern Guide
 ├── DSA Pattern Guide.html     # Backward-compatible alias
 ├── cicd_guide.html            # CI/CD Complete Interactive Guide & DevOps Lab
-├── sdet_software_engineering_interview_question_bank.html # SDET & SWE Comprehensive Question Bank
+├── sdet_software_engineering_interview_question_bank.html  # SDET & SWE Comprehensive Question Bank
 ├── styles.css                 # Modern design system & responsive styling
 ├── app.js                     # Application logic, streaks, reminders & state engine
 ├── data.js                    # Parsed dataset of 163 roadmap entries
 ├── roadmap_data.json          # Formatted JSON dataset
+├── shared-nav.js              # Shared navigation bar logic
+├── shared-nav.css             # Shared navigation bar styles
 ├── README.md                  # Project documentation & guide
 ├── LICENSE                    # MIT License
 ├── CONTRIBUTING.md            # Community contribution guidelines
@@ -117,7 +118,6 @@ dsa-mastery-hub/
 
 ---
 
-
 ## 📱 Cross-Platform Compatibility
 
 | Platform / Browser | Status | Features Tested |
@@ -130,25 +130,17 @@ dsa-mastery-hub/
 
 ---
 
-## 👤 Author & Organization
+## 🤝 Contributing & Contact
 
-- **Created by**: **Kamal Patel** — [LinkedIn Profile](https://www.linkedin.com/in/kamal-patel-61a8201a0/)
-- **Organization**: [CodeByArt](https://codebyart.com) — Where Code Meets Artistry
-- **Collaborator**: [ConnectKreations](https://connectkreations.com)
-- **Contact / Collaboration**: [codebyart@gmail.com](mailto:codebyart@gmail.com)
+This is an open-source project and contributions are welcome! Feel free to open issues, submit pull requests, or reach out via the links below:
 
----
-
-## 🤝 Collaboration & Contact
-
-We welcome open-source contributions, engineering partnerships, curriculum feedback, and sponsorship inquiries:
-- 📧 **Collaboration Email**: [codebyart@gmail.com](mailto:codebyart@gmail.com)
-- 🚀 **Organization Website**: [codebyart.com](https://codebyart.com)
-- 🌐 **Partner Network**: [connectkreations.com](https://connectkreations.com)
-- 💼 **Professional Network**: [Kamal Patel on LinkedIn](https://www.linkedin.com/in/kamal-patel-61a8201a0/)
+| Channel | Link |
+|---|---|
+| 🌐 **Website** | [codebyart.com](https://codebyart.com) |
+| 🌐 **Partner** | [connectkreations.com](https://connectkreations.com) |
+| 📧 **Email** | [codebyart@gmail.com](mailto:codebyart@gmail.com) |
 
 ---
-
 
 ## 📄 License
 

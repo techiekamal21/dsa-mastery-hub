@@ -1,6 +1,45 @@
 # Changelog — DSA and Software Engineering V.0.1
 
+## [0.5.3] — 2026-11-02
+
+### Updated: LinkedIn Profile URL & README Professional Formatting Enhancement
+
+**Date:** 2026-11-02  
+**Timestamp:** 13:00 IST  
+**Branch:** `fix/update-linkedin-url`  
+
+**Summary:**  
+Updated the LinkedIn profile URL from the old profile handle (`kamal-patel-61a8201a0`) to the new canonical developer handle (`kamal-patel-dev`) across all files. Additionally improved `README.md` with cleaner professional formatting, table-based Author & Contact sections, fixed description inaccuracy (3 → 6 portals), and added `shared-nav.js` / `shared-nav.css` to the repository structure tree.
+
+**Files Modified:**
+
+- `README.md`:
+  - Updated LinkedIn URL from `https://www.linkedin.com/in/kamal-patel-61a8201a0/` to `https://www.linkedin.com/in/kamal-patel-dev/` in header links section (line 16).
+  - Updated LinkedIn URL in Author & Organization section — reformatted from bullet list to a clean markdown table with role description ("Senior Software Development Engineer in Test").
+  - Updated LinkedIn URL in Collaboration & Contact section — reformatted from bullet list to a clean markdown table.
+  - Corrected "Core Portals" description from "three comprehensive preparation tools" to "six comprehensive preparation tools".
+  - Added `shared-nav.js` and `shared-nav.css` to the Repository Structure tree (previously missing entries).
+  - Minor prose improvements: "back up" (two words), "zero runtime dependencies" bolded, added blank line after section headings for consistency.
+  - Removed double blank lines in header `<p>` block.
+
+- `shared-nav.js`:
+  - Updated LinkedIn URL in the nav header icon button (`linkedinHtml`, line 138).
+  - Updated LinkedIn URL in footer copyright attribution anchor tag (line 175).
+
+- `home.html`:
+  - Updated LinkedIn URL in the About/Social buttons section (`#linkedin-profile`, line 1470).
+  - Updated LinkedIn URL in the Contribute card section (`#contribute-linkedin`, line 1505).
+
+- `CONTRIBUTING.md`:
+  - Updated LinkedIn URL in the author attribution line (line 47).
+
+- `docs/changelog.md`:
+  - Added this changelog entry [0.5.3].
+
+---
+
 ## [0.5.2] — 2026-10-24
+
 
 ### Fixed: More Dropdown Hover Bridge, Mobile Viewport Boundary Clamping, Touch Interactivity, and Asset Cache-Busting
 
