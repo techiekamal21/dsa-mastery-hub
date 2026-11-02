@@ -44,6 +44,6 @@ We expect all contributors to adhere to standard open-source community standards
 
 - **Organization**: [codebyart.com](https://codebyart.com)
 - **Partner**: [connectkreations.com](https://connectkreations.com)
-- **Author**: Kamal Patel ([LinkedIn Profile](https://www.linkedin.com/in/kamal-patel-61a8201a0/))
+- **Author**: Kamal Patel ([LinkedIn Profile](https://www.linkedin.com/in/kamal-patel-dev/))
 - **Collaboration & Contact**: [codebyart@gmail.com](mailto:codebyart@gmail.com)
 
