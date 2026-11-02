@@ -12,7 +12,6 @@
 </p>
 
 <p align="center">
-  <a href="https://www.linkedin.com/in/kamal-patel-dev/">💼 Kamal Patel</a> •
   <a href="https://codebyart.com">🚀 codebyart.com</a> •
   <a href="https://connectkreations.com">🌐 connectkreations.com</a> •
   <a href="mailto:codebyart@gmail.com">✉️ codebyart@gmail.com</a> •
@@ -131,28 +130,15 @@ dsa-mastery-hub/
 
 ---
 
-## 👤 Author & Organization
+## 🤝 Contributing & Contact
 
-| | |
-|---|---|
-| **Author** | **Kamal Patel** — Senior Software Development Engineer in Test |
-| **LinkedIn** | [linkedin.com/in/kamal-patel-dev](https://www.linkedin.com/in/kamal-patel-dev/) |
-| **Organization** | [CodeByArt](https://codebyart.com) — *Where Code Meets Artistry* |
-| **Collaborator** | [ConnectKreations](https://connectkreations.com) |
-| **Contact** | [codebyart@gmail.com](mailto:codebyart@gmail.com) |
-
----
-
-## 🤝 Collaboration & Contact
-
-We welcome open-source contributions, engineering partnerships, curriculum feedback, and sponsorship inquiries:
+This is an open-source project and contributions are welcome! Feel free to open issues, submit pull requests, or reach out via the links below:
 
 | Channel | Link |
 |---|---|
-| 📧 **Collaboration Email** | [codebyart@gmail.com](mailto:codebyart@gmail.com) |
-| 🚀 **Organization Website** | [codebyart.com](https://codebyart.com) |
-| 🌐 **Partner Network** | [connectkreations.com](https://connectkreations.com) |
-| 💼 **Professional Network** | [Kamal Patel on LinkedIn](https://www.linkedin.com/in/kamal-patel-dev/) |
+| 🌐 **Website** | [codebyart.com](https://codebyart.com) |
+| 🌐 **Partner** | [connectkreations.com](https://connectkreations.com) |
+| 📧 **Email** | [codebyart@gmail.com](mailto:codebyart@gmail.com) |
 
 ---
 
